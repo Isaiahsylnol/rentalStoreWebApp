@@ -1,4 +1,5 @@
 # rentalStoreWebApp
+[![Cypress Tests](https://github.com/Isaiahsylnol/rentalStoreWebApp/actions/workflows/main.yml/badge.svg)](https://github.com/Isaiahsylnol/cypress_project/actions/workflows/main.yml)
 
 # Getting Started with Create React App
 
