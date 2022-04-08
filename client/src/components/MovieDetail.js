@@ -1,11 +1,20 @@
 import React from "react";
 import { Grid, Paper } from "@mui/material";
 import { IKImage, IKContext } from "imagekitio-react";
+import { BsBookmarkFill } from "react-icons/bs";
+import { FaShareAlt } from "react-icons/fa";
+import { MdReportProblem } from "react-icons/md";
 
 function MovieDetail(props) {
   return (
     <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
-        <div style={{float: "right", marginRight: "3em", borderRadius: "50px", backgroundColor: "red", padding: ".5em"}}>Button</div>
+        <div style={{
+          float: "right",
+         marginRight: "2em",
+         borderRadius: "50px",
+          backgroundColor: "red", 
+          color: "white", 
+          padding: ".6em"}}><BsBookmarkFill  /><FaShareAlt /> <MdReportProblem /></div>
       <Grid
         container
         spacing={2}

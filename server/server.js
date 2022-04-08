@@ -5,6 +5,7 @@ const { graphqlHTTP } = require("express-graphql");
 const Schemas = require("./schema/schema");
 const resolvers = require("./resolver/resolver");
 const movieRouter = require("./routes/movies");
+ 
 require('dotenv').config();
 
 const app = express();
@@ -19,12 +20,8 @@ mongoose
   .then(() => console.log("MongoDB connected!"))
   .catch((err) => console.log("Error", err));
 
-app.get('/', (req, res) => {
-  res.send('Server says Hello World!')
-})
-
 app.use('/movies', movieRouter);
-
+ 
 app.use(
   "/graphql",
   graphqlHTTP({

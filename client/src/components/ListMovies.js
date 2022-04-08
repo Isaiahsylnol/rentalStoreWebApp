@@ -24,8 +24,8 @@ const Details = styled.div`
 
 const Movie = (props) => (
   <ButtonBase style={{padding: "2em"}} href={`/detail/${props.movie.pic_sku}`}  >
+    <Grid  item xs={12} sm={12} md={12} >
   <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
-  <Grid item>
   <IKImage path={props.movie.pic_sku + ".jpg"} transformation={[{
     "height": "300",
     "width": "230"
@@ -37,8 +37,8 @@ const Movie = (props) => (
         Duration: {props.movie.runtime} <br />
         sku: {props.movie.pic_sku}
       </Details>
-  </Grid>
   </IKContext>
+  </Grid>
   </ButtonBase>
 ); 
 
@@ -70,7 +70,7 @@ export default class ListMovies extends Component {
     return (
       <Wrapper>
          <h3>All Movies in Catalogue</h3>
-        <Grid container spacing={2}>
+        <Grid >
         {this.movieList()}
         </Grid>
       </Wrapper>

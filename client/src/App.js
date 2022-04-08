@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
-  height: 100%;
+  
   background-color: #c6dfcd;
 `;
 
