@@ -1,36 +1,30 @@
 const mongoose = require("mongoose");
-
+ 
+const date = new Date();
+ 
 const rentSchema = new mongoose.Schema({
-  transaction_id: {
+  username: {
     type: String,
-    required: [true, "Please enter valid ID"],
-    unique: [true, "Duplicate ID not allowed"],
+    required: [true, "Please enter valid user"],
     trim: true,
   },
   rental_date: {
     type: String,
     required: true,
-    validate: function (value) {
-      var dateRegex = /^\d{2}-\d{2}-\d{4}$/;
-      return dateRegex.test(value);
-    },
+    default: date.toLocaleString(),
   },
   rental_start: {
     type: String,
     required: true,
-    validate: function (value) {
-      var dateStartRegex = /^\d{2}-\d{2}-\d{4}$/;
-      return dateStartRegex.test(value);
-    },
+    default: date.toLocaleString(),
   },
   rental_end: {
     type: String,
-    required: true,
-    validate: function (value) {
-      var dateEndRegex = /^\d{2}-\d{2}-\d{4}$/;
-      return dateEndRegex.test(value);
-    },
-  }
+    
+    default: date.toLocaleDateString(),
+  },
+  createdAt: { type: String, default: date },
 });
 
-module.exports = new mongoose.model("Renting", rentSchema);
+
+module.exports = new mongoose.model("Rentals", rentSchema);

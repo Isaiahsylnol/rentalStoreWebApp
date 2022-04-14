@@ -1,6 +1,13 @@
 const { model, Schema } = require("mongoose");
 
+var dt = new Date();
+
 const userSchema = new Schema({
+    id: {
+        type: Number,
+        required: [true, "Please enter valid id"],
+        trim: true,
+    },
     email: {
         type: String,
         required: [true, "Please enter valid email"],
@@ -29,10 +36,7 @@ const userSchema = new Schema({
         required: [true, "Please enter valid last name"],
         trim: true,
     },
-    // movies: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'movies'
-    // }, 
-})
+    createdAt: { type: String, default: dt.toLocaleString() }, 
+}) 
 
 module.exports = model("Users", userSchema);
