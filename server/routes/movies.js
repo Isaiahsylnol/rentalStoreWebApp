@@ -7,4 +7,10 @@ router.route('/').get((req, res, next) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
+  router.route('/test').get((req, res, next) => {
+    Movie.searchMovie(req.body.title)
+      .then(movies => res.json(movies))
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
+
   module.exports = router;

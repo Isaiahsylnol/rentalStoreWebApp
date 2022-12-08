@@ -11,7 +11,7 @@ type Query {
 
   type Movie {
     title: String,
-    producer: String,
+    producer: [String],
     runtime: String,
     rating: String,
     year: String,
@@ -20,7 +20,7 @@ type Query {
   
   input MovieInput {
     title: String,
-    producer: String,
+    producer: [String],
     runtime: String,
     rating: String,
     year: String,
@@ -51,6 +51,15 @@ type Rental {
   }
 
   type Mutation {
+    createMovie(
+      title: String,
+    producer: [String],
+    runtime: Float,
+    rating: Int,
+    year: Int,
+    pic_sku: String,
+    ): Movie
+
     signup(
       id: Int!,
       username: String!,

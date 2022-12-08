@@ -7,6 +7,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 
 import Gallery from './Pages/Gallery';
 import Header from './components/Header';
@@ -22,22 +23,16 @@ const Wrapper = styled.div`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
-  
-  background-color: #c6dfcd;
 `;
-
-const Item = styled.div`
-  font-size: 1em;
-  text-align: center;
-  color: palevioletred;
-  height: 55px;
-  width: 499px;
-  background-color: #e6d5c3;
-`;
-
+ 
+const client = new ApolloClient({
+  uri: 'http://localhost:5000/graphql',
+  cache: new InMemoryCache(),
+});
 class App extends Component { 
   constructor(props) {
     super(props);
+
     this.state = { movies: [] };
   }
 
@@ -55,6 +50,7 @@ class App extends Component {
   render() {
     return ( 
       <Wrapper>
+        <ApolloProvider client={client}>
   <Router>
   <Header />
       <Routes>
@@ -74,6 +70,7 @@ class App extends Component {
       <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
+    </ApolloProvider>
       </Wrapper> 
     );
   }

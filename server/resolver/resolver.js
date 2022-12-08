@@ -37,6 +37,27 @@ const resolvers = {
     }
     },
 
+    createMovie: async (args) => {
+      try{
+      const existingMovie = await Movies.findOne({ title: args.title });
+        if (existingMovie) {
+          throw new Error('Movie exists already.');
+        }
+      let movie = new Movies({
+        title: args.title,
+        producer: args.producer,
+        runtime: args.runtime,
+        rating: args.rating,
+        year: args.year,
+        pic_sku: args.pic_sku,
+      });
+      const result = await movie.save();
+      return result;
+    } catch (err) {
+      throw err;
+    }
+    },
+
     addRental: (args) => {
       let rental = new Rental({
         start_date: args.start_date,

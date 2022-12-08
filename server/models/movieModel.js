@@ -7,7 +7,7 @@ const movieSchema = new mongoose.Schema({
         trim: true,
     },
     producer: {
-        type: String,
+        type: Array,
         required: [true, "Please enter valid name"],
         trim: true,
     },
@@ -30,6 +30,7 @@ const movieSchema = new mongoose.Schema({
         required: [true, "Please enter valid sku"],
         trim: true,
     },
+    createdAt: { type: String, default: new Date().toLocaleString() },
 })
 
 module.exports = mongoose.model("Movies", movieSchema);

@@ -1,9 +1,8 @@
-import React, { Component } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import Grid from "@mui/material/Grid";
 import { IKImage, IKContext } from 'imagekitio-react'
 import { ButtonBase } from '@mui/material';
+import { gql, useQuery } from '@apollo/client';
 
 const Wrapper = styled.div`
   font-size: 21px;
@@ -22,9 +21,20 @@ const Details = styled.div`
   border: solid black 2px;
 `; 
 
-const Movie = (props) => (
+const GET_MOVIES = gql`
+    query getMovies{
+        movies {
+            title
+            runtime
+            rating
+            year
+            pic_sku
+          }
+    }`
+
+const MovieCard = (props) => (
   <ButtonBase style={{padding: "2em"}} href={`/detail/${props.movie.pic_sku}`}  >
-    <Grid  item xs={12} sm={12} md={12} >
+    <Grid item xs={12} sm={12} md={12} >
   <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
   <IKImage path={props.movie.pic_sku + ".jpg"} transformation={[{
     "height": "300",
@@ -42,38 +52,24 @@ const Movie = (props) => (
   </ButtonBase>
 ); 
 
-export default class ListMovies extends Component {
+export default function ListMovies()  { 
+  const {loading, error, data} = useQuery(GET_MOVIES);
   
-  constructor(props) {
-    super(props);
-    this.state = { movies: [] };
-  }
+  if(loading) return(<><h2>Loading...</h2></>)
 
-  componentDidMount() {
-    axios
-      .get("http://localhost:5000/movies")
-      .then((response) => {
-        this.setState({ movies: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  if(error) return(<><h2>Error fetching Movies</h2></>)
 
-  movieList() {
-    return this.state.movies.map((currentMovie) => {
-      return <Movie movie={currentMovie} key={currentMovie._id} pic={currentMovie.pic_sku} /> 
-    });
-  }
-
-  render() {
-    return (
-      <Wrapper>
-         <h3>All Movies in Catalogue</h3>
-        <Grid >
-        {this.movieList()}
-        </Grid>
-      </Wrapper>
-    );
-  }
+  return (
+    <Wrapper>
+       <h3>All Movies in Catalogue</h3>
+      <Grid >
+     {data.movies.map((currentMovie) => {
+       return <MovieCard key={currentMovie._id} movie={currentMovie}  pic={currentMovie.pic_sku} /> 
+     })}
+      </Grid>
+    </Wrapper>
+  );
 }
+
+  
+

@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import AuthService from "../services/auth.service";
 
+import { withRouter } from '../common/with-router';
 const Wrapper = styled.form`
   font-size: 1.5em;
   text-align: center;
@@ -10,71 +13,35 @@ const Wrapper = styled.form`
   background-color: #FFFAF1;
 `;
 
+const required = value => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
+  }
+};
+
 function Login(props) {
-  const [errorMessages, setErrorMessages] = useState({});
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  //const onSubmit = data => console.log(data);
+
+  async function onSubmit(data){await console.log(data)}
+
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
-    }
-  ];
-  
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-  };
-
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div data-cy="error-msg" className="error">{errorMessages.message}</div>
-    );
-    
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      var { uname, pass } = document.forms[0];
-    
-      // Find user login info
-      const userData = database.find((user) => user.username === uname.value);
-    
-      // Compare user info
-      if (userData) {
-        if (userData.password !== pass.value) {
-          // Invalid password
-          setErrorMessages({ name: "pass", message: errors.pass });
-        } else {
-          setIsSubmitted(true);
-        }
-      } else {
-        // Username not found
-        setErrorMessages({ name: "uname", message: errors.uname });
-      }
-    };
-
     const renderForm = (
-      <Wrapper onSubmit={handleSubmit}>
+      <Wrapper onSubmit={handleSubmit(onSubmit)}>
       <h2>Login Page</h2>
-      <div>
-          <div className="input-container">
-            <label>Username </label>
-            <input type="text" name="uname" required />
-            {renderErrorMessage("uname")}
-          </div>
-          <div className="input-container">
-            <label>Password </label>
-            <input type="password" name="pass" required />
-            {renderErrorMessage("pass")}
-          </div>
-          <div className="button-container">
-            <input data-cy="submit-bn" type="submit" />
-          </div>
-      </div>
+      
+      <input placeholder="username" {...register("username", { required: true, minLength: 4 })} />
+      {errors.username && <span>Username is required</span>}
+
+      <input type="password" {...register("password", { required: true, minLength: 4 })} />
+      {errors.password && <span>Password field is required</span>}
+
+      <input type="submit" value="submit" />
       </Wrapper>
     );
 
