@@ -11,6 +11,10 @@ const Anchor = styled.a`
   color: white;
 `;
 
+const BoldText = styled.span`
+  font-weight: 500;
+`;
+
 function MovieDetail(props) {
   return (
     <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
@@ -72,10 +76,10 @@ function MovieDetail(props) {
               </div>
               <div style={{ textAlign: "left" }}>
                 <h3>{props.movie.title}</h3> 
-                Producer: {props.movie.producer} <br />
-                <span>Release Date: {props.movie.year}</span> <br />
-                <span>Duration: {props.movie.runtime}</span><br />
-                <span>Genre: Action</span>
+                <BoldText>Producer:</BoldText> {props.movie.producer[0]} <br />
+                <span><BoldText>Release Date:</BoldText> {props.movie.year}</span><br />
+                <span><BoldText>Duration:</BoldText> {props.movie.runtime}</span><br />
+                <span><BoldText>Genre:</BoldText> {props.movie.genre[0]}</span>
               </div>
               <p style={{ textAlign: "left" }}>
                 Contrary to popular belief, Lorem Ipsum is not simply random

@@ -47,6 +47,7 @@ const resolvers = {
         title: args.title,
         producer: args.producer,
         runtime: args.runtime,
+        genre: args.genre,
         rating: args.rating,
         year: args.year,
         pic_sku: args.pic_sku,

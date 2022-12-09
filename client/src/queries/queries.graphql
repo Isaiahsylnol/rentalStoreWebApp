@@ -1,0 +1,11 @@
+query getMovies{
+        movies {
+            title
+            producer
+            runtime
+            rating
+            genre
+            year
+            pic_sku
+          }
+    }

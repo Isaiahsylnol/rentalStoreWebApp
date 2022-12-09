@@ -14,6 +14,7 @@ type Query {
     producer: [String],
     runtime: String,
     rating: String,
+    genre: [String],
     year: String,
     pic_sku: String,
   }
@@ -23,6 +24,7 @@ type Query {
     producer: [String],
     runtime: String,
     rating: String,
+    genre: [String],
     year: String,
     pic_sku: String,
    }
@@ -56,6 +58,7 @@ type Rental {
     producer: [String],
     runtime: Float,
     rating: Int,
+    genre: [String],
     year: Int,
     pic_sku: String,
     ): Movie

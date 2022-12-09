@@ -20,6 +20,10 @@ const movieSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
+    genre: {
+        type: Array,
+        required: [true, "Please enter valid genre"],
+    },
     year: {
         type: String,
         required: [true, "Please enter valid year"],

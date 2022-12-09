@@ -2,35 +2,23 @@ import styled from "styled-components";
 import Grid from "@mui/material/Grid";
 import { IKImage, IKContext } from 'imagekitio-react'
 import { ButtonBase } from '@mui/material';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { loader } from 'graphql.macro';
+
+const getMovies = loader('../queries/queries.graphql');
 
 const Wrapper = styled.div`
   font-size: 21px;
-  text-align: center;
-  color: palevioletred;
   height: 100%; 
   padding: 1em;
-  background-color: #c6dfcd;
 `;
 
 const Details = styled.div`
   font-size: 1em;
   text-align: center;
-  color: palevioletred; 
-  background-color: #e6d5c3;
-  border: solid black 2px;
+  color: white;
+  margin-top: 20px;
 `; 
-
-const GET_MOVIES = gql`
-    query getMovies{
-        movies {
-            title
-            runtime
-            rating
-            year
-            pic_sku
-          }
-    }`
 
 const MovieCard = (props) => (
   <ButtonBase style={{padding: "2em"}} href={`/detail/${props.movie.pic_sku}`}  >
@@ -41,11 +29,9 @@ const MovieCard = (props) => (
     "width": "230"
   }]} />
       <Details>
-        {props.movie.title} <br />
-        Producer: {props.movie.producer} <br />
+        <h4 style={{display: "inline"}}>{props.movie.title}</h4> <br />
         Release: {props.movie.year} <br />
         Duration: {props.movie.runtime} <br />
-        sku: {props.movie.pic_sku}
       </Details>
   </IKContext>
   </Grid>
@@ -53,7 +39,7 @@ const MovieCard = (props) => (
 ); 
 
 export default function ListMovies()  { 
-  const {loading, error, data} = useQuery(GET_MOVIES);
+  const {loading, error, data} = useQuery(getMovies);
   
   if(loading) return(<><h2>Loading...</h2></>)
 
@@ -61,7 +47,7 @@ export default function ListMovies()  {
 
   return (
     <Wrapper>
-       <h3>All Movies in Catalogue</h3>
+       <h1 style={{textAlign: "left", marginLeft: "3%", color: "white"}}>Library</h1>
       <Grid >
      {data.movies.map((currentMovie) => {
        return <MovieCard key={currentMovie._id} movie={currentMovie}  pic={currentMovie.pic_sku} /> 
