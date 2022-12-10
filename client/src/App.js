@@ -31,7 +31,7 @@ function App() {
   return (
     <Wrapper>
       <Router>
-        <Header />
+        
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />

@@ -1,24 +1,23 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
-
-const Holder = styled.div`
-  color: palevioletred;
-  font-size: 1em;
-  margin: 1em;
-  height: 100%;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-`;
 
 const NotFound = () => (
-    <Holder>
-      <h1>404 - Not Found!</h1>
-      <Link data-cy="return_home" to="/home">
-        Go Home
-      </Link>
-    </Holder>
-  );
-  
-  export default NotFound;
+  <div className="flex text-white h-screen justify-center">
+    <div className=" w-full flex items-center justify-center">
+      <div class="inline-flex flex-col">
+        <div class="p-4 m-2">
+          <h1 className="text-5xl font-bold mb-9">404 - Page Not Found!</h1>
+        </div>
+        <div class="p-4 m-2">
+          <button className="border border-white h-14 w-40  " data-cy="return_home">
+             <Link to="/home">
+             Return Home
+             </Link>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export default NotFound;

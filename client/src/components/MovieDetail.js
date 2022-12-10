@@ -1,36 +1,19 @@
 import React from "react";
-import styled from "styled-components";
-import { Grid, Paper } from "@mui/material";
 import { IKImage, IKContext } from "imagekitio-react";
 import { BsBookmarkFill } from "react-icons/bs";
 import { FaShareAlt } from "react-icons/fa";
 import { MdReportProblem } from "react-icons/md";
-
-const Anchor = styled.a`
-  padding: 0.3em;
-  color: white;
-`;
-
-const BoldText = styled.span`
-  font-weight: 500;
-`;
+import Header from "./Header";
 
 function MovieDetail(props) {
   return (
     <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
-      <div style={{ marginTop: "2em" }}>
-        <Grid
-          container
-          spacing={8}
-          style={{
-            marginTop: "2em",
-            backgroundColor: "#353232",
-            padding: "1em",
-            justifyContent: "center",
-          }}
-        >
+      <Header />
+      <div className="mt-32 sm:mt-15 md:mt-24 lg:mt-52 flex justify-center">
+        {/* Container  */}
+        <div className="lg:m-8 lg:w-3/2 xl:w-4/6 bg-[#353232] p-12 justify-center rounded-xl grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2">
           {/* Movie poster */}
-          <Grid item style={{ alignSelf: "center" }}>
+          <div className="flex justify-center">
             <IKImage
               path={props.movie.pic_sku + ".jpg"}
               transformation={[
@@ -40,65 +23,62 @@ function MovieDetail(props) {
                 },
               ]}
             />
-          </Grid>
+          </div>
           {/* Movie Details */}
-          <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-            <Paper
-              style={{
-                background: "#221F1F",
-                color: "#fbf7f5",
-                padding: "1.5em",
-              }}
-            >
-              <div
-                style={{
-                  float: "right",
-                  borderRadius: "50px",
-                  padding: "1em",
-                }}
-              >
-                <Anchor href="#bookmark">
-                  <BsBookmarkFill style={{
-                  color: "red"
-                }} />
-                </Anchor>
-                <Anchor href="#share">
-                  <FaShareAlt style={{
-                  color: "blue"
-                }}/>
-                </Anchor>
-                <Anchor href="#report">
-                  {" "}
-                  <MdReportProblem style={{
-                  color: "orange"
-                }} />
-                </Anchor>
+          <div className="flex justify-center mt-10">
+            <div className="bg-[#221F1F] text-[#fbf7f5] p-8 rounded-lg">
+              <div className="float-right inline-flex">
+                <a href="#bookmark" className="p-2 text-slate-500">
+                  <BsBookmarkFill className="" />
+                </a>
+                <a href="#share" className="p-2 text-blue-500">
+                  <FaShareAlt />
+                </a>
+                <a href="#report" className="p-2 text-red-500">
+                  <MdReportProblem />
+                </a>
               </div>
-              <div style={{ textAlign: "left" }}>
-                <h3>{props.movie.title}</h3> 
-                <BoldText>Producer:</BoldText> {props.movie.producer[0]} <br />
-                <span><BoldText>Release Date:</BoldText> {props.movie.year}</span><br />
-                <span><BoldText>Duration:</BoldText> {props.movie.runtime}</span><br />
-                <span><BoldText>Genre:</BoldText> {props.movie.genre[0]}</span>
+              <div className="text-left">
+                <h3 className="text-2xl font-semibold mb-3">
+                  {props.movie.title}
+                </h3>
+                <span className="font-normal">Producer:</span>{" "}
+                {props.movie.producer[0]} <br />
+                <span>
+                  <span className="font-normal">Release Date:</span>{" "}
+                  {props.movie.year}
+                </span>
+                <br />
+                <span>
+                  <span className="font-normal">Duration:</span>{" "}
+                  {props.movie.runtime}
+                </span>
+                <br />
+                <span>
+                  <span className="font-normal">Genre:</span>{" "}
+                  {props.movie.genre[0]}
+                </span>
               </div>
-              <p style={{ textAlign: "left" }}>
-                Contrary to popular belief, Lorem Ipsum is not simply random
-                text. It has roots in a piece of classical Latin literature from
-                45 BC, making it over 2000 years old. Richard McClintock, a
-                Latin professor at Hampden-Sydney College in Virginia, looked up
-                one of the more obscure Latin words, consectetur, from a Lorem
-                Ipsum passage, and going through the cites of the word in
-                classical literature, discovered the undoubtable source. Lorem
-                Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
-                Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
-                written in 45 BC. This book is a treatise on the theory of
-                ethics, very popular during the Renaissance. The first line of
-                Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
-                in section 1.10.32.
-              </p>
-            </Paper>
-          </Grid>
-        </Grid>
+              <div className="h-auto">
+                <p className="mt-8 text-left">
+                  Contrary to popular belief, Lorem Ipsum is not simply random
+                  text. It has roots in a piece of classical Latin literature
+                  from 45 BC, making it over 2000 years old. Richard McClintock,
+                  a Latin professor at Hampden-Sydney College in Virginia,
+                  looked up one of the more obscure Latin words, consectetur,
+                  from a Lorem Ipsum passage, and going through the cites of the
+                  word in classical literature, discovered the undoubtable
+                  source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of
+                  "de Finibus Bonorum et Malorum" (The Extremes of Good and
+                  Evil) by Cicero, written in 45 BC. This book is a treatise on
+                  the theory of ethics, very popular during the Renaissance. The
+                  first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..",
+                  comes from a line in section 1.10.32.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </IKContext>
   );
