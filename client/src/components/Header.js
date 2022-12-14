@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useQuery } from '@apollo/client';
+import { loader } from 'graphql.macro';
 
+const getMovies = loader('../queries/queries.graphql');
 function menuToggle() {
   document.getElementById("nav-content").classList.toggle("hidden");
 }
 
-function Header(props) {
+const Header = () => {
+  const {loading, error, data} = useQuery(getMovies);
+  const [movieTitles, setMovies] = useState([])
+  useEffect(()=>{
+    for (var i = 0; i < data.movies.length; i++) {
+      movieTitles.push(data.movies[i].title)
+    }
+    setMovies(movieTitles);
+  },[]);
+ 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -40,20 +56,27 @@ function Header(props) {
         id="nav-content"
       >
         {/* Movie search bar */}
-            <div className="flex flex-grow justify-center ml-12">
-            <form action="#" className="justify-center border border-solid m-8 rounded-lg bg-white">
-              <input
-                type="text"
-                placeholder="Search.."
-                name="search"
-                size="60"
-                className="rounded-lg p-1 w-5/6 sm:w-11/12 float-left"
-              />
-              <button type="submit" className="text-black p-2 rounded-lg">
-                <FaSearch>Search</FaSearch>
-              </button>
-            </form>
-            </div>
+        <div className="flex flex-grow justify-center ml-12">
+            <Autocomplete
+        style={{ width: 500 }}
+        freeSolo
+        autoComplete
+        autoHighlight
+        options={movieTitles}
+        renderInput={(params) => (
+          <div className="w-full inline-flex ">
+          <TextField {...params}
+           variant="outlined"
+           className="p-1 w-5/6 sm:w-11/12 float-left bg-white rounded-xl"
+         />
+         <IconButton type="button" aria-label="search">
+        <SearchIcon className='text-white'/>
+      </IconButton>
+          </div>
+        )}
+      />
+      
+            </div>         
         <ul className="lg:flex justify-end items-center">
           <li className="mr-3">
           <Link className='navigation-links py-2 px-4 text-white no-underline' to="/">Home</Link>
