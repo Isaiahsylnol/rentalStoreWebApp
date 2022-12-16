@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const movieSchema = new mongoose.Schema({
+    _id:{
+        type: mongoose.ObjectId,
+    },
+
     title: {
         type: String,
         required: [true, "Please enter valid title"],

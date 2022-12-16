@@ -1,28 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
-import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useQuery } from '@apollo/client';
-import { loader } from 'graphql.macro';
 
-const getMovies = loader('../queries/queries.graphql');
+import SearchIcon from "@mui/icons-material/Search";
+import IconButton from "@mui/material/IconButton";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+
+import { useLazyQuery, useQuery } from "@apollo/client";
+import { loader } from "graphql.macro";
+
+import { SEARCH_MOVIE } from "../queries/movieQueries";
+
+const getMovies = loader("../queries/queries.graphql");
+
 function menuToggle() {
   document.getElementById("nav-content").classList.toggle("hidden");
 }
 
 const Header = () => {
-  const {loading, error, data} = useQuery(getMovies);
-  const [movieTitles, setMovies] = useState([])
-  useEffect(()=>{
+  const [movieSearched, setMovieSearched] = useState("");
+  const [fetchMovie, { data: movieSearchedData, error: movieError }] =
+    useLazyQuery(SEARCH_MOVIE);
+  const { loading, error, data } = useQuery(getMovies);
+
+  const [movieTitles, setMovies] = useState([]);
+
+  useEffect(() => {
     for (var i = 0; i < data.movies.length; i++) {
-      movieTitles.push(data.movies[i].title)
+      movieTitles.push(data.movies[i].title);
     }
     setMovies(movieTitles);
-  },[]);
- 
+  }, []);
+
+  useEffect(() => {
+    console.log(movieSearchedData);
+  }, [movieSearchedData]);
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -30,9 +43,7 @@ const Header = () => {
           className="text-white no-underline hover:text-white hover:no-underline"
           href="/"
         >
-          <p className="text-2xl pl-2">
-            Movie Rentals
-          </p>
+          <p className="text-2xl pl-2">Movie Rentals</p>
         </a>
       </div>
       <div className="block lg:hidden">
@@ -57,40 +68,71 @@ const Header = () => {
       >
         {/* Movie search bar */}
         <div className="flex flex-grow justify-center ml-12">
-            <Autocomplete
-        style={{ width: 500 }}
-        freeSolo
-        autoComplete
-        autoHighlight
-        options={movieTitles}
-        renderInput={(params) => (
-          <div className="w-full inline-flex ">
-          <TextField {...params}
-           variant="outlined"
-           className="p-1 w-5/6 sm:w-11/12 float-left bg-white rounded-xl"
-         />
-         <IconButton type="button" aria-label="search">
-        <SearchIcon className='text-white'/>
-      </IconButton>
-          </div>
-        )}
-      />
-      
-            </div>         
+          <Autocomplete
+            style={{ width: 500 }}
+            freeSolo
+            autoComplete
+            autoHighlight
+            options={movieTitles}
+            onChange={(event, value) => {
+              setMovieSearched(value);
+            }}
+            renderInput={(params) => (
+              <div className="w-full inline-flex">
+                <TextField
+                  {...params}
+                  onChange={(e) => {
+                    setMovieSearched(e.target.value);
+                  }}
+                  variant="outlined"
+                  className="p-1 w-5/6 sm:w-11/12 float-left bg-white rounded-xl"
+                />
+                <IconButton
+                  type="button"
+                  aria-label="search"
+                  onClick={() => {
+                    fetchMovie({
+                      variables: {
+                        title: movieSearched,
+                      },
+                    });
+                  }}
+                >
+                  <SearchIcon className="text-white" />
+                </IconButton>
+              </div>
+            )}
+          />
+        </div>
         <ul className="lg:flex justify-end items-center">
           <li className="mr-3">
-          <Link className='navigation-links py-2 px-4 text-white no-underline' to="/">Home</Link>
+            <Link
+              className="navigation-links py-2 px-4 text-white no-underline"
+              to="/"
+            >
+              Home
+            </Link>
           </li>
           <li className="mr-3">
-          <Link className='navigation-links text-white  no-underline hover:text-gray-200 hover:text-underline py-2 px-4' to="/movies">Movies</Link>
+            <Link
+              className="navigation-links text-white  no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
+              to="/movies"
+            >
+              Movies
+            </Link>
           </li>
           <li className="mr-3">
-          <Link className='navigation-links text-white  no-underline hover:text-gray-200 hover:text-underline py-2 px-4' to="/shop">About</Link>
+            <Link
+              className="navigation-links text-white  no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
+              to="/shop"
+            >
+              About
+            </Link>
           </li>
         </ul>
       </div>
     </nav>
   );
-}
+};
 
 export default Header;

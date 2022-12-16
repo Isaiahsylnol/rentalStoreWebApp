@@ -10,6 +10,7 @@ type Query {
   } 
 
   type Movie {
+    _id: String,
     title: String,
     producer: [String],
     runtime: String,
