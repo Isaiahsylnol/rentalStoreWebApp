@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
@@ -18,6 +18,7 @@ function menuToggle() {
 }
 
 const Header = () => {
+  let navigate = useNavigate();
   const [movieSearched, setMovieSearched] = useState("");
   const [fetchMovie, { data: movieSearchedData, error: movieError }] =
     useLazyQuery(SEARCH_MOVIE);
@@ -26,14 +27,18 @@ const Header = () => {
   const [movieTitles, setMovies] = useState([]);
 
   useEffect(() => {
-    for (var i = 0; i < data.movies.length; i++) {
-      movieTitles.push(data.movies[i].title);
+    for (var i = 0; i < data?.movies?.length; i++) {
+      movieTitles.push(data?.movies[i].title);
     }
     setMovies(movieTitles);
   }, []);
 
   useEffect(() => {
     console.log(movieSearchedData);
+    if(movieSearchedData != "" && movieSearchedData != undefined){
+      navigate(`/detail/${movieSearchedData?.searchMovie._id}`);
+    }
+ 
   }, [movieSearchedData]);
 
   return (

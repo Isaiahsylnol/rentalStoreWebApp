@@ -50,7 +50,7 @@ const resolvers = {
         genre: args.genre,
         rating: args.rating,
         year: args.year,
-        pic_sku: args.pic_sku,
+        thumbnail: args.thumbnail,
       });
       const result = await movie.save();
       return result;

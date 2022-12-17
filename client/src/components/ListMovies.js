@@ -1,16 +1,14 @@
 import { IKImage, IKContext } from 'imagekitio-react'
 import { ButtonBase } from '@mui/material';
 import { useQuery } from '@apollo/client';
-import { loader } from 'graphql.macro';
 import Header from "./Header";
-
-const getMovies = loader('../queries/queries.graphql');
+import { GET_MOVIES } from "../queries/movieQueries";
 
 const MovieCard = (props) => (
-  <ButtonBase style={{padding: "2em"}} href={`/detail/${props.movie.pic_sku}`}  >
+  <ButtonBase style={{padding: "2em"}} href={`/detail/${props.movie.thumbnail}`}  >
     <div className="grid-cols-4" >
   <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
-  <IKImage path={props.movie.pic_sku + ".jpg"} transformation={[{
+  <IKImage path={props.movie.thumbnail + ".jpg"} transformation={[{
     "height": "300",
     "width": "230"
   }]} />
@@ -25,7 +23,7 @@ const MovieCard = (props) => (
 ); 
 
 export default function ListMovies()  { 
-  const {loading, error, data} = useQuery(getMovies);
+  const { loading, error, data } = useQuery(GET_MOVIES);
   
   if(loading) return(<><h2>Loading...</h2></>)
 
@@ -37,8 +35,8 @@ export default function ListMovies()  {
     <div className="flex justify-center">
       <Header active={"active"} />     
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-     {data.movies.map((currentMovie) => {
-       return <MovieCard key={currentMovie._id} movie={currentMovie} pic={currentMovie.pic_sku} /> 
+     {data?.movies.map((currentMovie) => {
+       return <MovieCard key={currentMovie._id} movie={currentMovie} pic={currentMovie.thumbnail} /> 
      })}
       </div>
     </div>
