@@ -5,7 +5,7 @@ const Home = () => {
  
     return (
         <div>
-            <Header active={"active"} />
+            <Header />
             <h2 className='bg-red-200 text-white'>Home Page</h2>      
         </div>
     );

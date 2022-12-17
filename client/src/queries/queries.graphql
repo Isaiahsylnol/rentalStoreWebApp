@@ -6,6 +6,6 @@ query getMovies{
             rating
             genre
             year
-            pic_sku
+            thumbnail
           }
     }

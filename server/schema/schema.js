@@ -10,13 +10,14 @@ type Query {
   } 
 
   type Movie {
+    _id: String,
     title: String,
     producer: [String],
     runtime: String,
     rating: String,
     genre: [String],
     year: String,
-    pic_sku: String,
+    thumbnail: String,
   }
   
   input MovieInput {
@@ -26,7 +27,7 @@ type Query {
     rating: String,
     genre: [String],
     year: String,
-    pic_sku: String,
+    thumbnail: String,
    }
    
 type Rental {
@@ -60,7 +61,7 @@ type Rental {
     rating: Int,
     genre: [String],
     year: Int,
-    pic_sku: String,
+    thumbnail: String,
     ): Movie
 
     signup(

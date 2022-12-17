@@ -15,7 +15,7 @@ function MovieDetail(props) {
           {/* Movie poster */}
           <div className="flex justify-center">
             <IKImage
-              path={props.movie.pic_sku + ".jpg"}
+              path={props.movie.thumbnail + ".jpg"}
               transformation={[
                 {
                   height: "700",

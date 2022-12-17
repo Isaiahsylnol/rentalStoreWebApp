@@ -2,15 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Header from "./components/Header";
 import NotFound from "./components/NotFound";
 import Login from "./components/Login";
 import ListMovies from "./components/ListMovies";
 import MovieDetail from "./components/MovieDetail";
 import Home from "./Pages/Home";
-
+import { GET_MOVIES } from "./queries/movieQueries"
 import { useQuery } from "@apollo/client";
-import { loader } from 'graphql.macro';
 
 import "./App.css";
 
@@ -21,8 +19,7 @@ const Wrapper = styled.div`
 
 function App() {
 
-  const getMovies = loader('./queries/queries.graphql');
-  const { loading, error, data } = useQuery(getMovies);
+  const { loading, error, data } = useQuery(GET_MOVIES);
 
   if (loading) return <h1>Loading...</h1>;
 
@@ -41,7 +38,7 @@ function App() {
             <Route
               exact
               key={`route${i}`}
-              path={`/detail/${movie.pic_sku}`}
+              path={`/detail/${movie._id}`}
               element={<MovieDetail movie={movie} />}
             />
           ))}

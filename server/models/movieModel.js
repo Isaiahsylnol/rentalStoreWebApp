@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const movieSchema = new mongoose.Schema({
+    _id:{
+        type: mongoose.ObjectId,
+    },
+
     title: {
         type: String,
         required: [true, "Please enter valid title"],
@@ -29,9 +33,9 @@ const movieSchema = new mongoose.Schema({
         required: [true, "Please enter valid year"],
         trim: true,
     },
-    pic_sku: {
+    thumbnail: {
         type: String,
-        required: [true, "Please enter valid sku"],
+        required: [true, "Please enter valid thumbnail"],
         trim: true,
     },
     createdAt: { type: String, default: new Date().toLocaleString() },
