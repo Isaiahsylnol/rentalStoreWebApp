@@ -5,14 +5,15 @@ import Header from "./Header";
 import { GET_MOVIES } from "../queries/movieQueries";
 
 const MovieCard = (props) => (
-  <ButtonBase style={{padding: "2em"}} href={`/detail/${props.movie.thumbnail}`}  >
-    <div className="grid-cols-4" >
+  <div className="pt-8">
+    <ButtonBase href={`/detail/${props.movie._id}`}>
+    <div  >
   <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
   <IKImage path={props.movie.thumbnail + ".jpg"} transformation={[{
-    "height": "300",
-    "width": "230"
+    "height": "450",
+ 
   }]} />
-      <div className="text-center text-white mt-6">
+      <div className="text-left text-white p-2 md:p-8">
         <h1 className="inline text-2xl font-semibold">{props.movie.title}</h1> <br />
         Release: {props.movie.year} <br />
         Runtime: {props.movie.runtime[0] + "h" + " " +  props.movie.runtime.slice(2,4) + "m"} <br />
@@ -20,6 +21,7 @@ const MovieCard = (props) => (
   </IKContext>
   </div>
   </ButtonBase>
+  </div>
 ); 
 
 export default function ListMovies()  { 
@@ -31,12 +33,11 @@ export default function ListMovies()  {
 
   return (
     <>
-    <div className="flex mt-64 mb-8"><h1 className="w-full  text-5xl font-semibold text-white">Library</h1></div>
-    <div className="flex justify-center">
-      <Header active={"active"} />     
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div className="flex justify-center pt-32">
+      <Header />     
+      <div className="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
      {data?.movies.map((currentMovie) => {
-       return <MovieCard key={currentMovie._id} movie={currentMovie} pic={currentMovie.thumbnail} /> 
+       return <MovieCard key={currentMovie._id} movie={currentMovie} thumbnail={currentMovie.thumbnail} /> 
      })}
       </div>
     </div>

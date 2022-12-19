@@ -7,11 +7,9 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import { useLazyQuery, useQuery } from "@apollo/client";
-import { loader } from "graphql.macro";
 
 import { SEARCH_MOVIE } from "../queries/movieQueries";
-
-const getMovies = loader("../queries/queries.graphql");
+import { GET_MOVIES } from "../queries/movieQueries";
 
 function menuToggle() {
   document.getElementById("nav-content").classList.toggle("hidden");
@@ -22,7 +20,7 @@ const Header = () => {
   const [movieSearched, setMovieSearched] = useState("");
   const [fetchMovie, { data: movieSearchedData, error: movieError }] =
     useLazyQuery(SEARCH_MOVIE);
-  const { loading, error, data } = useQuery(getMovies);
+  const { loading, error, data } = useQuery(GET_MOVIES);
 
   const [movieTitles, setMovies] = useState([]);
 

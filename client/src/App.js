@@ -28,13 +28,12 @@ function App() {
   return (
     <Wrapper>
       <Router>
-        
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/movies" exact element={<ListMovies />} />
           <Route path="/home" element={<Home />} />
-          {data.movies.map((movie, i) => (
+          {data?.movies.map((movie, i) => (
             <Route
               exact
               key={`route${i}`}
