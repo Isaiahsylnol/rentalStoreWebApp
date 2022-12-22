@@ -32,7 +32,6 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    console.log(movieSearchedData);
     if(movieSearchedData != "" && movieSearchedData != undefined){
       navigate(`/detail/${movieSearchedData?.searchMovie._id}`);
     }
@@ -40,8 +39,8 @@ const Header = () => {
   }, [movieSearchedData]);
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-6 fixed w-full z-10 top-0">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
+    <nav className="flex items-center justify-between bg-gray-800 p-6 fixed w-full z-10 top-0">
+      <div className="flex-shrink-0 text-white mr-6">
         <a
           className="text-white no-underline hover:text-white hover:no-underline"
           href="/"
@@ -61,7 +60,7 @@ const Header = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
           </svg>
         </button>
       </div>
@@ -81,14 +80,14 @@ const Header = () => {
               setMovieSearched(value);
             }}
             renderInput={(params) => (
-              <div className="w-full inline-flex">
+              <div className="w-full inline-flex md:w-2/1">
                 <TextField
                   {...params}
                   onChange={(e) => {
                     setMovieSearched(e.target.value);
                   }}
                   variant="outlined"
-                  className="p-1 w-5/6 sm:w-11/12 float-left bg-white rounded-xl"
+                  className="p-1  float-left bg-white rounded-xl"
                 />
                 <IconButton
                   type="button"

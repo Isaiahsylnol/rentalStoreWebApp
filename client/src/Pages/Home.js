@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "../components/Header";
 import { IKImage, IKContext } from "imagekitio-react";
 import Footer from "../components/Footer";
+import { ButtonBase } from '@mui/material';
 import avatar from "../assets/avatar.jpg";
 import hobbitHouse from "../assets/Hobbiton-Courtesy-of-Steve-Hall-.webp";
 
@@ -17,7 +18,7 @@ const movies = [
 ];
 
 const Home = () => {
-  let news = movies.slice(0, 4);
+
   return (
     <div>
       <Header />
@@ -46,11 +47,11 @@ const Home = () => {
             </div>
           </div>
           {/* Right column - Upcoming movies */}
-          <div className="h-auto w-full sm:w-1/2 lg:mr-20 p-4 sm:p-0 mt-20">
-            <h2 className="text-2xl uppercase font-bold text-white">
+          <div className="h-auto  sm:w-full md:w-2/6 lg:mr-20 p-4 sm:p-0 mt-20">
+            <h2 className="text-2xl uppercase font-bold text-white bg-cyan-900 p-3 mb-4">
               Upcoming
             </h2>
-            <ul className="text-left p-4">
+            <ul className="text-left">
               {movies.map(function (movie, i) {
                 return (
                   <li
@@ -65,43 +66,142 @@ const Home = () => {
             </ul>
           </div>
         </div>
+        {/* News articles */}
         <div>
-          {/* News articles */}
-          <div className="flex justify-center p-12">
-          <div className="w-4/5">
-            <h1 className="text-white text-left font-semibold text-3xl mb-8">
-              The latest in film news
+          <div className="lg:w-1/3">
+            <h1 className="pt-14 text-3xl sm:p-3 round text-white font-semibold sm:text-2xl md:text-3xl sm:mt-16 sm:w-2/3 md:w-5/12 mb-4 border-b-4 border-cyan-700 ml-8 text-left">
+              LATEST NEWS
             </h1>
-            <ul className="text-left sm:grid sm:grid-cols-4 sm:gap-12">
-              {news.map(function (movie, i) {
-                return (
-                  <li
-                    key={i}
-                    className="text-white text-left font-semibold p-8 sm:p-0"
-                  >
-                    <button>
-                      <img src={avatar} alt="Logo" className="rounded-xl" />
-                      <div className="mt-4 text-left">Lorem ipsum dolor sit amet.</div>
-                    </button>
-                  </li>
-                );
-              })}
+          </div>
+          <div className="w-auto flex justify-center mb-20">
+            <ul className="text-left sm:grid p-6 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-3/3">
+              <li className="text-white text-left font-semibold sm:p-0">
+                <button>
+                  <img
+                    src={require("../assets/uncahrted.jpg")}
+                    alt="Characters from Uncharted the film"
+                    className="rounded-xl h-48 w-full object-contain"
+                  />
+                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                </button>
+              </li>
+              <li className="text-white text-left font-semiboldsm:p-0">
+                <button>
+                  <img
+                    src={require("../assets/essentials.webp")}
+                    alt="Collage of essential film characters"
+                    className="rounded-xl h-48 w-full object-contain"
+                  />
+                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                </button>
+              </li>
+              <li className="text-white text-left font-semibold sm:p-0">
+                <button>
+                  <img
+                    src={require("../assets/handmaids-tale.jpg")}
+                    alt="Game of Thrones film location"
+                    className="rounded-xl h-48 w-full object-contain"
+                  />
+                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                </button>
+              </li>
+              <li className="text-white text-left font-semibold sm:p-0">
+                <button>
+                  <img
+                    src={require("../assets/oscar-1.webp")}
+                    alt="Actors arriving at the Oscars"
+                    className="rounded-xl h-48 w-full object-contain"
+                  />
+                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                </button>
+              </li>
+              <li className="text-white text-left font-semibold sm:p-0">
+                <button>
+                  <img
+                    src={require("../assets/uncahrted.jpg")}
+                    alt="Characters from Uncharted the film"
+                    className="rounded-xl h-48 w-full object-contain"
+                  />
+                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                </button>
+              </li>
+              <li className="text-white text-left font-semiboldsm:p-0">
+                <button>
+                  <img
+                    src={require("../assets/essentials.webp")}
+                    alt="Collage of essential film characters"
+                    className="rounded-xl h-48 w-full object-contain"
+                  />
+                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                </button>
+              </li>
+              <li className="text-white text-left font-semibold sm:p-0">
+                <button>
+                  <img
+                    src={require("../assets/handmaids-tale.jpg")}
+                    alt="Game of Thrones film location"
+                    className="rounded-xl h-48 w-full object-contain"
+                  />
+                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                </button>
+              </li>
+              <li className="text-white text-left font-semibold sm:p-0">
+                <button>
+                  <img
+                    src={require("../assets/oscar-1.webp")}
+                    alt="Actors arriving at the Oscars"
+                    className="rounded-xl h-48 w-full object-contain"
+                  />
+                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                </button>
+              </li>
             </ul>
           </div>
-          </div>
-          <div className="h-auto w-full p-10 flex justify-center content-end">
-            <div className="w-3/4 h-5/6 bg-zinc-800 p-14 items-end rounded-lg flex">
-              <img src={hobbitHouse} alt="The " className="rounded-xl"/>
-              <div className="absolute justify-center align-left flex flex-col">
-              <h2 className="mb-52 font-bold text-white text-2xl ml-16 mt-10 sm:text-4xl uppercase">
-              The hobbit
-            </h2>
-            <h2 className="absolute mb-32 w-full font-semibold text-white text-1xl ml-8 mt-10 sm:text-1xl uppercase">
-              Adventure, Fantasy 
-            </h2>
-              <button className="absolute ml-16 mt-12 h-14 w-36 rounded-3xl text-white hover:opacity-70 font-semibold uppercase bg-cyan-600">
-                Watch
-              </button>
+          <div className="h-auto p-10 flex justify-center content-end">
+            <div className="bg-zinc-800 p-14 items-end rounded-lg flex">
+              <div className="lg:grid lg:grid-cols-4 gap-3">
+                <div className='col-span-3 text-left h-fit rounded-xl bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
+                  <div className="p-8">
+                    <h2 className="text-white text-2xl font-bold sm:text-4xl mt-72 flex uppercase">
+                      The hobbit
+                    </h2>
+                    <h2 className="text-white pb-4 font-semibold text-base uppercase">
+                      Action, Adventure
+                    </h2>
+                    <button className="h-14 w-36 rounded-3xl text-white hover:opacity-70 font-semibold uppercase bg-cyan-600">
+                      Watch
+                    </button>
+                  </div>
+                </div>
+                <div className="bg-blue-100 p-8">
+                  <h3 className="text-2xl font-bold">Similar Movies</h3>
+                  <div className="mt-10">
+                    <ul className="text-left">
+                      {movies.map(function (movie, i) {
+                        return (
+                          <li
+                            key={i}
+                            className="p-1 border-2 h-auto border-white text-white font-semibold"
+                          ><ButtonBase href={`/detail/${movie._id}`}>
+                          <div className="">
+                        <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
+                        <IKImage 
+                        path={"default.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1671234276238"}  className="h-60"/>
+                            <div className="flex justify-center">
+                            <div className="text-left text-white">
+                              <h1 className="inline text-2xl font-semibold">{movie.title}</h1> <br />
+                              Release: {movie.year} <br/>
+                            </div>
+                            </div>
+                        </IKContext>
+                        </div>
+                        </ButtonBase>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
