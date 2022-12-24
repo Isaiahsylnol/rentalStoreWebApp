@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import { IKImage, IKContext } from "imagekitio-react";
 import Footer from "../components/Footer";
-import { ButtonBase } from '@mui/material';
-import avatar from "../assets/avatar.jpg";
-import hobbitHouse from "../assets/Hobbiton-Courtesy-of-Steve-Hall-.webp";
+import Pagination from "../components/Pagination";
+import { SimilarMoviesWidget } from "../components/SimilarMoviesWidget";
 
+// Mock data
 const movies = [
   { title: "Avatar", release_date: "022223" },
   { title: "SpideMan Long Way Home", release_date: "021123" },
@@ -15,10 +15,20 @@ const movies = [
   { title: "American X History", release_date: "020623" },
   { title: "Gone Girl", release_date: "042421" },
   { title: "Django", release_date: "121522" },
+  { title: "SpideMan Long Way Home", release_date: "021123" },
 ];
 
 const Home = () => {
+  // User is currently on this page
+  const [currentPage, setCurrentPage] = useState(1);
+  // No of Records to be displayed on each page
+  const [recordsPerPage] = useState(4);
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  // Records to be displayed on the current page
+  const currentRecords = movies.slice(indexOfFirstRecord, indexOfLastRecord);
 
+  const nPages = Math.ceil(movies.length / recordsPerPage);
   return (
     <div>
       <Header />
@@ -157,50 +167,50 @@ const Home = () => {
               </li>
             </ul>
           </div>
-          <div className="h-auto p-10 flex justify-center content-end">
+          <div className="h-auto p-10 ">
             <div className="bg-zinc-800 p-14 items-end rounded-lg flex">
               <div className="lg:grid lg:grid-cols-4 gap-3">
-                <div className='col-span-3 text-left h-fit rounded-xl bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
-                  <div className="p-8">
-                    <h2 className="text-white text-2xl font-bold sm:text-4xl mt-72 flex uppercase">
-                      The hobbit
-                    </h2>
-                    <h2 className="text-white pb-4 font-semibold text-base uppercase">
-                      Action, Adventure
-                    </h2>
-                    <button className="h-14 w-36 rounded-3xl text-white hover:opacity-70 font-semibold uppercase bg-cyan-600">
-                      Watch
-                    </button>
+                <div className="flex flex-row col-span-3 justify-center">
+                  <div className="sm:w-10/12 text-left text-white">
+                    <div className=' h-fit rounded-xl bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
+                      <div className="p-8 font-semibold uppercase">
+                        <h2 className="  text-2xl font-bold sm:text-4xl mt-72 flex">
+                          The hobbit
+                        </h2>
+                        <h2 className="  pb-4 text-base">
+                          Action, Adventure
+                        </h2>
+                        <button className="h-14 w-full uppercase sm:w-36 rounded-3xl hover:opacity-70 bg-cyan-600">
+                          Watch
+                        </button>
+                      </div>
+                    </div>
+                    <div className="   pt-8 pb-20">
+                      Magna minim nisi ea veniam reprehenderit officia nulla
+                      ullamco id duis laborum minim eu mollit. Ea irure Lorem
+                      eiusmod tempor ea adipisicing velit nisi nostrud. Lorem
+                      minim cupidatat officia qui. Est velit cupidatat magna
+                      incididunt Lorem ut qui labore duis ex elit. Velit non
+                      reprehenderit laborum reprehenderit est sit laborum minim
+                      dolor exercitation est reprehenderit officia commodo. Nisi
+                      ea fugiat aliqua aute elit elit eu enim. Tempor incididunt
+                      ea mollit eu. Labore dolore do cillum laboris
+                      exercitation. Magna eiusmod aliqua nostrud non nostrud
+                      tempor sit aliqua. Quis cupidatat nostrud consectetur do
+                      aliquip nisi aute velit aliqua laboris. Ea reprehenderit
+                      fugiat incididunt nulla enim adipisicing id adipisicing
+                      ea. Reprehenderit fugiat anim sunt eiusmod adipisicing
+                      laborum dolor.
+                    </div>
                   </div>
                 </div>
-                <div className="bg-blue-100 p-8">
-                  <h3 className="text-2xl font-bold">Similar Movies</h3>
-                  <div className="mt-10">
-                    <ul className="text-left">
-                      {movies.map(function (movie, i) {
-                        return (
-                          <li
-                            key={i}
-                            className="p-1 border-2 h-auto border-white text-white font-semibold"
-                          ><ButtonBase href={`/detail/${movie._id}`}>
-                          <div className="">
-                        <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
-                        <IKImage 
-                        path={"default.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1671234276238"}  className="h-60"/>
-                            <div className="flex justify-center">
-                            <div className="text-left text-white">
-                              <h1 className="inline text-2xl font-semibold">{movie.title}</h1> <br />
-                              Release: {movie.year} <br/>
-                            </div>
-                            </div>
-                        </IKContext>
-                        </div>
-                        </ButtonBase>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
+                <div>
+                  <SimilarMoviesWidget data={currentRecords} />
+                  <Pagination 
+                    nPages={nPages}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                  />
                 </div>
               </div>
             </div>
