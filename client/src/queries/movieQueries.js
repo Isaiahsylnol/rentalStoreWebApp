@@ -1,33 +1,33 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const GET_MOVIES = gql`
-query getMovies {
+  query getMovies {
     movies {
-        _id
-        title
-        producer
-        runtime
-        rating
-        genre
-        year
-        thumbnail
-      }
-}
+      _id
+      title
+      director
+      runtime
+      rating
+      genre
+      year
+      thumbnail
+    }
+  }
 `;
 
 const SEARCH_MOVIE = gql`
-query searchMovie($title: String!) {
+  query searchMovie($title: String!) {
     searchMovie(title: $title) {
-        _id
-        title
-        producer
-        runtime
-        rating
-        genre
-        year
-        thumbnail
-      }
-}
+      _id
+      title
+      director
+      runtime
+      rating
+      genre
+      year
+      thumbnail
+    }
+  }
 `;
 
-export { GET_MOVIES, SEARCH_MOVIE};
+export { GET_MOVIES, SEARCH_MOVIE };

@@ -5,6 +5,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import ModalService from "./Modal/services/ModalService";
+import SignUpModal from "./Modal/SignUpModal";
 
 import { useLazyQuery, useQuery } from "@apollo/client";
 
@@ -16,6 +18,10 @@ function menuToggle() {
 }
 
 const Header = () => {
+  const addModal = (modal) => {
+    ModalService.open(modal);
+  };
+
   let navigate = useNavigate();
   const [movieSearched, setMovieSearched] = useState("");
   const [fetchMovie, { data: movieSearchedData, error: movieError }] =
@@ -32,10 +38,9 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if(movieSearchedData != "" && movieSearchedData != undefined){
+    if (movieSearchedData != "" && movieSearchedData != undefined) {
       navigate(`/detail/${movieSearchedData?.searchMovie._id}`);
     }
- 
   }, [movieSearchedData]);
 
   return (
@@ -60,7 +65,7 @@ const Header = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
           </svg>
         </button>
       </div>
@@ -123,13 +128,8 @@ const Header = () => {
               Movies
             </Link>
           </li>
-          <li className="mr-3">
-            <Link
-              className="navigation-links text-white  no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-              to="/shop"
-            >
-              About
-            </Link>
+          <li className="mr-3 text-white" onClick={() => addModal(SignUpModal)}>
+            Signup
           </li>
         </ul>
       </div>

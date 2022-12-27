@@ -11,7 +11,7 @@ export const SimilarMoviesWidget = ({data}) => {
                         return (
                           <li
                             key={i}
-                            className="p-4 border-2 h-auto border-white text-white font-semibold"
+                            className="p-4 h-auto text-white font-semibold"
                           ><ButtonBase href={`/detail/${movie._id}`}>
                            <img src={require('../assets/uncahrted.jpg')} alt='similar movie thumbnails'/>
                         </ButtonBase>

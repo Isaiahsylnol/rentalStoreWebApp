@@ -50,7 +50,7 @@ function showPaginationNumbers(pageNumbers) {
           <Link
             key={pgNumber}
             className={`page-item page-link p-2 text-white ${
-              currentPage == pgNumber ? "active bg-blue-600 w-12" : ""
+              currentPage == pgNumber ? "active border bottom-2 border-white rounded-3xl" : ""
             } `}
             onClick={() => setCurrentPage(pgNumber)}
             to={"#"}

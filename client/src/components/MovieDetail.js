@@ -43,7 +43,7 @@ function MovieDetail(props) {
                   {props.movie.title}
                 </h3>
                 <span className="font-normal">Producer:</span>{" "}
-                {props.movie.producer[0]} <br />
+                {props.movie.director[0]} <br />
                 <span>
                   <span className="font-normal">Release Date:</span>{" "}
                   {props.movie.year}
