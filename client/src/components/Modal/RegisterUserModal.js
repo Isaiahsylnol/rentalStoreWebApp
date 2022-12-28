@@ -7,15 +7,20 @@ import { useMutation } from "@apollo/client";
 import { REGISTER_USER } from "../../mutations/userMutations";
 import { ErrorMessage } from "@hookform/error-message";
 
-export default function SignUpModal(props) {
+export default function RegisterUserModal(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [submitted, setSubmitted] = useState();
   const [password, setPassword] = useState("");
 
-  const [registerUser, { error }] = useMutation(REGISTER_USER, {
+  const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER, {
     variables: { username, firstName, lastName, email, password },
+    onCompleted(data) {
+      console.log("USER SUCCEFUSSLY REGISTERED");
+      setSubmitted(true);
+    },
   });
 
   const {
@@ -39,8 +44,9 @@ export default function SignUpModal(props) {
   return (
     <Modal>
       {/* Close modal button */}
-      <div className="float-right justify-center">
+      <div className="float-right justify-center p-4">
         <button
+          className="hover:bg-slate-700 rounded-3xl"
           aria-label="Close Modal"
           aria-labelledby="close-modal"
           onClick={props.close}
@@ -60,20 +66,25 @@ export default function SignUpModal(props) {
         </button>
       </div>
       {/* Close modal button - END */}
-      <ModalHeader>
-        <h1 className="text-center">Register</h1>
-      </ModalHeader>
+      <ModalHeader />
       <ModalBody>
-        <div className="justify-center w-96 flex">"Logo Here"</div>
+        <div className="justify-center w-96 flex">
+          <img
+            src={require("../../assets/movie-logo.png")}
+            className="mb-7 rounded-3xl"
+            alt="movie logo"
+          />
+        </div>
         <form
           onSubmit={handleSubmit(onSubmit, onError)}
           className="flex flex-col gap-7"
         >
+          <label className="text-white text-base -mb-4">Username</label>
           <input
             className="p-3 rounded-xl"
-            placeholder="username"
+            placeholder="Example: jollyFilmWatcher4"
             {...register("username", {
-              required: true,
+              required: "Please fill out this field",
             })}
           />
           <ErrorMessage
@@ -91,12 +102,12 @@ export default function SignUpModal(props) {
               ))
             }
           />
-
+          <label className="text-white text-base -mb-4">First name</label>
           <input
             className="p-3 rounded-xl"
-            placeholder="First Name"
+            placeholder="Example: Paul"
             {...register("firstName", {
-              required: "First name is required",
+              required: "Please fill out this field",
             })}
           />
           <ErrorMessage
@@ -114,12 +125,12 @@ export default function SignUpModal(props) {
               ))
             }
           />
-
+          <label className="text-white text-base -mb-4">Last name</label>
           <input
             className="p-3 rounded-xl"
-            placeholder="Last Name"
+            placeholder="Example: Harrison"
             {...register("lastName", {
-              required: "This is required.",
+              required: "Please fill out this field.",
               minLength: {
                 value: 3,
                 message: "Input must exceed 3 characters.",
@@ -142,14 +153,16 @@ export default function SignUpModal(props) {
             }
           />
 
+          <label className="text-white text-base -mb-4">Email</label>
           <input
             className="p-3 rounded-xl"
             type="email"
-            placeholder="Email"
+            placeholder="Example: paul.harrison@gmail.com"
             {...register("email", {
-              required: "This field is required",
+              required: "Please fill out this field.",
             })}
           />
+
           <ErrorMessage
             errors={errors}
             name="email"
@@ -165,7 +178,7 @@ export default function SignUpModal(props) {
               ))
             }
           />
-
+          <label className="text-white text-base -mb-4">Password</label>
           <input
             className="p-3 rounded-xl"
             type="password"
@@ -175,7 +188,7 @@ export default function SignUpModal(props) {
           />
           {errors.password && (
             <span className="text-red-500 text-base font-medium -mt-4">
-              Password field is required
+              Please fill out this field
             </span>
           )}
 
@@ -185,10 +198,15 @@ export default function SignUpModal(props) {
             </span>
           )}
           <div className="flex justify-center">
+            <button className="text-white">
+              Already have an account? Login
+            </button>
+          </div>
+          <div className="flex justify-center">
             <input
               type="submit"
               value="Sign up"
-              className="bg-blue-500 w-40 h-12 text-base font-semibold text-white rounded-2xl"
+              className="bg-blue-500 hover:bg-blue-600 w-40 h-12 text-base font-semibold text-white rounded-2xl"
             />
           </div>
         </form>

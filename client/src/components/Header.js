@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import SearchIcon from "@mui/icons-material/Search";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ModalService from "./Modal/services/ModalService";
-import SignUpModal from "./Modal/SignUpModal";
+import RegisterUserModal from "./Modal/RegisterUserModal";
 
 import { useLazyQuery, useQuery } from "@apollo/client";
 
@@ -128,8 +129,11 @@ const Header = () => {
               Movies
             </Link>
           </li>
-          <li className="mr-3 text-white" onClick={() => addModal(SignUpModal)}>
-            Signup
+          <li
+            className="mr-3 text-white text-xl"
+            onClick={() => addModal(RegisterUserModal)}
+          >
+            <PersonOutlineIcon fontSize="large" />
           </li>
         </ul>
       </div>
