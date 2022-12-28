@@ -1,32 +1,29 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 
 import Modal from "./Modal";
 import ModalBody from "./ModalBody";
 import ModalHeader from "./ModalHeader";
 import ModalService from "./services/ModalService";
-import { LoginModal } from "./LoginModal";
+import RegisterUserModal from "./RegisterUserModal";
 
+import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
-import { REGISTER_USER } from "../../mutations/userMutations";
+import { LOGIN_USER } from "../../mutations/userMutations";
+import { ErrorMessage } from "@hookform/error-message";
 
-export default function RegisterUserModal(props) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+export const LoginModal = (props) => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [submitted, setSubmitted] = useState();
   const [password, setPassword] = useState("");
 
-  const addModal = (modal) => {
-    ModalService.open(modal);
-  };
-
-  const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER, {
-    variables: { username, firstName, lastName, email, password },
+  const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER, {
+    variables: { email, password },
     onCompleted(data) {
       console.log("USER SUCCEFUSSLY REGISTERED");
+
+      let user = data.login;
+      user["email"] = email;
+      localStorage.setItem("User", JSON.stringify(user));
       setSubmitted(true);
     },
   });
@@ -40,15 +37,16 @@ export default function RegisterUserModal(props) {
   });
 
   const onSubmit = (data, e) => {
-    setFirstName(data.firstName);
     setEmail(data.email);
-    setLastName(data.lastName);
     setPassword(data.password);
-    setUsername(data.username);
-
-    registerUser(firstName, lastName, email, username, password);
+    loginUser(email, password);
   };
   const onError = (errors, e) => console.log(errors, e);
+
+  const addModal = (modal) => {
+    ModalService.open(modal);
+  };
+
   return (
     <Modal>
       {/* Close modal button */}
@@ -87,80 +85,6 @@ export default function RegisterUserModal(props) {
           onSubmit={handleSubmit(onSubmit, onError)}
           className="flex flex-col gap-7"
         >
-          <label className="text-white text-base -mb-4">Username</label>
-          <input
-            className="p-3 rounded-xl"
-            placeholder="Example: jollyFilmWatcher4"
-            {...register("username", {
-              required: "Please fill out this field",
-            })}
-          />
-          <ErrorMessage
-            errors={errors}
-            name="username"
-            render={({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p
-                  key={type}
-                  className="text-red-500 text-base font-medium -mt-4"
-                >
-                  {message}
-                </p>
-              ))
-            }
-          />
-          <label className="text-white text-base -mb-4">First name</label>
-          <input
-            className="p-3 rounded-xl"
-            placeholder="Example: Paul"
-            {...register("firstName", {
-              required: "Please fill out this field",
-            })}
-          />
-          <ErrorMessage
-            errors={errors}
-            name="firstName"
-            render={({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p
-                  key={type}
-                  className="text-red-500 text-base font-medium -mt-4"
-                >
-                  {message}
-                </p>
-              ))
-            }
-          />
-          <label className="text-white text-base -mb-4">Last name</label>
-          <input
-            className="p-3 rounded-xl"
-            placeholder="Example: Harrison"
-            {...register("lastName", {
-              required: "Please fill out this field.",
-              minLength: {
-                value: 3,
-                message: "Input must exceed 3 characters.",
-              },
-            })}
-          />
-          <ErrorMessage
-            errors={errors}
-            name="lastName"
-            render={({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p
-                  key={type}
-                  className="text-red-500 text-base font-medium -mt-4"
-                >
-                  {message}
-                </p>
-              ))
-            }
-          />
-
           <label className="text-white text-base -mb-4">Email</label>
           <input
             className="p-3 rounded-xl"
@@ -186,6 +110,7 @@ export default function RegisterUserModal(props) {
               ))
             }
           />
+
           <label className="text-white text-base -mb-4">Password</label>
           <input
             className="p-3 rounded-xl"
@@ -206,14 +131,17 @@ export default function RegisterUserModal(props) {
             </span>
           )}
           <div className="flex justify-center">
-            <button onClick={() => addModal(LoginModal)} className="text-white">
-              Already have an account? Login
+            <button
+              onClick={() => addModal(RegisterUserModal)}
+              className="text-white"
+            >
+              Don't have an account? Sign up
             </button>
           </div>
           <div className="flex justify-center">
             <input
               type="submit"
-              value="Sign up"
+              value="Log in"
               className="bg-blue-500 hover:bg-blue-600 w-40 h-12 text-base font-semibold text-white rounded-2xl"
             />
           </div>
@@ -221,4 +149,4 @@ export default function RegisterUserModal(props) {
       </ModalBody>
     </Modal>
   );
-}
+};

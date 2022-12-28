@@ -39,7 +39,8 @@ type Rental {
 
   type AuthPayload {
     token: String!,
-    id: Int!,
+    username: String!,
+    id: String!,
     tokenExpiration: Int!
   }
 

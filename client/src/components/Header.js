@@ -6,11 +6,11 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+
 import ModalService from "./Modal/services/ModalService";
-import RegisterUserModal from "./Modal/RegisterUserModal";
+import { LoginModal } from "./Modal/LoginModal";
 
 import { useLazyQuery, useQuery } from "@apollo/client";
-
 import { SEARCH_MOVIE } from "../queries/movieQueries";
 import { GET_MOVIES } from "../queries/movieQueries";
 
@@ -131,7 +131,7 @@ const Header = () => {
           </li>
           <li
             className="mr-3 text-white text-xl"
-            onClick={() => addModal(RegisterUserModal)}
+            onClick={() => addModal(LoginModal)}
           >
             <PersonOutlineIcon fontSize="large" />
           </li>

@@ -88,7 +88,12 @@ const resolvers = {
     const token = jwt.sign({ email: user.email }, "somesuperscretkey", {
       expiresIn: "1h",
     });
-    return { id: user.id, token: token, tokenExpiration: 1 };
+    return {
+      id: user.id,
+      token: token,
+      tokenExpiration: 1,
+      username: user.username,
+    };
   },
 
   searchByYear: (args) => {
