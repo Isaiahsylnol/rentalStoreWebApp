@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import Modal from "./Modal";
 import ModalBody from "./ModalBody";
@@ -13,18 +13,20 @@ import { ErrorMessage } from "@hookform/error-message";
 
 export const LoginModal = (props) => {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState();
   const [password, setPassword] = useState("");
+  const closeModal = useRef();
+  const [submitted, setSubmitted] = useState(false);
 
-  const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER, {
+  const [loginUser, { error }] = useMutation(LOGIN_USER, {
     variables: { email, password },
     onCompleted(data) {
-      console.log("USER SUCCEFUSSLY REGISTERED");
-
+      // Create a user object to store client side
       let user = data.login;
       user["email"] = email;
       localStorage.setItem("User", JSON.stringify(user));
-      setSubmitted(true);
+
+      closeModalSubmit();
+      window.location.reload(false);
     },
   });
 
@@ -47,11 +49,16 @@ export const LoginModal = (props) => {
     ModalService.open(modal);
   };
 
+  const closeModalSubmit = () => {
+    closeModal.current.click();
+  };
+
   return (
     <Modal>
       {/* Close modal button */}
       <div className="float-right justify-center p-4">
         <button
+          ref={closeModal}
           className="hover:bg-slate-700 rounded-3xl"
           aria-label="Close Modal"
           aria-labelledby="close-modal"

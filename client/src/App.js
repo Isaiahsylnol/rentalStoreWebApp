@@ -6,6 +6,7 @@ import NotFound from "./components/NotFound";
 import ListMovies from "./components/ListMovies";
 import MovieDetail from "./components/MovieDetail";
 import Home from "./Pages/Home";
+import Profile from "./Pages/Profile";
 import { GET_MOVIES } from "./queries/movieQueries";
 import { useQuery } from "@apollo/client";
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/movies" exact element={<ListMovies />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
           {data?.movies.map((movie, i) => (
             <Route
               exact

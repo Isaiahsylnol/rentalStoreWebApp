@@ -14,19 +14,30 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import { SEARCH_MOVIE } from "../queries/movieQueries";
 import { GET_MOVIES } from "../queries/movieQueries";
 
+// Small screen x Mobile menu
 function menuToggle() {
   document.getElementById("nav-content").classList.toggle("hidden");
 }
 
 const Header = () => {
+  const [currentUser, setCurrentUser] = useState();
+
   const addModal = (modal) => {
     ModalService.open(modal);
   };
 
+  // Sign user out
+  const signOut = () => {
+    localStorage.removeItem("User");
+    setCurrentUser();
+  };
+
   let navigate = useNavigate();
+
   const [movieSearched, setMovieSearched] = useState("");
   const [fetchMovie, { data: movieSearchedData, error: movieError }] =
     useLazyQuery(SEARCH_MOVIE);
+
   const { loading, error, data } = useQuery(GET_MOVIES);
 
   const [movieTitles, setMovies] = useState([]);
@@ -44,98 +55,121 @@ const Header = () => {
     }
   }, [movieSearchedData]);
 
+  useEffect(() => {
+    setCurrentUser(JSON.parse(localStorage.getItem("User")));
+  }, []);
+
   return (
-    <nav className="flex items-center justify-between bg-gray-800 p-6 fixed w-full z-10 top-0">
-      <div className="flex-shrink-0 text-white mr-6">
-        <a
-          className="text-white no-underline hover:text-white hover:no-underline"
-          href="/"
-        >
-          <p className="text-2xl pl-2">Movie Rentals</p>
-        </a>
-      </div>
-      <div className="block lg:hidden">
-        <button
-          id="nav-toggle"
-          onClick={menuToggle}
-          className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white"
-        >
-          <svg
-            className="fill-current h-3 w-3"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+    <nav className="w-full bg-gray-800 fixed z-10 top-0">
+      <div className="rounded-lg flex-shrink-0 text-white p-4">
+        <div className="flex-shrink-0 text-white"></div>
+        <div className="block lg:hidden">
+          <button
+            id="nav-toggle"
+            onClick={menuToggle}
+            className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white"
           >
-            <title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-          </svg>
-        </button>
-      </div>
-      <div
-        className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden"
-        id="nav-content"
-      >
-        {/* Movie search bar */}
-        <div className="flex flex-grow justify-center ml-12">
-          <Autocomplete
-            style={{ width: 500 }}
-            freeSolo
-            autoComplete
-            autoHighlight
-            options={movieTitles}
-            onChange={(event, value) => {
-              setMovieSearched(value);
-            }}
-            renderInput={(params) => (
-              <div className="w-full inline-flex md:w-2/1">
-                <TextField
-                  {...params}
-                  onChange={(e) => {
-                    setMovieSearched(e.target.value);
-                  }}
-                  variant="outlined"
-                  className="p-1  float-left bg-white rounded-xl"
-                />
-                <IconButton
-                  type="button"
-                  aria-label="search"
-                  onClick={() => {
-                    fetchMovie({
-                      variables: {
-                        title: movieSearched,
-                      },
-                    });
-                  }}
-                >
-                  <SearchIcon className="text-white" />
-                </IconButton>
-              </div>
-            )}
-          />
+            <svg
+              className="fill-current h-3 w-3"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Menu</title>
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            </svg>
+          </button>
         </div>
-        <ul className="lg:flex justify-end items-center">
-          <li className="mr-3">
-            <Link
-              className="navigation-links py-2 px-4 text-white no-underline"
-              to="/"
-            >
-              Home
-            </Link>
-          </li>
-          <li className="mr-3">
-            <Link
-              className="navigation-links text-white  no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-              to="/movies"
-            >
-              Movies
-            </Link>
-          </li>
-          <li
-            className="mr-3 text-white text-xl"
-            onClick={() => addModal(LoginModal)}
+        <div
+          className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden"
+          id="nav-content"
+        >
+          <a
+            className="text-white no-underline hover:text-white hover:no-underline"
+            href="/"
           >
-            <PersonOutlineIcon fontSize="large" />
-          </li>
-        </ul>
+            <p className="text-2xl pl-2">Movie Rentals</p>
+          </a>
+          {/* Movie search bar */}
+          <div className="flex flex-grow justify-center ml-12">
+            <Autocomplete
+              style={{ width: 500 }}
+              freeSolo
+              autoComplete
+              autoHighlight
+              options={movieTitles}
+              onChange={(event, value) => {
+                setMovieSearched(value);
+              }}
+              renderInput={(params) => (
+                <div className="w-full inline-flex md:w-2/1">
+                  <TextField
+                    {...params}
+                    onChange={(e) => {
+                      setMovieSearched(e.target.value);
+                    }}
+                    variant="outlined"
+                    className="p-1 float-left bg-white rounded-xl"
+                  />
+                  <IconButton
+                    type="button"
+                    aria-label="search"
+                    onClick={() => {
+                      fetchMovie({
+                        variables: {
+                          title: movieSearched,
+                        },
+                      });
+                    }}
+                  >
+                    <SearchIcon className="text-white" />
+                  </IconButton>
+                </div>
+              )}
+            />
+          </div>
+          <ul className="lg:flex justify-end items-center">
+            <li className="mr-3">
+              <Link
+                className="navigation-links py-2 px-4 text-white no-underline"
+                to="/"
+              >
+                Home
+              </Link>
+            </li>
+            <li className="mr-3">
+              <Link
+                className="navigation-links text-white  no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
+                to="/movies"
+              >
+                Movies
+              </Link>
+            </li>
+            <li
+              className="mr-3 text-white text-xl"
+              onClick={
+                currentUser
+                  ? () => navigate(`/profile`)
+                  : () => addModal(LoginModal)
+              }
+            >
+              <PersonOutlineIcon fontSize="large" />
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="bg-gray-800 text-base">
+        {currentUser ? (
+          <div>
+            <div className="text-right text-white -mt-5 p-3 mr-6">
+              {currentUser.email}
+              <button onClick={signOut} className="text-white pl-7">
+                Sign out
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>No User</div>
+        )}
       </div>
     </nav>
   );
