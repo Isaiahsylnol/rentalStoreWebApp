@@ -61,7 +61,23 @@ const Header = () => {
 
   return (
     <nav className="w-full bg-gray-800 fixed z-10 top-0">
-      <div className="rounded-lg flex-shrink-0 text-white p-4">
+      {/* Header Row 1 */}
+      <div className="bg-gray-800 text-base m-4">
+        {currentUser ? (
+          <div>
+            <div className="text-right text-white mr-6">
+              {currentUser.email}
+              <button onClick={signOut} className="text-white pl-7">
+                Sign out
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>No User</div>
+        )}
+      </div>
+      {/* Header Row 2 */}
+      <div className="rounded-lg flex-shrink-0 text-white p-4 h-11 flex -mt-0 pb-12">
         <div className="flex-shrink-0 text-white"></div>
         <div className="block lg:hidden">
           <button
@@ -83,11 +99,18 @@ const Header = () => {
           className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden"
           id="nav-content"
         >
+          {/* Header logo */}
           <a
             className="text-white no-underline hover:text-white hover:no-underline"
             href="/"
           >
-            <p className="text-2xl font-bold pl-2 uppercase">Movie Rentals</p>
+            <img
+              src={require("../assets/logo-1.png")}
+              alt="Site logo"
+              width="130"
+              height="130"
+              className="-mt-3"
+            />
           </a>
           {/* Movie search bar */}
           <div className="flex flex-grow justify-center ml-12">
@@ -156,20 +179,6 @@ const Header = () => {
             </li>
           </ul>
         </div>
-      </div>
-      <div className="bg-gray-800 text-base">
-        {currentUser ? (
-          <div>
-            <div className="text-right text-white -mt-5 p-3 mr-6">
-              {currentUser.email}
-              <button onClick={signOut} className="text-white pl-7">
-                Sign out
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div>No User</div>
-        )}
       </div>
     </nav>
   );
