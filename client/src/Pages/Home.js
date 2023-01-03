@@ -7,15 +7,15 @@ import { SimilarMoviesWidget } from "../components/SimilarMoviesWidget";
 
 // Mock data
 const movies = [
-  { title: "Avatar", release_date: "022223" },
-  { title: "SpideMan Long Way Home", release_date: "021123" },
-  { title: "Kill Bill", release_date: "020423" },
-  { title: "The Departed", release_date: "021221" },
-  { title: "La La Land", release_date: "012223" },
-  { title: "American X History", release_date: "020623" },
-  { title: "Gone Girl", release_date: "042421" },
-  { title: "Django", release_date: "121522" },
-  { title: "SpideMan Long Way Home", release_date: "021123" },
+  { title: "Avatar", release_date: "2/05" },
+  { title: "SpideMan Long Way Home", release_date: "2/11" },
+  { title: "Kill Bill", release_date: "5/04" },
+  { title: "The Departed", release_date: "8/12" },
+  { title: "La La Land", release_date: "8/22" },
+  { title: "American X History", release_date: "9/06" },
+  { title: "Gone Girl", release_date: "9/24" },
+  { title: "Django", release_date: "11/15" },
+  { title: "SpideMan Long Way Home", release_date: "12/11" },
 ];
 
 const Home = () => {
@@ -177,9 +177,7 @@ const Home = () => {
                         <h2 className="  text-2xl font-bold sm:text-4xl mt-72 flex">
                           The hobbit
                         </h2>
-                        <h2 className="  pb-4 text-base">
-                          Action, Adventure
-                        </h2>
+                        <h2 className="  pb-4 text-base">Action, Adventure</h2>
                         <button className="h-14 w-full uppercase sm:w-36 rounded-3xl hover:opacity-70 bg-cyan-600">
                           Watch
                         </button>
@@ -206,7 +204,7 @@ const Home = () => {
                 </div>
                 <div>
                   <SimilarMoviesWidget data={currentRecords} />
-                  <Pagination 
+                  <Pagination
                     nPages={nPages}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}

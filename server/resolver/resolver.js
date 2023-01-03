@@ -85,23 +85,18 @@ const resolvers = {
     if (!isEqual) {
       throw new Error("Password is incorrect");
     }
-    const token = jwt.sign({ email: user.email }, "somesuperscretkey", {
+    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
     return {
       id: user.id,
       token: token,
-      tokenExpiration: 1,
       username: user.username,
     };
   },
 
   searchByYear: (args) => {
     return Movies.findOne({ year: args.year });
-  },
-
-  listMovies: () => {
-    return Movies.find({});
   },
 };
 

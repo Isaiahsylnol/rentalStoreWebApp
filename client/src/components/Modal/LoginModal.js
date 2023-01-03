@@ -20,13 +20,11 @@ export const LoginModal = (props) => {
   const [loginUser, { error }] = useMutation(LOGIN_USER, {
     variables: { email, password },
     onCompleted(data) {
+      console.log(data);
       // Create a user object to store client side
       let user = data.login;
       user["email"] = email;
       localStorage.setItem("User", JSON.stringify(user));
-
-      closeModalSubmit();
-      window.location.reload(false);
     },
   });
 
@@ -41,7 +39,9 @@ export const LoginModal = (props) => {
   const onSubmit = (data, e) => {
     setEmail(data.email);
     setPassword(data.password);
-    loginUser(email, password);
+    loginUser(email, password).then(() => {
+      // window.location.reload();
+    });
   };
   const onError = (errors, e) => console.log(errors, e);
 
@@ -84,48 +84,52 @@ export const LoginModal = (props) => {
         <div className="justify-center w-96 flex">
           <img
             src={require("../../assets/movie-logo.png")}
-            className="mb-7 rounded-3xl"
+            className="mb-7 rounded-3xl h-36"
             alt="movie logo"
           />
         </div>
         <form
           onSubmit={handleSubmit(onSubmit, onError)}
-          className="flex flex-col gap-7"
+          className="flex flex-col gap-7 mx-auto justify-center "
         >
-          <label className="text-white text-base -mb-4">Email</label>
-          <input
-            className="p-3 rounded-xl"
-            type="email"
-            placeholder="Example: paul.harrison@gmail.com"
-            {...register("email", {
-              required: "Please fill out this field.",
-            })}
-          />
+          <div className="justify-center mx-auto">
+            <label className="text-white block text-base">Email</label>
+            <input
+              className="w-60 md:w-80 p-3 rounded-xl"
+              type="email"
+              placeholder="Example: paul.harrison@gmail.com"
+              {...register("email", {
+                required: "Please fill out this field.",
+              })}
+            />
 
-          <ErrorMessage
-            errors={errors}
-            name="email"
-            render={({ messages }) =>
-              messages &&
-              Object.entries(messages).map(([type, message]) => (
-                <p
-                  key={type}
-                  className="text-red-500 text-base font-medium -mt-4"
-                >
-                  {message}
-                </p>
-              ))
-            }
-          />
+            <ErrorMessage
+              errors={errors}
+              name="email"
+              render={({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                  <p
+                    key={type}
+                    className="text-red-500 text-base font-medium -mt-4"
+                  >
+                    {message}
+                  </p>
+                ))
+              }
+            />
+          </div>
 
-          <label className="text-white text-base -mb-4">Password</label>
-          <input
-            className="p-3 rounded-xl"
-            type="password"
-            {...register("password", {
-              required: true,
-            })}
-          />
+          <div className="justify-center mx-auto">
+            <label className="text-white block text-base">Password</label>
+            <input
+              className="w-60 md:w-80 p-3 rounded-xl"
+              type="password"
+              {...register("password", {
+                required: true,
+              })}
+            />
+          </div>
           {errors.password && (
             <span className="text-red-500 text-base font-medium -mt-4">
               Please fill out this field

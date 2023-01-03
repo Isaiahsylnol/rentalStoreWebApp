@@ -87,7 +87,7 @@ const Header = () => {
             className="text-white no-underline hover:text-white hover:no-underline"
             href="/"
           >
-            <p className="text-2xl pl-2">Movie Rentals</p>
+            <p className="text-2xl font-bold pl-2 uppercase">Movie Rentals</p>
           </a>
           {/* Movie search bar */}
           <div className="flex flex-grow justify-center ml-12">

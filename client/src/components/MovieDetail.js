@@ -11,9 +11,9 @@ function MovieDetail(props) {
       <Header />
       <div className="mt-32 sm:mt-15 md:mt-24 lg:mt-52 flex justify-center">
         {/* Container  */}
-        <div className="lg:m-8 lg:w-3/2 xl:w-4/6 bg-[#353232] p-12 justify-center rounded-xl grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2">
+        <div className="xl:w-4/6 bg-[#353232] p-12 justify-center rounded-xl grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2">
           {/* Movie poster */}
-          <div className="flex justify-center">
+          <div className="flex justify-center sm:col-span-2 md:col-span-1">
             <IKImage
               path={props.movie.thumbnail + ".jpg"}
               transformation={[
@@ -59,7 +59,10 @@ function MovieDetail(props) {
                   {props.movie.genre[0]}
                 </span>
               </div>
-              <div className="h-auto">
+              <div className="border-4 border-blue-700 hover:border-yellow-400 hover:text-yellow-400 mt-12 w-52  font-medium flex justify-center">
+                <button className="p-4 uppercase">Rent from $7.00</button>
+              </div>
+              <div className="h-auto pt-7">
                 <p className="mt-8 text-left">
                   Contrary to popular belief, Lorem Ipsum is not simply random
                   text. It has roots in a piece of classical Latin literature

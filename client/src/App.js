@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import AuthService from "./services/auth.service";
 import NotFound from "./components/NotFound";
 import ListMovies from "./components/ListMovies";
 import MovieDetail from "./components/MovieDetail";
