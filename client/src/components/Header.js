@@ -1,68 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-
 import ModalService from "./Modal/services/ModalService";
 import { LoginModal } from "./Modal/LoginModal";
-
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { SEARCH_MOVIE } from "../queries/movieQueries";
 import { GET_MOVIES } from "../queries/movieQueries";
-
 // Small screen x Mobile menu
 function menuToggle() {
   document.getElementById("nav-content").classList.toggle("hidden");
 }
-
 const Header = () => {
   const [currentUser, setCurrentUser] = useState();
-
-  const addModal = (modal) => {
+  function addModal(modal) {
     ModalService.open(modal);
-  };
-
+  }
   // Sign user out
-  const signOut = () => {
+  function signOut() {
     localStorage.removeItem("User");
     setCurrentUser();
-  };
-
+  }
   let navigate = useNavigate();
-
   const [movieSearched, setMovieSearched] = useState("");
   const [fetchMovie, { data: movieSearchedData, error: movieError }] =
     useLazyQuery(SEARCH_MOVIE);
-
   const { loading, error, data } = useQuery(GET_MOVIES);
-
   const [movieTitles, setMovies] = useState([]);
-
   useEffect(() => {
     for (var i = 0; i < data?.movies?.length; i++) {
       movieTitles.push(data?.movies[i].title);
     }
     setMovies(movieTitles);
   }, []);
-
   useEffect(() => {
     if (movieSearchedData != "" && movieSearchedData != undefined) {
       navigate(`/detail/${movieSearchedData?.searchMovie._id}`);
     }
   }, [movieSearchedData]);
-
   useEffect(() => {
     setCurrentUser(JSON.parse(localStorage.getItem("User")));
   }, []);
-
   return (
     <nav className="w-full bg-gray-800 fixed z-10 top-0">
       {/* Header Row 1 */}
-      <div className="bg-gray-800 text-base m-4">
+      <div className="bg-gray-800 text-base m-2">
         {currentUser ? (
           <div>
             <div className="text-right text-white mr-6">
@@ -73,12 +58,11 @@ const Header = () => {
             </div>
           </div>
         ) : (
-          <div>No User</div>
+          <div className="pt-4"></div>
         )}
       </div>
       {/* Header Row 2 */}
-      <div className="rounded-lg flex-shrink-0 text-white p-4 h-11 flex -mt-0 pb-12">
-        <div className="flex-shrink-0 text-white"></div>
+      <div className="rounded-lg flex-shrink-0 text-white p-4 h-8 flex -mt-0 pb-8">
         <div className="block lg:hidden">
           <button
             id="nav-toggle"
@@ -95,23 +79,23 @@ const Header = () => {
             </svg>
           </button>
         </div>
+        {/* Header logo */}
+        <a
+          className="text-white no-underline hover:text-white mx-auto -mt-12 justify-center hover:no-underline invisible sm:visible"
+          href="/"
+        >
+          <img
+            src={require("../assets/logo-1.png")}
+            alt="Site logo"
+            width="100"
+            height="100"
+            className="p-1"
+          />
+        </a>
         <div
           className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden"
           id="nav-content"
         >
-          {/* Header logo */}
-          <a
-            className="text-white no-underline hover:text-white hover:no-underline"
-            href="/"
-          >
-            <img
-              src={require("../assets/logo-1.png")}
-              alt="Site logo"
-              width="130"
-              height="130"
-              className="-mt-3"
-            />
-          </a>
           {/* Movie search bar */}
           <div className="flex flex-grow justify-center ml-12">
             <Autocomplete
@@ -130,8 +114,7 @@ const Header = () => {
                     onChange={(e) => {
                       setMovieSearched(e.target.value);
                     }}
-                    variant="outlined"
-                    className="p-1 float-left bg-white rounded-xl"
+                    className="p-1 float-left bg-white rounded-xl h-8"
                   />
                   <IconButton
                     type="button"
@@ -153,7 +136,7 @@ const Header = () => {
           <ul className="lg:flex justify-end items-center">
             <li className="mr-3">
               <Link
-                className="navigation-links py-2 px-4 text-white no-underline"
+                className="font-medium text-white no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
                 to="/"
               >
                 Home
@@ -161,7 +144,7 @@ const Header = () => {
             </li>
             <li className="mr-3">
               <Link
-                className="navigation-links text-white  no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
+                className="font-medium text-white no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
                 to="/movies"
               >
                 Movies
@@ -183,5 +166,4 @@ const Header = () => {
     </nav>
   );
 };
-
 export default Header;

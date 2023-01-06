@@ -40,7 +40,7 @@ export const LoginModal = (props) => {
     setEmail(data.email);
     setPassword(data.password);
     loginUser(email, password).then(() => {
-      // window.location.reload();
+      window.location.reload();
     });
   };
   const onError = (errors, e) => console.log(errors, e);

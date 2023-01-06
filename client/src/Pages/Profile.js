@@ -6,21 +6,20 @@ const Profile = () => {
     let user = JSON.parse(localStorage.getItem("User"));
     console.log(user);
   }, []);
-
   let user = {
     name: "John Doe",
     address: "77 Field Crest",
     email: "doe@test.com",
   };
-
   function triggerBtn() {
     console.log("The button was pressed");
   }
   return (
-    <div>
-      <div className="h-screen -mb-12 flex justify-center items-center">
-        <Header />
-        <div className="w-11/12 bg-slate-200 flex justify-center rounded-2xl">
+    <div className="h-screen">
+      <Header />
+      {/* Container */}
+      <div className="flex justify-center items-center p-6 sm:p-16 mt-14 xl:-mt-10 min-h-screen">
+        <div className="w-full bg-slate-200 flex justify-center rounded-2xl">
           {/* Container */}
           <div className="rounded-3xl p-4 w-full justify-center mx-auto">
             <div className='bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/projectionist.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1672677850653")] bg-cover bg-center h-56'>
@@ -74,7 +73,7 @@ const Profile = () => {
                   </span>
                   <span className="text-left p-4 w-full sm:w-5/12">
                     <h3 className="pt-3 mb-3 font-bold text-2xl">
-                      Favourite genres
+                      Favorite genres
                     </h3>
                     <ul className="font-bold text-base text-white inline-flex gap-x-2 cursor-default">
                       <li className="bg-black p-1 rounded-lg">Adventure</li>
@@ -91,5 +90,4 @@ const Profile = () => {
     </div>
   );
 };
-
 export default Profile;

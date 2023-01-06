@@ -13,18 +13,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.navigation-links {
-  padding: .3em;
-  font-size: 26px;
-  font-weight: 500;
-  text-decoration: none;
-  text-align: right;
-  align-items: flex-end;
-  justify-content: right;
-  justify-items: right;
-  margin: 12px;
-}
-
 html, body {
   height: 100%
 }

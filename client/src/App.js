@@ -12,10 +12,12 @@ import { GET_MOVIES } from "./queries/movieQueries";
 import { useQuery } from "@apollo/client";
 
 import "./App.css";
+import Footer from "./components/Footer";
 
 const Wrapper = styled.div`
   font-size: 1.5em;
   text-align: center;
+  height: screen;
 `;
 
 function App() {
