@@ -11,6 +11,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+const port = 5000;
 
 mongoose
   .connect(process.env.ATLAS_URI)
@@ -26,6 +27,8 @@ app.use(
   })
 );
 
-const port = process.env.PORT || 3000;
-const host = "0.0.0.0";
-app.listen(port, host, () => connsole.log(`server is running on port ${port}`));
+// Choose the port and start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server up running on port ${PORT}`);
+});
