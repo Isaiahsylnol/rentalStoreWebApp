@@ -1,3 +1,4 @@
+const path = require("path");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
@@ -11,7 +12,10 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-const port = 5000;
+// Anything that doesn't match the above, send back the index.html file
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
 
 mongoose
   .connect(process.env.ATLAS_URI)
