@@ -1,7 +1,0 @@
-
-    {
-      "name": "Should login to home page",
-      "username": "user1",
-      "password": "pass1",
-      "expected": "Products"
-  }
