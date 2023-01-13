@@ -1,35 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+
 import ModalService from "./Modal/services/ModalService";
 import { LoginModal } from "./Modal/LoginModal";
+
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { SEARCH_MOVIE } from "../queries/movieQueries";
 import { GET_MOVIES } from "../queries/movieQueries";
+
 // Small screen x Mobile menu
 function menuToggle() {
   document.getElementById("nav-content").classList.toggle("hidden");
 }
+
 const Header = () => {
   const [currentUser, setCurrentUser] = useState();
   function addModal(modal) {
     ModalService.open(modal);
   }
+
   // Sign user out
   function signOut() {
     localStorage.removeItem("User");
     setCurrentUser();
   }
+
   let navigate = useNavigate();
+
   const [movieSearched, setMovieSearched] = useState("");
   const [fetchMovie, { data: movieSearchedData, error: movieError }] =
     useLazyQuery(SEARCH_MOVIE);
   const { loading, error, data } = useQuery(GET_MOVIES);
   const [movieTitles, setMovies] = useState([]);
+
   useEffect(() => {
     for (var i = 0; i < data?.movies?.length; i++) {
       movieTitles.push(data?.movies[i].title);
@@ -44,13 +53,14 @@ const Header = () => {
   useEffect(() => {
     setCurrentUser(JSON.parse(localStorage.getItem("User")));
   }, []);
+
   return (
     <nav className="w-full bg-gray-800 fixed z-10 top-0">
       {/* Header Row 1 */}
       <div className="bg-gray-800 text-base m-2">
         {currentUser ? (
           <div>
-            <div className="text-right text-white mr-6">
+            <div className="text-right text-white mr-6 cursor-default">
               {currentUser.email}
               <button onClick={signOut} className="text-white pl-7">
                 Sign out
@@ -114,7 +124,9 @@ const Header = () => {
                     onChange={(e) => {
                       setMovieSearched(e.target.value);
                     }}
-                    className="p-1 float-left bg-white rounded-xl h-8"
+                    variant="outlined"
+                    size="small"
+                    className="float-left bg-white rounded-xl"
                   />
                   <IconButton
                     type="button"

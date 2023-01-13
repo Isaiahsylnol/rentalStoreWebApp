@@ -40,11 +40,11 @@ const Home = () => {
       <Header />
       {/* Container */}
       <div className="mt-24">
-        <div className="sm:flex">
+        <div className="sm:flex p-8">
           {/* left column - Feature Card */}
           <div className="w-full">
             <div className="p-10 sm:p-20">
-              <h2 className="font-bold w-1/3 absolute text-neutral-400 text-6xl sm:text-7xl md:text-8xl uppercase opacity-25">
+              <h2 className="cursor-default font-bold w-1/3 absolute text-neutral-400 text-6xl sm:text-7xl md:text-8xl uppercase opacity-25">
                 Latest Movies
               </h2>
               <div className="flex justify-center items-center">
@@ -63,8 +63,8 @@ const Home = () => {
             </div>
           </div>
           {/* Right column - Upcoming movies */}
-          <div className="h-auto w-full sm:w-3/5 xl:w-2/5 lg:mr-20 p-4 sm:p-0 mt-20">
-            <h2 className="text-2xl uppercase font-bold text-white bg-cyan-900 p-3 mb-4">
+          <div className="h-fit rounded-2xl bg-slate-700 w-full sm:w-3/5 xl:w-2/5 lg:mr-20 p-5 mt-20">
+            <h2 className="text-2xl uppercase font-bold text-white p-3 mb-4 cursor-default">
               Upcoming
             </h2>
             <ul className="text-left">
@@ -84,7 +84,7 @@ const Home = () => {
         </div>
         {/* News articles */}
         <div>
-          <div className="lg:w-1/3 w-60">
+          <div className=" sm:w-2/5 md:w-3/5 xl:w-2/5 w-60">
             <h1 className="pt-14 text-3xl sm:p-3 round text-white font-semibold sm:text-2xl md:text-3xl sm:mt-16 sm:w-2/3 md:w-5/12 mb-4 border-b-4 border-cyan-700 ml-8 text-left">
               LATEST NEWS
             </h1>
@@ -173,20 +173,21 @@ const Home = () => {
               </li>
             </ul>
           </div>
-          <div className="p-4">
+          {/* Featured movie */}
+          <div className="p-6">
             <div className="bg-zinc-800 sm:p-14 items-end rounded-lg flex">
               <div className="lg:grid lg:grid-cols-4 gap-3">
                 <div className="flex flex-row col-span-3 justify-center">
                   <div className="sm:w-10/12 text-left text-white">
                     <div className='rounded-xl bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
-                      <div className="p-8 uppercase">
+                      <div className="p-8 uppercase font-bold">
                         <h2 className="text-2xl font-bold sm:text-4xl mt-72">
                           The hobbit
                         </h2>
                         <h2 className="pb-4 text-base font-semibold">
                           Action, Adventure
                         </h2>
-                        <button className="h-14 w-full uppercase sm:w-36 font-semibold rounded-3xl hover:bg-[#0783a0] bg-cyan-600">
+                        <button className="h-14 w-full uppercase sm:w-36 rounded-3xl hover:bg-[#0783a0] bg-cyan-600">
                           Watch
                         </button>
                       </div>
