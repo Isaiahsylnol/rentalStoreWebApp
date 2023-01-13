@@ -94,11 +94,61 @@ const Home = () => {
               <li className="text-white text-left font-semibold mb-8">
                 <button>
                   <img
+                    src={require("../assets/godzilla.jpg")}
+                    alt="Characters from Uncharted the film"
+                    className="rounded-xl object-cover sm:h-44 h-60 w-96"
+                  />
+                  <span className="float-left">
+                    Lorem ipsum dolor sit amet.
+                  </span>
+                </button>
+              </li>
+              <li className="text-white text-left font-semibold mb-8">
+                <button>
+                  <img
+                    src={require("../assets/film-set-construction.png")}
+                    alt="Film equipment staged in front of studio green screen"
+                    className="rounded-xl object-cover sm:h-44 h-60 w-96"
+                  />
+                  <span className="float-left">
+                    Lorem ipsum dolor sit amet.
+                  </span>
+                </button>
+              </li>
+              <li className="text-white text-left font-semibold mb-8">
+                <button>
+                  <img
+                    src={require("../assets/glass-onion.jpg")}
+                    alt="Characters from Glass Onion"
+                    className="rounded-xl object-cover sm:h-44 h-60 w-96"
+                  />
+                  <span className="float-left">
+                    Lorem ipsum dolor sit amet.
+                  </span>
+                </button>
+              </li>
+              <li className="text-white text-left font-semibold mb-8">
+                <button>
+                  <img
+                    src={require("../assets/classic.jpg")}
+                    alt="Candid of Steven Spielberg filming on set"
+                    className="rounded-xl object-cover sm:h-44 h-60 w-96"
+                  />
+                  <span className="float-left">
+                    Lorem ipsum dolor sit amet.
+                  </span>
+                </button>
+              </li>
+              <li className="text-white text-left font-semibold mb-8">
+                <button>
+                  <img
                     src={require("../assets/uncahrted.jpg")}
                     alt="Characters from Uncharted the film"
-                    className="rounded-xl w-11/12 object-contain"
+                    className="rounded-xl object-cover sm:h-44 h-60 w-96"
                   />
-                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                  <span className="float-left">
+                    Lorem ipsum dolor sit amet.
+                  </span>
                 </button>
               </li>
               <li className="text-white text-left font-semibold mb-8">
@@ -106,9 +156,11 @@ const Home = () => {
                   <img
                     src={require("../assets/essentials.webp")}
                     alt="Collage of essential film characters"
-                    className="rounded-xl w-11/12 object-contain"
+                    className="rounded-xl object-cover sm:h-44 h-60 w-96"
                   />
-                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                  <span className="float-left">
+                    Lorem ipsum dolor sit amet.
+                  </span>
                 </button>
               </li>
               <li className="text-white text-left font-semibold mb-8">
@@ -116,9 +168,11 @@ const Home = () => {
                   <img
                     src={require("../assets/handmaids-tale.jpg")}
                     alt="Game of Thrones film location"
-                    className="rounded-xl w-11/12 object-contain"
+                    className="rounded-xl object-cover sm:h-44 h-60 w-96"
                   />
-                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                  <span className="float-left">
+                    Lorem ipsum dolor sit amet.
+                  </span>
                 </button>
               </li>
               <li className="text-white text-left font-semibold mb-8">
@@ -126,49 +180,11 @@ const Home = () => {
                   <img
                     src={require("../assets/oscar-1.webp")}
                     alt="Actors arriving at the Oscars"
-                    className="rounded-xl w-11/12 object-contain"
+                    className="rounded-xl object-cover sm:h-44 h-60 w-96"
                   />
-                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
-                </button>
-              </li>
-              <li className="text-white text-left font-semibold mb-8">
-                <button>
-                  <img
-                    src={require("../assets/uncahrted.jpg")}
-                    alt="Characters from Uncharted the film"
-                    className="rounded-xl w-11/12 object-contain"
-                  />
-                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
-                </button>
-              </li>
-              <li className="text-white text-left font-semibold mb-8">
-                <button>
-                  <img
-                    src={require("../assets/essentials.webp")}
-                    alt="Collage of essential film characters"
-                    className="rounded-xl w-11/12 object-contain"
-                  />
-                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
-                </button>
-              </li>
-              <li className="text-white text-left font-semibold mb-8">
-                <button>
-                  <img
-                    src={require("../assets/handmaids-tale.jpg")}
-                    alt="Game of Thrones film location"
-                    className="rounded-xl w-11/12 object-contain"
-                  />
-                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
-                </button>
-              </li>
-              <li className="text-white text-left font-semibold mb-8">
-                <button>
-                  <img
-                    src={require("../assets/oscar-1.webp")}
-                    alt="Actors arriving at the Oscars"
-                    className="rounded-xl w-11/12 object-contain"
-                  />
-                  <div className="text-left">Lorem ipsum dolor sit amet.</div>
+                  <span className="float-left">
+                    Lorem ipsum dolor sit amet.
+                  </span>
                 </button>
               </li>
             </ul>
