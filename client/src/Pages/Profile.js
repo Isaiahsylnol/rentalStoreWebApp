@@ -71,11 +71,11 @@ const Profile = () => {
                     </h3>
                     <span className="font-bold text-base">372</span>
                   </span>
-                  <span className="text-left p-4 w-full sm:w-5/12">
+                  <span className="text-left p-4 w-full">
                     <h3 className="pt-3 mb-3 font-bold text-2xl">
                       Favorite genres
                     </h3>
-                    <ul className="font-bold text-base text-white inline-flex gap-x-2 cursor-default">
+                    <ul className="font-bold text-white inline-flex gap-2 cursor-default">
                       <li className="bg-black p-1 rounded-lg">Adventure</li>
                       <li className="bg-black p-1 rounded-lg">Sc-FI</li>
                     </ul>

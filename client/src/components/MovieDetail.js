@@ -61,7 +61,7 @@ function MovieDetail(props) {
                   </span>
                 </div>
                 <div className="border-4 border-blue-700 hover:border-yellow-400 hover:text-yellow-400 mt-8 w-2/5 font-medium flex justify-center">
-                  <button className="p-4 uppercase text-sm md:text-base">
+                  <button className="p-2 uppercase text-sm xl:text-base">
                     Rent from $7.00
                   </button>
                 </div>
@@ -88,10 +88,14 @@ function MovieDetail(props) {
           </div>
         </div>
       </IKContext>
-      <div className="">
+      <div>
         <Footer />
       </div>
     </div>
   );
 }
 export default MovieDetail;
+ 
+ 
+
+
