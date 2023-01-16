@@ -1,44 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
- 
+
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
- 
+
 import ModalService from "./Modal/services/ModalService";
 import { LoginModal } from "./Modal/LoginModal";
- 
+
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { SEARCH_MOVIE } from "../queries/movieQueries";
 import { GET_MOVIES } from "../queries/movieQueries";
- 
+
 // Small screen x Mobile menu
 function menuToggle() {
   document.getElementById("nav-content").classList.toggle("hidden");
 }
- 
+
 const Header = () => {
   const [currentUser, setCurrentUser] = useState();
   function addModal(modal) {
     ModalService.open(modal);
   }
- 
+
   // Sign user out
   function signOut() {
     localStorage.removeItem("User");
     setCurrentUser();
   }
- 
+
   let navigate = useNavigate();
- 
+
   const [movieSearched, setMovieSearched] = useState("");
   const [fetchMovie, { data: movieSearchedData, error: movieError }] =
     useLazyQuery(SEARCH_MOVIE);
   const { loading, error, data } = useQuery(GET_MOVIES);
   const [movieTitles, setMovies] = useState([]);
- 
+
   useEffect(() => {
     for (var i = 0; i < data?.movies?.length; i++) {
       movieTitles.push(data?.movies[i].title);
@@ -53,7 +53,7 @@ const Header = () => {
   useEffect(() => {
     setCurrentUser(JSON.parse(localStorage.getItem("User")));
   }, []);
- 
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-4 fixed w-full z-10 top-0">
       <div className="block lg:hidden">
@@ -84,7 +84,7 @@ const Header = () => {
           />
         </a>
       </div>
- 
+
       <div
         className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden"
         id="nav-content"
@@ -111,20 +111,19 @@ const Header = () => {
                   size="small"
                   className="bg-white rounded-xl"
                 />
-             
-                  
-            
               </div>
-              
             )}
           />
-          <SearchIcon className="text-white m-2" onClick={() => {
-                    fetchMovie({
-                      variables: {
-                        title: movieSearched,
-                      },
-                    });
-                  }} />
+          <SearchIcon
+            className="text-white m-2"
+            onClick={() => {
+              fetchMovie({
+                variables: {
+                  title: movieSearched,
+                },
+              });
+            }}
+          />
         </div>
         <ul className="lg:flex justify-end items-center m-6 text-lg">
           <li className="mr-3">
@@ -173,7 +172,3 @@ const Header = () => {
   );
 };
 export default Header;
- 
- 
-
-
