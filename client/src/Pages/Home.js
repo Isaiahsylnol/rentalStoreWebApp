@@ -40,47 +40,58 @@ const Home = () => {
     <div>
       <Header />
       {/* Container */}
-      <div className="mt-20 sm:mt-32">
-        <div className="sm:flex p-8 sm:p-0 lg:p-8 sm:m-14">
-          {/* left column - Feature Card */}
-
-          <div className="w-full md:flex mx-auto items-center justify-center">
-            <div>
+      <div className="p-4 mt-40 md:mt-24">
+        <div>
+          <div className="md:flex mx-auto items-center justify-center max-w-7xl">
+            {/* left column - Feature Card */}
+            <div className="w-full md:w-3/5">
               <Carousel>
                 <CarouselItem>
-                  <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
+                  <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/totoro_TWjcO4fVo.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673915010114")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
-                      <h2 className="text-2xl sm:text-4xl mt-36">The hobbit</h2>
-                      <h2 className="pb-4 text-base font-semibold">
-                        Action, Adventure
-                      </h2>
+                      <div className="backdrop-blur-[2px] w-min">
+                        <h2 className="text-2xl sm:text-4xl mt-36">
+                          Studio GIniboli
+                        </h2>
+                        <h2 className="pb-4 text-base font-semibold">
+                          Action, Adventure
+                        </h2>
+                      </div>
                     </div>
                   </div>
                 </CarouselItem>
                 <CarouselItem>
-                  <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
+                  <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/pussinbootslastwish_7mNNEMBBX.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673916134278")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
-                      <h2 className="text-2xl sm:text-4xl mt-36">The hobbit</h2>
-                      <h2 className="pb-4 text-base font-semibold">
-                        Action, Adventure
-                      </h2>
+                      <div className="backdrop-blur-[2px] w-min">
+                        <h2 className="text-2xl sm:text-4xl mt-36">
+                          Puss in Boots: The Last Wish
+                        </h2>
+                        <h2 className="pb-4 text-base font-semibold">
+                          Fantasy, Animation
+                        </h2>
+                      </div>
                     </div>
                   </div>
                 </CarouselItem>
                 <CarouselItem>
-                  <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
+                  <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/197617_hwLA-JJBc.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1673928989073")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
-                      <h2 className="text-2xl sm:text-4xl mt-36">The hobbit</h2>
-                      <h2 className="pb-4 text-base font-semibold">
-                        Action, Adventure
-                      </h2>
+                      <div className="backdrop-blur-[2px] w-min">
+                        <h2 className="text-2xl sm:text-4xl mt-36">
+                          Black Panther: Wakanda Forever
+                        </h2>
+                        <h2 className="pb-4 text-base font-semibold">
+                          Action, Adventure
+                        </h2>
+                      </div>
                     </div>
                   </div>
                 </CarouselItem>
               </Carousel>
             </div>
             {/* Right column - Upcoming movies */}
-            <div className="h-fit rounded-2xl bg-slate-700 w-full sm:w-full md:w-4/5 xl:w-2/5 justify-center mx-auto mt-12 sm:mt-0 p-5">
+            <div className="h-fit rounded-2xl bg-slate-700 w-full max-w-5xl justify-center mx-auto mt-12 sm:mt-0 p-5">
               <h2 className="text-2xl uppercase font-bold text-white p-3 mb-4 cursor-default">
                 Upcoming
               </h2>
@@ -101,21 +112,21 @@ const Home = () => {
           </div>
         </div>
         {/* News articles */}
-        <div className="xl:w-11/12 mx-auto">
-          <h1 className="text-2xl  w-3/4 md:w-11/12 text-white flex justify-center mx-auto sm:flex-none sm:justify-start font-semibold">
+        <div className="flex-col mx-auto max-w-7xl pt-12">
+          <h1 className="text-2xl text-white sm:justify-start ml-6 font-semibold">
             LATEST NEWS
           </h1>
-          <div className="flex justify-center mb-20">
-            <ul className="text-left sm:grid p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="flex justify-center items-center mb-20">
+            <ul className="text-left sm:grid p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8">
               <li className="text-white text-left font-semibold mb-8">
                 <button>
                   <img
-                    width={320}
+                    width={420}
                     src={require("../assets/godzilla.jpg")}
                     alt="Characters from Uncharted the film"
                     className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
                   />
-                  <span className="float-left">
+                  <span className="float-left text-lg">
                     Lorem ipsum dolor sit amet.
                   </span>
                 </button>
@@ -123,12 +134,12 @@ const Home = () => {
               <li className="text-white text-left font-semibold mb-8">
                 <button>
                   <img
-                    width={320}
+                    width={420}
                     src={require("../assets/film-set-construction.png")}
                     alt="Film equipment staged in front of studio green screen"
                     className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
                   />
-                  <span className="float-left">
+                  <span className="float-left text-lg">
                     Lorem ipsum dolor sit amet.
                   </span>
                 </button>
@@ -136,12 +147,12 @@ const Home = () => {
               <li className="text-white text-left font-semibold mb-8">
                 <button>
                   <img
-                    width={320}
+                    width={420}
                     src={require("../assets/glass-onion.jpg")}
                     alt="Characters from Glass Onion"
                     className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
                   />
-                  <span className="float-left">
+                  <span className="float-left text-lg">
                     Lorem ipsum dolor sit amet.
                   </span>
                 </button>
@@ -149,12 +160,12 @@ const Home = () => {
               <li className="text-white text-left font-semibold mb-8">
                 <button>
                   <img
-                    width={320}
+                    width={420}
                     src={require("../assets/classic.jpg")}
                     alt="Candid of Steven Spielberg filming on set"
                     className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
                   />
-                  <span className="float-left">
+                  <span className="float-left text-lg">
                     Lorem ipsum dolor sit amet.
                   </span>
                 </button>
@@ -162,12 +173,12 @@ const Home = () => {
               <li className="text-white text-left font-semibold mb-8">
                 <button>
                   <img
-                    width={320}
+                    width={420}
                     src={require("../assets/uncahrted.jpg")}
                     alt="Characters from Uncharted the film"
                     className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
                   />
-                  <span className="float-left">
+                  <span className="float-left text-lg">
                     Lorem ipsum dolor sit amet.
                   </span>
                 </button>
@@ -175,12 +186,12 @@ const Home = () => {
               <li className="text-white text-left font-semibold mb-8">
                 <button>
                   <img
-                    width={320}
+                    width={420}
                     src={require("../assets/essentials.webp")}
                     alt="Collage of essential film characters"
                     className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
                   />
-                  <span className="float-left">
+                  <span className="float-left text-lg">
                     Lorem ipsum dolor sit amet.
                   </span>
                 </button>
@@ -188,12 +199,12 @@ const Home = () => {
               <li className="text-white text-left font-semibold mb-8">
                 <button>
                   <img
-                    width={320}
+                    width={420}
                     src={require("../assets/handmaids-tale.jpg")}
                     alt="Game of Thrones film location"
                     className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
                   />
-                  <span className="float-left">
+                  <span className="float-left text-lg">
                     Lorem ipsum dolor sit amet.
                   </span>
                 </button>
@@ -201,20 +212,18 @@ const Home = () => {
               <li className="text-white text-left font-semibold mb-8">
                 <button>
                   <img
-                    width={320}
+                    width={420}
                     src={require("../assets/oscar-1.webp")}
                     alt="Actors arriving at the Oscars"
                     className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
                   />
-                  <span className="float-left">
-                    Lorem ipsum dolor sit amet.
-                  </span>
+                  <span className="float-left text-lg">test here</span>
                 </button>
               </li>
             </ul>
           </div>
           {/* Featured movie */}
-          <div className="bg-zinc-800 sm:p-8 items-end sm:rounded-lg m-9">
+          <div className="bg-zinc-800 sm:p-8 items-end sm:rounded-lg">
             <div className="lg:grid lg:grid-cols-4">
               <div className="flex p-4 flex-row col-span-3 justify-center">
                 <div className="text-left text-white">

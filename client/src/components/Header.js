@@ -55,8 +55,8 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-4 fixed w-full z-10 top-0">
-      <div className="block lg:hidden">
+    <nav className="flex items-center justify-between flex-wrap bg-gray-800 fixed w-full z-10 top-0">
+      <div className="block lg:hidden ml-4">
         <button
           id="nav-toggle"
           onClick={menuToggle}
@@ -72,11 +72,8 @@ const Header = () => {
           </svg>
         </button>
       </div>
-      <div className="flex items-center h-10 text-white">
-        <a
-          className="text-white no-underline hover:text-white hover:no-underline"
-          href="/"
-        >
+      <div className="flex justify-center items-center mx-auto h-auto text-white">
+        <a href="/">
           <img
             src={require("../assets/logo-1.png")}
             alt="Site logo"
@@ -125,10 +122,10 @@ const Header = () => {
             }}
           />
         </div>
-        <ul className="lg:flex justify-end items-center m-6 text-lg">
+        <ul className="lg:flex justify-end items-center m-6 text-lg lg:space-x-8">
           <li className="mr-3">
             <Link
-              className="py-2 px-4 text-gray-200 no-underline hover:text-white"
+              className="text-gray-200 font-normal no-underline hover:text-white hover:text-underline"
               to="/"
             >
               Home
@@ -136,30 +133,30 @@ const Header = () => {
           </li>
           <li className="mr-3">
             <Link
-              className="text-gray-200 no-underline hover:text-white hover:text-underline py-2 px-4"
+              className="text-gray-200 font-normal no-underline hover:text-white hover:text-underline"
               to="/movies"
             >
               Movies
             </Link>
           </li>
           <li
-            className="text-white ml-5 text-xl hover:text-white hover:text-underline"
+            className="text-gray-200 font-normal hover:text-white cursor-pointer"
             onClick={
               currentUser
                 ? () => navigate(`/profile`)
                 : () => addModal(LoginModal)
             }
           >
-            <PersonOutlineIcon fontSize="medium" />
+            Profile
           </li>
         </ul>
       </div>
-      <div className="rounded-lg text-white">
+      <div className="text-gray-200 bg-slate-700 w-full flex md:w-auto md:flex-none">
         {currentUser ? (
           <div>
-            <div className="text-right text-white mr-6 cursor-default">
+            <div className="text-right p-4 cursor-default flex flex-col">
               {currentUser.email}
-              <button onClick={signOut} className="text-white pl-7">
+              <button onClick={signOut} className="text-left sm:text-right">
                 Sign out
               </button>
             </div>
