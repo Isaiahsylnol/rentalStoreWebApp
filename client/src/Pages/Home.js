@@ -47,43 +47,52 @@ const Home = () => {
             <div className="w-full md:w-3/5">
               <Carousel>
                 <CarouselItem>
-                  <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/totoro_TWjcO4fVo.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673915010114")] bg-cover bg-center'>
+                  <div className='rounded-xl w-11/12 h-96 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/totoro_TWjcO4fVo.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673915010114")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
-                        <h2 className="text-2xl sm:text-4xl mt-36">
+                        <h2 className="text-2xl md:text-2xl mt-36">
                           Studio GIniboli
                         </h2>
                         <h2 className="pb-4 text-base font-semibold">
                           Action, Adventure
                         </h2>
+                        <button className="h-10 uppercase w-36 hover:bg-[#2b4d55] bg-cyan-800 opacity-90">
+                          Trailer
+                        </button>
                       </div>
                     </div>
                   </div>
                 </CarouselItem>
                 <CarouselItem>
-                  <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/pussinbootslastwish_7mNNEMBBX.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673916134278")] bg-cover bg-center'>
+                  <div className='rounded-xl w-11/12 h-96 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/pussinbootslastwish_7mNNEMBBX.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673916134278")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
-                        <h2 className="text-2xl sm:text-4xl mt-36">
+                        <h2 className="text-xl md:text-lg lg:text-2xl mt-36">
                           Puss in Boots: The Last Wish
                         </h2>
                         <h2 className="pb-4 text-base font-semibold">
                           Fantasy, Animation
                         </h2>
+                        <button className="h-10 uppercase w-36 hover:bg-[#2b4d55] bg-cyan-800 opacity-90">
+                          Trailer
+                        </button>
                       </div>
                     </div>
                   </div>
                 </CarouselItem>
                 <CarouselItem>
-                  <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/197617_hwLA-JJBc.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1673928989073")] bg-cover bg-center'>
+                  <div className='rounded-xl w-11/12 h-96 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/197617_hwLA-JJBc.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1673928989073")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
-                        <h2 className="text-2xl sm:text-4xl mt-36">
+                        <p className="text-lg lg:text-2xl mt-36 break-words">
                           Black Panther: Wakanda Forever
-                        </h2>
-                        <h2 className="pb-4 text-base font-semibold">
+                        </p>
+                        <h2 className="pb-4 text-sm font-semibold">
                           Action, Adventure
                         </h2>
+                        <button className="h-10 uppercase w-36 hover:bg-[#2b4d55] bg-cyan-800 opacity-90">
+                          Trailer
+                        </button>
                       </div>
                     </div>
                   </div>
