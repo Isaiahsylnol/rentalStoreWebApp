@@ -123,24 +123,24 @@ const Header = () => {
           />
         </div>
         <ul className="lg:flex justify-end items-center m-6 text-lg lg:space-x-8">
-          <li className="mr-3">
+          <li className="mr-3 text-center">
             <Link
-              className="text-gray-200 font-normal no-underline hover:text-white hover:text-underline"
+              className="text-gray-200 font-normal no-underline hover:text-white"
               to="/"
             >
               Home
             </Link>
           </li>
-          <li className="mr-3">
+          <li className="mr-3 text-center">
             <Link
-              className="text-gray-200 font-normal no-underline hover:text-white hover:text-underline"
+              className="text-gray-200 font-normal no-underline hover:text-white"
               to="/movies"
             >
               Movies
             </Link>
           </li>
           <li
-            className="text-gray-200 font-normal hover:text-white cursor-pointer"
+            className="text-gray-200 text-center mr-2 font-normal hover:text-white cursor-pointer"
             onClick={
               currentUser
                 ? () => navigate(`/profile`)
