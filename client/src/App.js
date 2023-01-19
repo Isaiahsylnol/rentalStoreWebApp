@@ -12,6 +12,7 @@ import { useQuery } from "@apollo/client";
 
 import "./App.css";
 import Footer from "./components/Footer";
+import { LoginModal } from "./components/Modal/LoginModal";
 
 function App() {
   const { loading, error, data } = useQuery(GET_MOVIES);
@@ -24,6 +25,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LoginModal />} />
         <Route path="/movies" exact element={<ListMovies />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />

@@ -60,10 +60,10 @@ const Header = () => {
         <button
           id="nav-toggle"
           onClick={menuToggle}
-          class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white"
+          className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white"
         >
           <svg
-            class="fill-current h-3 w-3"
+            className="fill-current h-3 w-3"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -73,7 +73,7 @@ const Header = () => {
         </button>
       </div>
       <div className="flex justify-center items-center mx-auto h-auto text-white">
-        <a href="/">
+        <a href="/" data-cy="btn-logo">
           <img
             src={require("../assets/logo-1.png")}
             alt="Site logo"
@@ -151,7 +151,10 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <div className="text-gray-200 bg-slate-700 w-full flex md:w-auto md:flex-none">
+      <div
+        className="text-gray-200 bg-slate-700 w-full flex md:w-auto md:flex-none"
+        data-cy="current-user"
+      >
         {currentUser ? (
           <div>
             <div className="text-right p-4 cursor-default flex flex-col">

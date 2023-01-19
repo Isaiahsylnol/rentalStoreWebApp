@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { createBrowserHistory } from "history";
 
 import Modal from "./Modal";
 import ModalBody from "./ModalBody";
@@ -16,7 +17,7 @@ export const LoginModal = (props) => {
   const [password, setPassword] = useState("");
   const closeModal = useRef();
   const [submitted, setSubmitted] = useState(false);
-
+  let history = createBrowserHistory();
   const [loginUser, { error }] = useMutation(LOGIN_USER, {
     variables: { email, password },
     onCompleted(data) {
@@ -40,7 +41,12 @@ export const LoginModal = (props) => {
     setEmail(data.email);
     setPassword(data.password);
     loginUser(email, password).then(() => {
-      window.location.reload();
+      if (window.location.pathname != "/login") {
+        window.location.reload();
+      } else {
+        history.push("/");
+        window.location.reload();
+      }
     });
   };
   const onError = (errors, e) => console.log(errors, e);
@@ -97,6 +103,7 @@ export const LoginModal = (props) => {
             <input
               className="w-60 md:w-80 p-3 rounded-xl"
               type="email"
+              name="email"
               placeholder="Example: paul.harrison@gmail.com"
               {...register("email", {
                 required: "Please fill out this field.",
@@ -124,6 +131,7 @@ export const LoginModal = (props) => {
             <label className="text-white block text-base">Password</label>
             <input
               className="w-60 md:w-80 p-3 rounded-xl"
+              name="password"
               type="password"
               {...register("password", {
                 required: true,
