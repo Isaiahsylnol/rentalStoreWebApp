@@ -1,6 +1,11 @@
 # rentalStoreWebApp
 [![Cypress Tests](https://github.com/Isaiahsylnol/rentalStoreWebApp/actions/workflows/main.yml/badge.svg)](https://github.com/Isaiahsylnol/cypress_project/actions/workflows/main.yml)
 
+Tailwind CSS • Express • Axios • MongoDB • GraphQL
+
+[![rentalStoreWebApp](https://github.com/Isaiahsylnol/rentalStoreWebApp/blob/main/screenshots/frontend/figma_design.png)](#features)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
