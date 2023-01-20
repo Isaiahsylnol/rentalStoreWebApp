@@ -45,10 +45,10 @@ const Home = () => {
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
                         <h2 className="text-2xl md:text-2xl mt-36">
-                          Studio GIniboli
+                        My Neighbor Totoro
                         </h2>
                         <h2 className="pb-4 text-base font-semibold">
-                          Action, Adventure
+                          Fantasy, Anime
                         </h2>
                         <button className="h-10 uppercase w-36 hover:bg-[#2b4d55] bg-cyan-800 opacity-90">
                           Trailer
