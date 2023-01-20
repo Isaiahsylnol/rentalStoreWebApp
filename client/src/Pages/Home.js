@@ -8,22 +8,16 @@ import { SimilarMoviesWidget } from "../components/SimilarMoviesWidget";
 
 // Mock data
 const movies = [
-  { title: "Avatar", release_date: "2023-02-12" },
-  { title: "SpideMan Long Way Home", release_date: "2023-02-17" },
-  { title: "Kill Bill", release_date: "2023-02-26" },
-  { title: "The Departed", release_date: "2023-02-26" },
-  { title: "La La Land", release_date: "2023-03-03" },
-  { title: "American X History", release_date: "2023-03-09" },
-  { title: "Gone Girl", release_date: "2023-03-20" },
-  { title: "Django", release_date: "2023-04-02" },
-  { title: "SpideMan Long Way Home", release_date: "2023-04-04" },
+  { title: "Snow Angel", release_date: "2023-01-20" },
+  { title: "Everything Under Control", release_date: "2023-01-21" },
+  { title: "Pathan", release_date: "2023-01-25" },
+  { title: "Infinity Pool", release_date: "2023-01-27" },
+  { title: "My Teacher", release_date: "2023-01-27" },
+  { title: "Blood", release_date: "2023-01-27" },
+  { title: "Close", release_date: "2023-01-27" },
+  { title: "Condor's Nest", release_date: "2023-01-27" },
+  { title: "Harold and the Purple Crayon", release_date: "2023-01-27" },
 ];
-
-function getFilmDate(film) {
-  let date = new Date(film);
-  console.log(date);
-  return date;
-}
 
 const Home = () => {
   // User is currently on this page
@@ -121,118 +115,122 @@ const Home = () => {
           </div>
         </div>
         {/* News articles */}
-        <div className="flex-col mx-auto max-w-7xl pt-12">
-          <h1 className="text-2xl text-white sm:justify-start ml-6 font-semibold">
-            LATEST NEWS
-          </h1>
-          <div className="flex justify-center items-center mb-20">
-            <ul className="text-left sm:grid p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8">
-              <li className="text-white text-left font-semibold mb-8">
+        <div className="flex-col mx-auto max-w-7xl pt-8 sm:p-5">
+          <div className="bg-zinc-800 text-white rounded-xl p-6">
+            <h1 className="h-16 text-2xl font-semibold">LATEST NEWS</h1>
+            <ul className="font-normal sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-8">
+              <li className="mb-8">
                 <button>
                   <img
                     width={420}
                     src={require("../assets/godzilla.jpg")}
                     alt="Characters from Uncharted the film"
-                    className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
+                    className="object-cover xl:w-96 sm:h-40 rounded-md"
                   />
-                  <span className="float-left text-lg">
-                    Lorem ipsum dolor sit amet.
+                  <span className="float-left text-left text-lg mt-3">
+                    Godzilla and Kong keep growing. But they’re no match for
+                    physics
                   </span>
                 </button>
               </li>
-              <li className="text-white text-left font-semibold mb-8">
+              <li className="mb-8">
                 <button>
                   <img
                     width={420}
                     src={require("../assets/film-set-construction.png")}
                     alt="Film equipment staged in front of studio green screen"
-                    className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
+                    className="object-cover xl:w-96 sm:h-40 rounded-md"
                   />
-                  <span className="float-left text-lg">
-                    Lorem ipsum dolor sit amet.
+                  <span className="float-left text-left text-lg mt-3">
+                    The Art of Illusion: The Design of Film Set Construction
                   </span>
                 </button>
               </li>
-              <li className="text-white text-left font-semibold mb-8">
+              <li className="mb-8">
                 <button>
                   <img
                     width={420}
                     src={require("../assets/glass-onion.jpg")}
                     alt="Characters from Glass Onion"
-                    className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
+                    className="object-cover xl:w-96 sm:h-40 rounded-md"
                   />
-                  <span className="float-left text-lg">
-                    Lorem ipsum dolor sit amet.
+                  <span className="float-left text-left text-lg mt-3">
+                    Glass Onion: Daniel Craig's Knives Out sequel continues
+                    Whodunit craze
                   </span>
                 </button>
               </li>
-              <li className="text-white text-left font-semibold mb-8">
+              <li className="mb-8">
                 <button>
                   <img
                     width={420}
                     src={require("../assets/classic.jpg")}
                     alt="Candid of Steven Spielberg filming on set"
-                    className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
+                    className="object-cover xl:w-96 sm:h-40 rounded-md"
                   />
-                  <span className="float-left text-lg">
-                    Lorem ipsum dolor sit amet.
+                  <span className="float-left text-left text-lg mt-3">
+                    The Untold Truth Of Steven Spielberg
                   </span>
                 </button>
               </li>
-              <li className="text-white text-left font-semibold mb-8">
+              <li className="mb-8">
                 <button>
                   <img
                     width={420}
                     src={require("../assets/uncahrted.jpg")}
                     alt="Characters from Uncharted the film"
-                    className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
+                    className="object-cover xl:w-96 sm:h-40 rounded-md"
                   />
-                  <span className="float-left text-lg">
-                    Lorem ipsum dolor sit amet.
+                  <span className="float-left text-left text-lg mt-3">
+                    Uncharted movie Easter eggs: every major reference to the
+                    games
                   </span>
                 </button>
               </li>
-              <li className="text-white text-left font-semibold mb-8">
+              <li className="mb-8">
                 <button>
                   <img
                     width={420}
                     src={require("../assets/essentials.webp")}
                     alt="Collage of essential film characters"
-                    className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
+                    className="object-cover xl:w-96 sm:h-40 rounded-md"
                   />
-                  <span className="float-left text-lg">
-                    Lorem ipsum dolor sit amet.
+                  <span className="float-left text-left text-lg mt-3">
+                    The 89 Best Movies of All Time: The Ultimate Must-Watch
+                    Films
                   </span>
                 </button>
               </li>
-              <li className="text-white text-left font-semibold mb-8">
+              <li className="mb-8">
                 <button>
                   <img
                     width={420}
                     src={require("../assets/handmaids-tale.jpg")}
                     alt="Game of Thrones film location"
-                    className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
+                    className="object-cover xl:w-96 sm:h-40 rounded-md"
                   />
-                  <span className="float-left text-lg">
-                    Lorem ipsum dolor sit amet.
+                  <span className="float-left text-lg mt-3">
+                    Review: The Handmaid’s Tale
                   </span>
                 </button>
               </li>
-              <li className="text-white text-left font-semibold mb-8">
+              <li className="mb-8">
                 <button>
                   <img
                     width={420}
                     src={require("../assets/oscar-1.webp")}
                     alt="Actors arriving at the Oscars"
-                    className="rounded-xl object-cover sm:h-36 xl:h-52 xl:w-96 h-44 sm:w-60"
+                    className="object-cover xl:w-96 sm:h-40 rounded-md"
                   />
-                  <span className="float-left text-lg">test here</span>
+                  <span className="float-left text-left text-lg">
+                    Oscars 2022: The 25 Best Red Carpet Looks
+                  </span>
                 </button>
               </li>
             </ul>
           </div>
           {/* Featured movie */}
-          <div className="bg-zinc-800 sm:p-8 items-end sm:rounded-lg">
+          <div className="bg-zinc-800 mt-16 sm:p-8 items-end sm:rounded-lg">
             <div className="lg:grid lg:grid-cols-4">
               <div className="flex p-4 flex-row col-span-3 justify-center">
                 <div className="text-left text-white">
@@ -249,7 +247,7 @@ const Home = () => {
                       </button>
                     </div>
                   </div>
-                  <div className="m-8 sm:m-0 sm:mt-8">
+                  <div className="text-lg mt-4">
                     Magna minim nisi ea veniam reprehenderit officia nulla
                     ullamco id duis laborum minim eu mollit. Ea irure Lorem
                     eiusmod tempor ea adipisicing velit nisi nostrud. Lorem

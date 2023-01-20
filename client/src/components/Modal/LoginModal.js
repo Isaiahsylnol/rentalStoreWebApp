@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { createBrowserHistory } from "history";
 
 import Modal from "./Modal";
@@ -15,8 +15,7 @@ import { ErrorMessage } from "@hookform/error-message";
 export const LoginModal = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const closeModal = useRef();
-  const [submitted, setSubmitted] = useState(false);
+
   let history = createBrowserHistory();
   const [loginUser, { error }] = useMutation(LOGIN_USER, {
     variables: { email, password },
@@ -41,7 +40,7 @@ export const LoginModal = (props) => {
     setEmail(data.email);
     setPassword(data.password);
     loginUser(email, password).then(() => {
-      if (window.location.pathname != "/login") {
+      if (window.location.pathname !== "/login") {
         window.location.reload();
       } else {
         history.push("/");
@@ -55,16 +54,11 @@ export const LoginModal = (props) => {
     ModalService.open(modal);
   };
 
-  const closeModalSubmit = () => {
-    closeModal.current.click();
-  };
-
   return (
     <Modal>
       {/* Close modal button */}
       <div className="float-right justify-center p-4">
         <button
-          ref={closeModal}
           className="hover:bg-slate-700 rounded-3xl"
           aria-label="Close Modal"
           aria-labelledby="close-modal"

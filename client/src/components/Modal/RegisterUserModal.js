@@ -16,18 +16,17 @@ export default function RegisterUserModal(props) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [submitted, setSubmitted] = useState();
+
   const [password, setPassword] = useState("");
 
   const addModal = (modal) => {
     ModalService.open(modal);
   };
 
-  const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER, {
+  const [registerUser, { error }] = useMutation(REGISTER_USER, {
     variables: { username, firstName, lastName, email, password },
-    onCompleted(data) {
+    onCompleted() {
       console.log("USER SUCCEFUSSLY REGISTERED");
-      setSubmitted(true);
     },
   });
 

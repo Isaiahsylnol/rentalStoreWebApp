@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import AuthService from "./services/auth.service";
 import NotFound from "./components/NotFound";
 import ListMovies from "./components/ListMovies";
 import MovieDetail from "./components/MovieDetail";
@@ -11,7 +10,6 @@ import { GET_MOVIES } from "./queries/movieQueries";
 import { useQuery } from "@apollo/client";
 
 import "./App.css";
-import Footer from "./components/Footer";
 import { LoginModal } from "./components/Modal/LoginModal";
 
 function App() {

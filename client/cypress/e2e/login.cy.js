@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("The Login functionality", () => {
+describe("The Login and sign out functionality", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/login");
   });
@@ -17,5 +17,6 @@ describe("The Login functionality", () => {
     // UI should reflect this user being logged in
     cy.get('[data-cy="current-user"]').should("contain", "mike@test.com");
     cy.getLocalStorage("User").should("exist");
+    cy.get("div > button").contains("Sign out").should("be.visible");
   });
 });

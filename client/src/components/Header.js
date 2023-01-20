@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import SearchIcon from "@mui/icons-material/Search";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
@@ -34,9 +32,8 @@ const Header = () => {
   let navigate = useNavigate();
 
   const [movieSearched, setMovieSearched] = useState("");
-  const [fetchMovie, { data: movieSearchedData, error: movieError }] =
-    useLazyQuery(SEARCH_MOVIE);
-  const { loading, error, data } = useQuery(GET_MOVIES);
+  const [fetchMovie, { data: movieSearchedData }] = useLazyQuery(SEARCH_MOVIE);
+  const { data } = useQuery(GET_MOVIES);
   const [movieTitles, setMovies] = useState([]);
 
   useEffect(() => {
@@ -46,7 +43,7 @@ const Header = () => {
     setMovies(movieTitles);
   }, []);
   useEffect(() => {
-    if (movieSearchedData != "" && movieSearchedData != undefined) {
+    if (movieSearchedData !== "" && movieSearchedData !== undefined) {
       navigate(`/detail/${movieSearchedData?.searchMovie._id}`);
     }
   }, [movieSearchedData]);
