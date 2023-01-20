@@ -42,7 +42,8 @@ const resolvers = {
       }
       let movie = new Movies({
         title: args.title,
-        director: args.director,
+        directors: args.directors,
+        producers: args.producers,
         runtime: args.runtime,
         genre: args.genre,
         rating: args.rating,
