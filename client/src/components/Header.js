@@ -95,7 +95,7 @@ const Header = () => {
               setMovieSearched(value);
             }}
             renderInput={(params) => (
-              <div className="w-full inline-flex md:w-2/1">
+              <div className="md:w-2/1">
                 <TextField
                   {...params}
                   onChange={(e) => {
@@ -119,7 +119,7 @@ const Header = () => {
             }}
           />
         </div>
-        <ul className="lg:flex justify-end items-center m-6 text-lg lg:space-x-8">
+        <ul className="lg:flex justify-end items-center m-6 text-base lg:space-x-8">
           <li className="mr-3 text-center">
             <Link
               className="text-gray-200 font-normal no-underline hover:text-white"

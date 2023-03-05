@@ -5,7 +5,8 @@ import Footer from "../components/Footer";
 import Carousel, { CarouselItem } from "../components/Carousel/Carousel";
 import Pagination from "../components/Pagination";
 import { SimilarMoviesWidget } from "../components/SimilarMoviesWidget";
-
+import { GET_MOVIES } from "../queries/movieQueries";
+import { useQuery } from "@apollo/client";
 // Mock data
 const movies = [
   { title: "Snow Angel", release_date: "2023-01-20" },
@@ -20,6 +21,7 @@ const movies = [
 ];
 
 const Home = () => {
+  const { loading, error, data } = useQuery(GET_MOVIES);
   // User is currently on this page
   const [currentPage, setCurrentPage] = useState(1);
   // No of Records to be displayed on each page
@@ -27,9 +29,9 @@ const Home = () => {
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   // Records to be displayed on the current page
-  const currentRecords = movies.slice(indexOfFirstRecord, indexOfLastRecord);
+  const currentRecords = data.movies.slice(indexOfFirstRecord, indexOfLastRecord);
 
-  const nPages = Math.ceil(movies.length / recordsPerPage);
+  const nPages = Math.ceil(data.movies.length / recordsPerPage);
   return (
     <div>
       <Header />
@@ -230,11 +232,10 @@ const Home = () => {
             </ul>
           </div>
           {/* Featured movie */}
-          <div className="bg-zinc-800 mt-16 sm:p-8 items-end sm:rounded-lg">
-            <div className="lg:grid lg:grid-cols-4">
-              <div className="flex p-4 flex-row col-span-3 justify-center">
-                <div className="text-left text-white">
-                  <div className='rounded-xl bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
+          <section className="bg-zinc-800 mt-16 flex flex-col  items-center  sm:rounded-lg">
+            <div className="sm:grid sm:grid-cols-3 space-x-6 justify-center mx-auto">
+                <div className="text-left text-white pb-6 col-span-2">
+                  <div className='sm:rounded-xl bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold">
                       <h2 className="text-2xl font-bold sm:text-4xl mt-72">
                         The hobbit
@@ -242,13 +243,14 @@ const Home = () => {
                       <h2 className="pb-4 text-base font-semibold">
                         Action, Adventure
                       </h2>
-                      <button className="h-14 w-full uppercase sm:w-36 rounded-3xl hover:bg-[#0783a0] bg-cyan-600">
+                      <button className="h-10 w-24 uppercase md:w-36 rounded-3xl hover:bg-[#0783a0] bg-cyan-600">
                         Watch
                       </button>
                     </div>
                   </div>
-                  <div className="text-lg mt-4">
-                    Magna minim nisi ea veniam reprehenderit officia nulla
+                </div>
+              <p className="text-white">
+                Magna minim nisi ea veniam reprehenderit officia nulla
                     ullamco id duis laborum minim eu mollit. Ea irure Lorem
                     eiusmod tempor ea adipisicing velit nisi nostrud. Lorem
                     minim cupidatat officia qui. Est velit cupidatat magna
@@ -262,19 +264,17 @@ const Home = () => {
                     velit aliqua laboris. Ea reprehenderit fugiat incididunt
                     nulla enim adipisicing id adipisicing ea. Reprehenderit
                     fugiat anim sunt eiusmod adipisicing laborum dolor.
-                  </div>
-                </div>
-              </div>
-              <div>
-                <SimilarMoviesWidget data={currentRecords} />
+              </p>
+            </div>
+            <div className="mt-4 ">
+                  <SimilarMoviesWidget data={currentRecords} />
                 <Pagination
                   nPages={nPages}
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
                 />
-              </div>
-            </div>
-          </div>
+                  </div>
+          </section>
         </div>
       </div>
       <Footer />

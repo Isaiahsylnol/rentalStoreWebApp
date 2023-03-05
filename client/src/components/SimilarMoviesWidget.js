@@ -1,32 +1,29 @@
 import React from "react";
 import { ButtonBase } from "@mui/material";
- 
+import { IKImage, IKContext } from "imagekitio-react";
+
 export const SimilarMoviesWidget = ({ data }) => {
   return (
-    <div>
-      <h3 className="text-xl flex mx-auto justify-center font-bold text-white p-5">Similar Movies</h3>
-      <div>
-        <ul className="text-left flex flex-col justify-center">
-          {data.map(function (movie, i) {
-            return (
-              <li key={i} className="justify-center mx-auto m-6">
+    <div className="items-center">
+                <h1 className="text-white text-lg mt-3 mb-3 font-semibold">Similar Movies</h1>
+ 
+      <ul className="md:flex grid grid-cols-2">
+        {data.map(function (movie, i) {
+          return (
+            <li key={i}>
+              <div className="w-min">
                 <ButtonBase href={`/detail/${movie._id}`}>
-                  <img
-                    src={require("../assets/uncahrted.jpg")}
-                    alt="similar movie thumbnails"
-                    className="object-cover sm:h-36 h-60 w-96 rounded-lg"
-                  />
+                  <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
+                    <div className="w-60 flex">
+                      <IKImage path={movie.thumbnail + ".jpg"} />
+                    </div>
+                  </IKContext>
                 </ButtonBase>
-                <h1 className="text-white text-lg mt-3">{movie.title}</h1>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
- 
- 
-
-

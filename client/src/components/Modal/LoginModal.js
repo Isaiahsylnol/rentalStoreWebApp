@@ -84,7 +84,7 @@ export const LoginModal = (props) => {
         <div className="justify-center w-96 flex">
           <img
             src={require("../../assets/movie-logo.png")}
-            className="mb-7 rounded-3xl h-36"
+            className="mb-7 rounded-3xl h-32"
             alt="movie logo"
           />
         </div>
@@ -103,7 +103,6 @@ export const LoginModal = (props) => {
                 required: "Please fill out this field.",
               })}
             />
-
             <ErrorMessage
               errors={errors}
               name="email"
@@ -120,7 +119,6 @@ export const LoginModal = (props) => {
               }
             />
           </div>
-
           <div className="justify-center mx-auto">
             <label className="text-white block text-base">Password</label>
             <input
@@ -151,11 +149,11 @@ export const LoginModal = (props) => {
               Don't have an account? Sign up
             </button>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center pb-8">
             <input
               type="submit"
               value="Log in"
-              className="bg-blue-500 hover:bg-blue-600 w-40 h-12 text-base font-semibold text-white rounded-2xl"
+              className="bg-blue-500 hover:bg-blue-600 w-40 h-10 text-base font-semibold text-white rounded-2xl"
             />
           </div>
         </form>

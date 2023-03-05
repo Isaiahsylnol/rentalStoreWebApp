@@ -7,7 +7,7 @@ const Profile = () => {
     console.log(user);
   }, []);
   let user = {
-    name: "John Doe",
+    name: "Mike Denver",
     address: "77 Field Crest",
     email: "doe@test.com",
   };

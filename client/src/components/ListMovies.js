@@ -5,7 +5,7 @@ import Header from "./Header";
 import { GET_MOVIES } from "../queries/movieQueries";
 
 const MovieCard = (props) => (
-  <div className="pt-8 max-w-xs">
+  <div className="max-w-xs">
     <ButtonBase href={`/detail/${props.movie._id}`}>
       <div>
         <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
@@ -13,7 +13,7 @@ const MovieCard = (props) => (
             <IKImage path={props.movie.thumbnail + ".jpg"} />
           </div>
           <div className="text-left w-60 text-white p-2 md:p-2">
-            <h1 className="inline text-2xl font-semibold">
+            <h1 className="inline text-2xl">
               {props.movie.title}
             </h1>{" "}
             <br />
