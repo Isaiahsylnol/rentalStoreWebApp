@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Carousel, { CarouselItem } from "../components/Carousel/Carousel";
 import Pagination from "../components/Pagination";
 import { SimilarMoviesWidget } from "../components/SimilarMoviesWidget";
+
 
 // Mock data
 const movies = [
@@ -19,11 +21,13 @@ const movies = [
   { title: "SpideMan Long Way Home", release_date: "2023-04-04" },
 ];
 
+
 function getFilmDate(film) {
   let date = new Date(film);
   console.log(date);
   return date;
 }
+
 
 const Home = () => {
   // User is currently on this page
@@ -34,6 +38,7 @@ const Home = () => {
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   // Records to be displayed on the current page
   const currentRecords = movies.slice(indexOfFirstRecord, indexOfLastRecord);
+
 
   const nPages = Math.ceil(movies.length / recordsPerPage);
   return (
@@ -50,9 +55,7 @@ const Home = () => {
                   <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/totoro_TWjcO4fVo.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673915010114")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
-                        <h2 className="text-2xl sm:text-4xl mt-36">
-                          Studio GIniboli
-                        </h2>
+                        <h2 className="text-2xl mt-36">Studio GIniboli</h2>
                         <h2 className="pb-4 text-base font-semibold">
                           Action, Adventure
                         </h2>
@@ -64,7 +67,7 @@ const Home = () => {
                   <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/pussinbootslastwish_7mNNEMBBX.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673916134278")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
-                        <h2 className="text-2xl sm:text-4xl mt-36">
+                        <h2 className="text-2xl mt-36">
                           Puss in Boots: The Last Wish
                         </h2>
                         <h2 className="pb-4 text-base font-semibold">
@@ -78,9 +81,9 @@ const Home = () => {
                   <div className='rounded-xl w-11/12 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/197617_hwLA-JJBc.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1673928989073")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
-                        <h2 className="text-2xl sm:text-4xl mt-36">
+                        <p className="text-xl md:text-lg lg:text-2xl mt-36 break-words">
                           Black Panther: Wakanda Forever
-                        </h2>
+                        </p>
                         <h2 className="pb-4 text-base font-semibold">
                           Action, Adventure
                         </h2>
@@ -275,4 +278,11 @@ const Home = () => {
   );
 };
 
+
 export default Home;
+
+
+
+
+
+
