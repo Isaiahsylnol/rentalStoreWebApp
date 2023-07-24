@@ -18,8 +18,8 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
       } else {
         startPage = currentPage;
         if (
-          startPage != pageNumbers.length &&
-          startPage + 1 != pageNumbers.length
+          startPage !== pageNumbers.length &&
+          startPage + 1 !== pageNumbers.length
         ) {
           endPage = currentPage + showMax - 1;
         } else {
@@ -51,7 +51,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
           <Link
             key={pgNumber}
             className={`page-item page-link p-2 text-white ${
-              currentPage == pgNumber
+              currentPage === pgNumber
                 ? "active border bottom-2 border-white rounded-3xl"
                 : ""
             } `}

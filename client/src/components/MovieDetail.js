@@ -10,11 +10,11 @@ function MovieDetail(props) {
     <div>
       <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
         <Header />
-        <div className="mt-32 min-h-screen sm:p-16">
+        <div className="mt-32 min-h-screen lg:p-8">
           {/* Container  */}
-          <div className="bg-[#353232] sm:p-12 rounded-xl grid grid-cols-1 lg:grid-cols-2">
+          <div className="bg-[#2c2a2a] p-8 rounded-xl grid grid-cols-1 md:grid-cols-2 gap-x-6">
             {/* Movie poster */}
-            <div className="mx-auto pt-8 sm:p-0">
+            <div className="mx-auto">
               <IKImage
                 path={props.movie.thumbnail + ".jpg"}
                 transformation={[
@@ -26,7 +26,7 @@ function MovieDetail(props) {
               />
             </div>
             {/* Movie Details */}
-            <div className="flex justify-center mt-10 sm:mt-8 lg:mt-0">
+            <div className="flex justify-center mt-10 sm:-mt-6">
               <div className="bg-[#221F1F] text-[#fbf7f5] p-8 rounded-lg">
                 <div className="float-right inline-flex">
                   <a href="#bookmark" className="p-2 text-slate-500">
@@ -43,8 +43,13 @@ function MovieDetail(props) {
                   <h3 className="text-2xl font-semibold mb-3">
                     {props.movie.title}
                   </h3>
-                  <span className="font-normal">Producer:</span>{" "}
-                  {props.movie.director[0]} <br />
+                  <span className="font-normal">Producers:</span>{" "}
+                  {props.movie.producers.map(function (person, index) {
+                    return (
+                      <span key={index}>{(index ? ", " : "") + person}</span>
+                    );
+                  })}{" "}
+                  <br />
                   <span>
                     <span className="font-normal">Release Date:</span>{" "}
                     {props.movie.year}
@@ -52,35 +57,47 @@ function MovieDetail(props) {
                   <br />
                   <span>
                     <span className="font-normal">Duration:</span>{" "}
-                    {props.movie.runtime}
+                    {props.movie.runtime[0] +
+                      "h" +
+                      " " +
+                      props.movie.runtime.slice(2, 4) +
+                      "m"}
                   </span>
                   <br />
                   <span>
                     <span className="font-normal">Genre:</span>{" "}
-                    {props.movie.genre[0]}
+                    {props.movie.genre.map(function (item, index) {
+                      return (
+                        <span key={index}>{(index ? ", " : "") + item}</span>
+                      );
+                    })}{" "}
                   </span>
                 </div>
-                <div className="border-4 border-blue-700 hover:border-yellow-400 hover:text-yellow-400 mt-8 w-2/5 font-medium flex justify-center">
-                  <button className="p-2 uppercase text-sm xl:text-base">
+                <div className="border-4 border-blue-700 hover:border-yellow-400 hover:text-yellow-400 mt-8 w-2/4 lg:w-2/5 xl:w-2/6  font-medium flex justify-center">
+                  <button className="p-2 uppercase xl:text-base">
                     Rent from $7.00
                   </button>
                 </div>
-                <div className="pt-6 text-left text-sm xl:text-base">
+                <div className="pt-6 text-sm xl:text-base">
                   <p>
-                    Contrary to popular belief, Lorem Ipsum is not simply random
-                    text. It has roots in a piece of classical Latin literature
-                    from 45 BC, making it over 2000 years old. Richard
-                    McClintock, a Latin professor at Hampden-Sydney College in
-                    Virginia, looked up one of the more obscure Latin words,
-                    consectetur, from a Lorem Ipsum passage, and going through
-                    the cites of the word in classical literature, discovered
-                    the undoubtable source. Lorem Ipsum comes from sections
-                    1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The
-                    Extremes of Good and Evil) by Cicero, written in 45 BC. This
-                    book is a treatise on the theory of ethics, very popular
-                    during the Renaissance. The first line of Lorem Ipsum,
-                    "Lorem ipsum dolor sit amet..", comes from a line in section
-                    1.10.32.
+                    Walt Disney Animation Studios’ “Encanto” tells the tale of
+                    an extraordinary family, the Madrigals, who live hidden in
+                    the mountains of Colombia, in a magical house, in a vibrant
+                    town, in a wondrous, charmed place called an Encanto. The
+                    magic of the Encanto has blessed every child in the family
+                    with a unique gift from super strength to the power to
+                    heal—every child except one, Mirabel (voice of Stephanie
+                    Beatriz). But when she discovers that the magic surrounding
+                    the Encanto is in danger, Mirabel decides that she, the only
+                    ordinary Madrigal, might just be her exceptional family’s
+                    last hope. Releasing on Nov. 24, 2021, the film features
+                    all-new songs by Emmy®, GRAMMY® and Tony Award® winner
+                    Lin-Manuel Miranda (“Hamilton,” “Moana”) and is directed by
+                    Byron Howard (“Zootopia,” “Tangled”) and Jared Bush
+                    (co-director “Zootopia”), co-directed by Charise Castro
+                    Smith (writer “The Death of Eva Sofia Valdez”), and produced
+                    by Clark Spencer and Yvett Merino; Bush and Castro Smith are
+                    screenwriters on the film.
                   </p>
                 </div>
               </div>
@@ -95,7 +112,3 @@ function MovieDetail(props) {
   );
 }
 export default MovieDetail;
- 
- 
-
-

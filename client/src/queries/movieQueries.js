@@ -5,7 +5,8 @@ const GET_MOVIES = gql`
     movies {
       _id
       title
-      director
+      directors
+      producers
       runtime
       rating
       genre
@@ -20,7 +21,8 @@ const SEARCH_MOVIE = gql`
     searchMovie(title: $title) {
       _id
       title
-      director
+      directors
+      producers
       runtime
       rating
       genre

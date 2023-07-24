@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+import { createBrowserHistory } from "history";
 
 import Modal from "./Modal";
 import ModalBody from "./ModalBody";
@@ -14,9 +15,8 @@ import { ErrorMessage } from "@hookform/error-message";
 export const LoginModal = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const closeModal = useRef();
-  const [submitted, setSubmitted] = useState(false);
 
+  let history = createBrowserHistory();
   const [loginUser, { error }] = useMutation(LOGIN_USER, {
     variables: { email, password },
     onCompleted(data) {
@@ -40,7 +40,12 @@ export const LoginModal = (props) => {
     setEmail(data.email);
     setPassword(data.password);
     loginUser(email, password).then(() => {
-      window.location.reload();
+      if (window.location.pathname !== "/login") {
+        window.location.reload();
+      } else {
+        history.push("/");
+        window.location.reload();
+      }
     });
   };
   const onError = (errors, e) => console.log(errors, e);
@@ -49,16 +54,11 @@ export const LoginModal = (props) => {
     ModalService.open(modal);
   };
 
-  const closeModalSubmit = () => {
-    closeModal.current.click();
-  };
-
   return (
     <Modal>
       {/* Close modal button */}
       <div className="float-right justify-center p-4">
         <button
-          ref={closeModal}
           className="hover:bg-slate-700 rounded-3xl"
           aria-label="Close Modal"
           aria-labelledby="close-modal"
@@ -84,7 +84,7 @@ export const LoginModal = (props) => {
         <div className="justify-center w-96 flex">
           <img
             src={require("../../assets/movie-logo.png")}
-            className="mb-7 rounded-3xl h-36"
+            className="mb-7 rounded-3xl h-32"
             alt="movie logo"
           />
         </div>
@@ -97,12 +97,12 @@ export const LoginModal = (props) => {
             <input
               className="w-60 md:w-80 p-3 rounded-xl"
               type="email"
+              name="email"
               placeholder="Example: paul.harrison@gmail.com"
               {...register("email", {
                 required: "Please fill out this field.",
               })}
             />
-
             <ErrorMessage
               errors={errors}
               name="email"
@@ -119,11 +119,11 @@ export const LoginModal = (props) => {
               }
             />
           </div>
-
           <div className="justify-center mx-auto">
             <label className="text-white block text-base">Password</label>
             <input
               className="w-60 md:w-80 p-3 rounded-xl"
+              name="password"
               type="password"
               {...register("password", {
                 required: true,
@@ -149,11 +149,11 @@ export const LoginModal = (props) => {
               Don't have an account? Sign up
             </button>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center pb-8">
             <input
               type="submit"
               value="Log in"
-              className="bg-blue-500 hover:bg-blue-600 w-40 h-12 text-base font-semibold text-white rounded-2xl"
+              className="bg-blue-500 hover:bg-blue-600 w-40 h-10 text-base font-semibold text-white rounded-2xl"
             />
           </div>
         </form>

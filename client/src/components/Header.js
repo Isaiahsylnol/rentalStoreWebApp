@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import SearchIcon from "@mui/icons-material/Search";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
@@ -34,9 +32,8 @@ const Header = () => {
   let navigate = useNavigate();
 
   const [movieSearched, setMovieSearched] = useState("");
-  const [fetchMovie, { data: movieSearchedData, error: movieError }] =
-    useLazyQuery(SEARCH_MOVIE);
-  const { loading, error, data } = useQuery(GET_MOVIES);
+  const [fetchMovie, { data: movieSearchedData }] = useLazyQuery(SEARCH_MOVIE);
+  const { data } = useQuery(GET_MOVIES);
   const [movieTitles, setMovies] = useState([]);
 
   useEffect(() => {
@@ -46,7 +43,7 @@ const Header = () => {
     setMovies(movieTitles);
   }, []);
   useEffect(() => {
-    if (movieSearchedData != "" && movieSearchedData != undefined) {
+    if (movieSearchedData !== "" && movieSearchedData !== undefined) {
       navigate(`/detail/${movieSearchedData?.searchMovie._id}`);
     }
   }, [movieSearchedData]);
@@ -60,10 +57,10 @@ const Header = () => {
         <button
           id="nav-toggle"
           onClick={menuToggle}
-          class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white"
+          className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white"
         >
           <svg
-            class="fill-current h-3 w-3"
+            className="fill-current h-3 w-3"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -73,7 +70,7 @@ const Header = () => {
         </button>
       </div>
       <div className="flex justify-center items-center mx-auto h-auto text-white">
-        <a href="/">
+        <a href="/" data-cy="btn-logo">
           <img
             src={require("../assets/logo-1.png")}
             alt="Site logo"
@@ -98,7 +95,7 @@ const Header = () => {
               setMovieSearched(value);
             }}
             renderInput={(params) => (
-              <div className="w-full inline-flex md:w-2/1">
+              <div className="md:w-2/1">
                 <TextField
                   {...params}
                   onChange={(e) => {
@@ -122,25 +119,25 @@ const Header = () => {
             }}
           />
         </div>
-        <ul className="lg:flex justify-end items-center m-6 text-lg lg:space-x-8">
-          <li className="mr-3">
+        <ul className="lg:flex justify-end items-center m-6 text-base lg:space-x-8">
+          <li className="mr-3 text-center">
             <Link
-              className="text-gray-200 font-normal no-underline hover:text-white hover:text-underline"
+              className="text-gray-200 font-normal no-underline hover:text-white"
               to="/"
             >
               Home
             </Link>
           </li>
-          <li className="mr-3">
+          <li className="mr-3 text-center">
             <Link
-              className="text-gray-200 font-normal no-underline hover:text-white hover:text-underline"
+              className="text-gray-200 font-normal no-underline hover:text-white"
               to="/movies"
             >
               Movies
             </Link>
           </li>
           <li
-            className="text-gray-200 font-normal hover:text-white cursor-pointer"
+            className="text-gray-200 text-center mr-2 font-normal hover:text-white cursor-pointer"
             onClick={
               currentUser
                 ? () => navigate(`/profile`)
@@ -151,7 +148,10 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <div className="text-gray-200 bg-slate-700 w-full flex md:w-auto md:flex-none">
+      <div
+        className="text-gray-200 bg-slate-700 w-full flex md:w-auto md:flex-none"
+        data-cy="current-user"
+      >
         {currentUser ? (
           <div>
             <div className="text-right p-4 cursor-default flex flex-col">

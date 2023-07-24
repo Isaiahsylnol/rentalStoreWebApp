@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 const Profile = () => {
@@ -7,7 +7,7 @@ const Profile = () => {
     console.log(user);
   }, []);
   let user = {
-    name: "John Doe",
+    name: "Mike Denver",
     address: "77 Field Crest",
     email: "doe@test.com",
   };
