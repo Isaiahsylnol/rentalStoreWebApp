@@ -6,7 +6,12 @@ const movieSchema = new mongoose.Schema({
     required: [true, "Please enter valid title"],
     trim: true,
   },
-  director: {
+  directors: {
+    type: Array,
+    required: [true, "Please enter valid name"],
+    trim: true,
+  },
+  producers: {
     type: Array,
     required: [true, "Please enter valid name"],
     trim: true,

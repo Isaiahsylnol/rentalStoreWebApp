@@ -12,7 +12,8 @@ type Query {
   type Movie {
     _id: String,
     title: String!,
-    director: [String]!,
+    directors: [String]!,
+    producers: [String]!,
     runtime: String!,
     rating: String,
     genre: [String]!,
@@ -47,7 +48,8 @@ type Rental {
   type Mutation {
     createMovie(
       title: String,
-      director: [String],
+      directors: [String],
+      producers: [String],
       runtime: Float,
       rating: Int,
       genre: [String],
