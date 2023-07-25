@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 
-
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Carousel, { CarouselItem } from "../components/Carousel/Carousel";
 import Pagination from "../components/Pagination";
 import { SimilarMoviesWidget } from "../components/SimilarMoviesWidget";
-<<<<<<< HEAD
-
-
-=======
 import { GET_MOVIES } from "../queries/movieQueries";
 import { useQuery } from "@apollo/client";
->>>>>>> 275f518cb1aa7ed2de60b28f9794b32882c9931a
 // Mock data
 const movies = [
   { title: "Snow Angel", release_date: "2023-01-20" },
@@ -26,17 +20,6 @@ const movies = [
   { title: "Harold and the Purple Crayon", release_date: "2023-01-27" },
 ];
 
-<<<<<<< HEAD
-
-function getFilmDate(film) {
-  let date = new Date(film);
-  console.log(date);
-  return date;
-}
-
-
-=======
->>>>>>> 275f518cb1aa7ed2de60b28f9794b32882c9931a
 const Home = () => {
   const { loading, error, data } = useQuery(GET_MOVIES);
   // User is currently on this page
@@ -48,12 +31,7 @@ const Home = () => {
   // Records to be displayed on the current page
   const currentRecords = data.movies.slice(indexOfFirstRecord, indexOfLastRecord);
 
-<<<<<<< HEAD
-
-  const nPages = Math.ceil(movies.length / recordsPerPage);
-=======
   const nPages = Math.ceil(data.movies.length / recordsPerPage);
->>>>>>> 275f518cb1aa7ed2de60b28f9794b32882c9931a
   return (
     <div>
       <Header />
@@ -68,13 +46,9 @@ const Home = () => {
                   <div className='rounded-xl w-11/12 h-96 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/totoro_TWjcO4fVo.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673915010114")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
-<<<<<<< HEAD
-                        <h2 className="text-2xl mt-36">Studio GIniboli</h2>
-=======
                         <h2 className="text-2xl md:text-2xl mt-36">
                         My Neighbor Totoro
                         </h2>
->>>>>>> 275f518cb1aa7ed2de60b28f9794b32882c9931a
                         <h2 className="pb-4 text-base font-semibold">
                           Fantasy, Anime
                         </h2>
@@ -89,11 +63,7 @@ const Home = () => {
                   <div className='rounded-xl w-11/12 h-96 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/pussinbootslastwish_7mNNEMBBX.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1673916134278")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
-<<<<<<< HEAD
-                        <h2 className="text-2xl mt-36">
-=======
                         <h2 className="text-xl md:text-lg lg:text-2xl mt-36">
->>>>>>> 275f518cb1aa7ed2de60b28f9794b32882c9931a
                           Puss in Boots: The Last Wish
                         </h2>
                         <h2 className="pb-4 text-base font-semibold">
@@ -110,17 +80,10 @@ const Home = () => {
                   <div className='rounded-xl w-11/12 h-96 bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/197617_hwLA-JJBc.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1673928989073")] bg-cover bg-center'>
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
-<<<<<<< HEAD
-                        <p className="text-xl md:text-lg lg:text-2xl mt-36 break-words">
-                          Black Panther: Wakanda Forever
-                        </p>
-                        <h2 className="pb-4 text-base font-semibold">
-=======
                         <p className="text-lg lg:text-2xl mt-36 break-words">
                           Black Panther: Wakanda Forever
                         </p>
                         <h2 className="pb-4 text-sm font-semibold">
->>>>>>> 275f518cb1aa7ed2de60b28f9794b32882c9931a
                           Action, Adventure
                         </h2>
                         <button className="h-10 uppercase w-36 hover:bg-[#2b4d55] bg-cyan-800 opacity-90">
@@ -319,11 +282,4 @@ const Home = () => {
   );
 };
 
-
 export default Home;
-
-
-
-
-
-
