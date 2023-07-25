@@ -1,0 +1,31 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches:
+      - main # - branch you want to deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.15.0' # Replace with the appropriate Node.js version
+
+      - name: Install dependencies
+        run: npm install # Use yarn install if you are using Yarn
+
+      - name: Deploy to Heroku
+        run: |
+          echo "machine api.heroku.com login _ password $HEROKU_API_KEY" >> ~/.netrc
+          echo "machine git.heroku.com login _ password $HEROKU_API_KEY" >> ~/.netrc
+          git remote add heroku https://git.heroku.com/movie-app-2.git # Replace 'your-app-name' with your Heroku app name
+          git push heroku main # Replace 'main' with the branch you want to deploy
+        env:
+          HEROKU_API_KEY: ${{ 5183f1e6-ede0-4c9b-8d83-7a5ca7d19afc }}
