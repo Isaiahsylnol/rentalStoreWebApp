@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: process.env.GRAPHQL_URL,
+  uri: "https://movie-app-2-13fb90b27d3b.herokuapp.com/graphql",
   cache: new InMemoryCache(),
 });
 ReactDOM.render(
