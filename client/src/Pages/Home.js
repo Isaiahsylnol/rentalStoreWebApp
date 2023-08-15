@@ -7,6 +7,7 @@ import Pagination from "../components/Pagination";
 import { SimilarMoviesWidget } from "../components/SimilarMoviesWidget";
 import { GET_MOVIES } from "../queries/movieQueries";
 import { useQuery } from "@apollo/client";
+
 // Mock data
 const movies = [
   { title: "Snow Angel", release_date: "2023-01-20" },
@@ -29,9 +30,27 @@ const Home = () => {
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   // Records to be displayed on the current page
-  const currentRecords = data.movies.slice(indexOfFirstRecord, indexOfLastRecord);
+  const currentRecords = data?.movies.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
 
-  const nPages = Math.ceil(data.movies.length / recordsPerPage);
+  const nPages = Math.ceil(data?.movies?.length / recordsPerPage);
+
+  if (loading)
+    return (
+      <>
+        <h2>Loading...</h2>
+      </>
+    );
+
+  if (error)
+    return (
+      <>
+        <h2>Failed to load data</h2>
+      </>
+    );
+
   return (
     <div>
       <Header />
@@ -47,7 +66,7 @@ const Home = () => {
                     <div className="p-8 uppercase font-bold mb-32 text-white cursor-pointer">
                       <div className="backdrop-blur-[2px] w-min">
                         <h2 className="text-2xl md:text-2xl mt-36">
-                        My Neighbor Totoro
+                          My Neighbor Totoro
                         </h2>
                         <h2 className="pb-4 text-base font-semibold">
                           Fantasy, Anime
@@ -101,14 +120,14 @@ const Home = () => {
                 Upcoming
               </h2>
               <ul className="text-left">
-                {movies.map(function (movie, i) {
+                {movies?.map(function (movie, i) {
                   return (
                     <li
                       key={i}
                       className="p-1 border-b-2 border-white text-white font-semibold"
                     >
-                      <span>{movie.title}</span>
-                      <span className="float-right">{movie.release_date}</span>
+                      <span>{movie?.title}</span>
+                      <span className="float-right">{movie?.release_date}</span>
                     </li>
                   );
                 })}
@@ -122,7 +141,7 @@ const Home = () => {
             <h1 className="h-16 text-2xl font-semibold">LATEST NEWS</h1>
             <ul className="font-normal sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-8">
               <li className="mb-8">
-                <button>
+                <a href="/artictle/godzilla">
                   <img
                     width={420}
                     src={require("../assets/godzilla.jpg")}
@@ -133,7 +152,7 @@ const Home = () => {
                     Godzilla and Kong keep growing. But they’re no match for
                     physics
                   </span>
-                </button>
+                </a>
               </li>
               <li className="mb-8">
                 <button>
@@ -234,46 +253,45 @@ const Home = () => {
           {/* Featured movie */}
           <section className="bg-zinc-800 mt-16 flex flex-col  items-center  sm:rounded-lg">
             <div className="sm:grid sm:grid-cols-3 space-x-6 justify-center mx-auto">
-                <div className="text-left text-white pb-6 col-span-2">
-                  <div className='sm:rounded-xl bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
-                    <div className="p-8 uppercase font-bold">
-                      <h2 className="text-2xl font-bold sm:text-4xl mt-72">
-                        The hobbit
-                      </h2>
-                      <h2 className="pb-4 text-base font-semibold">
-                        Action, Adventure
-                      </h2>
-                      <button className="h-10 w-24 uppercase md:w-36 rounded-3xl hover:bg-[#0783a0] bg-cyan-600">
-                        Watch
-                      </button>
-                    </div>
+              <div className="text-left text-white pb-6 col-span-2">
+                <div className='sm:rounded-xl bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
+                  <div className="p-8 uppercase font-bold">
+                    <h2 className="text-2xl font-bold sm:text-4xl mt-72">
+                      The hobbit
+                    </h2>
+                    <h2 className="pb-4 text-base font-semibold">
+                      Action, Adventure
+                    </h2>
+                    <button className="h-10 w-24 uppercase md:w-36 rounded-3xl hover:bg-[#0783a0] bg-cyan-600">
+                      Watch
+                    </button>
                   </div>
                 </div>
+              </div>
               <p className="text-white">
-                Magna minim nisi ea veniam reprehenderit officia nulla
-                    ullamco id duis laborum minim eu mollit. Ea irure Lorem
-                    eiusmod tempor ea adipisicing velit nisi nostrud. Lorem
-                    minim cupidatat officia qui. Est velit cupidatat magna
-                    incididunt Lorem ut qui labore duis ex elit. Velit non
-                    reprehenderit laborum reprehenderit est sit laborum minim
-                    dolor exercitation est reprehenderit officia commodo. Nisi
-                    ea fugiat aliqua aute elit elit eu enim. Tempor incididunt
-                    ea mollit eu. Labore dolore do cillum laboris exercitation.
-                    Magna eiusmod aliqua nostrud non nostrud tempor sit aliqua.
-                    Quis cupidatat nostrud consectetur do aliquip nisi aute
-                    velit aliqua laboris. Ea reprehenderit fugiat incididunt
-                    nulla enim adipisicing id adipisicing ea. Reprehenderit
-                    fugiat anim sunt eiusmod adipisicing laborum dolor.
+                Magna minim nisi ea veniam reprehenderit officia nulla ullamco
+                id duis laborum minim eu mollit. Ea irure Lorem eiusmod tempor
+                ea adipisicing velit nisi nostrud. Lorem minim cupidatat officia
+                qui. Est velit cupidatat magna incididunt Lorem ut qui labore
+                duis ex elit. Velit non reprehenderit laborum reprehenderit est
+                sit laborum minim dolor exercitation est reprehenderit officia
+                commodo. Nisi ea fugiat aliqua aute elit elit eu enim. Tempor
+                incididunt ea mollit eu. Labore dolore do cillum laboris
+                exercitation. Magna eiusmod aliqua nostrud non nostrud tempor
+                sit aliqua. Quis cupidatat nostrud consectetur do aliquip nisi
+                aute velit aliqua laboris. Ea reprehenderit fugiat incididunt
+                nulla enim adipisicing id adipisicing ea. Reprehenderit fugiat
+                anim sunt eiusmod adipisicing laborum dolor.
               </p>
             </div>
             <div className="mt-4 ">
-                  <SimilarMoviesWidget data={currentRecords} />
-                <Pagination
-                  nPages={nPages}
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                />
-                  </div>
+              <SimilarMoviesWidget data={currentRecords} />
+              <Pagination
+                nPages={nPages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+            </div>
           </section>
         </div>
       </div>

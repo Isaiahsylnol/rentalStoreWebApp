@@ -99,6 +99,10 @@ const resolvers = {
   searchByYear: (args) => {
     return Movies.findOne({ year: args.year });
   },
+  
+  searchMovieById: (args) => {
+    return Movies.findOne({ _id: args._id });
+  },
 };
 
 module.exports = resolvers;

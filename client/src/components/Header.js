@@ -9,8 +9,7 @@ import ModalService from "./Modal/services/ModalService";
 import { LoginModal } from "./Modal/LoginModal";
 
 import { useLazyQuery, useQuery } from "@apollo/client";
-import { SEARCH_MOVIE } from "../queries/movieQueries";
-import { GET_MOVIES } from "../queries/movieQueries";
+import { SEARCH_MOVIE, GET_MOVIES } from "../queries/movieQueries";
 
 // Small screen x Mobile menu
 function menuToggle() {
@@ -37,19 +36,21 @@ const Header = () => {
   const [movieTitles, setMovies] = useState([]);
 
   useEffect(() => {
-    for (var i = 0; i < data?.movies?.length; i++) {
-      movieTitles.push(data?.movies[i].title);
+    setCurrentUser(JSON.parse(localStorage.getItem("User")));
+
+    if (data?.movies) {
+      const titles = data.movies.map((movie) => movie.title);
+      setMovies(titles);
     }
-    setMovies(movieTitles);
-  }, []);
+  }, [data]);
+
   useEffect(() => {
-    if (movieSearchedData !== "" && movieSearchedData !== undefined) {
+    if (movieSearchedData) {
+      console.log(movieSearchedData.searchMovie);
       navigate(`/detail/${movieSearchedData?.searchMovie._id}`);
+      setMovieSearched();
     }
   }, [movieSearchedData]);
-  useEffect(() => {
-    setCurrentUser(JSON.parse(localStorage.getItem("User")));
-  }, []);
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-gray-800 fixed w-full z-10 top-0">
@@ -98,11 +99,9 @@ const Header = () => {
               <div className="md:w-2/1">
                 <TextField
                   {...params}
-                  onChange={(e) => {
-                    setMovieSearched(e.target.value);
-                  }}
                   variant="outlined"
                   size="small"
+                  id="searchInput"
                   className="bg-white rounded-xl"
                 />
               </div>
