@@ -10,7 +10,7 @@ type Query {
   } 
 
   type Movie {
-    _id: String,
+    id: String,
     title: String!,
     directors: [String]!,
     producers: [String]!,

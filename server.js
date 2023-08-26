@@ -1,41 +1,52 @@
 const path = require("path");
-const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const { graphqlHTTP } = require("express-graphql");
+require("dotenv").config();
+
+const dataSource = require("./data-source");
+const movieRouter = require("./routes/movieRoute");
 const Schemas = require("./schema/schema");
 const resolvers = require("./resolver/resolver");
 
-require("dotenv").config();
+const initializeDataSource = async () => {
+  try {
+    await dataSource.initialize();
+    console.log("Data Source has been initialized!");
+  } catch (err) {
+    console.error("Error during Data Source initialization", err);
+  }
+};
 
-const app = express();
+const startServer = () => {
+  const app = express();
 
-app.use(cors());
-app.use(express.json());
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, "client/build")));
+  app.use(cors());
+  app.use(express.json());
+  app.use(
+    "/graphql",
+    graphqlHTTP({
+      schema: Schemas,
+      rootValue: resolvers,
+      graphiql: true,
+    })
+  );
+  app.use(express.static(path.join(__dirname, "client/build")));
+  app.use("/api", movieRouter);
 
-// Anything that doesn't match the above, send back the index.html file
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
-});
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  });
 
-mongoose
-  .connect(process.env.ATLAS_URI)
-  .then(() => console.log("MongoDB connected!"))
-  .catch((err) => console.log("Error", err));
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server up running on port ${PORT}`);
+  });
+};
 
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: Schemas,
-    rootValue: resolvers,
-    graphiql: true,
-  })
-);
+const startApp = async () => {
+  await initializeDataSource();
+  startServer();
+};
 
-// Choose the port and start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server up running on port ${PORT}`);
-});
+startApp();
