@@ -31,11 +31,6 @@ const startServer = () => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
   });
 
-  mongoose
-    .connect(process.env.ATLAS_URI)
-    .then(() => console.log("MongoDB connected!"))
-    .catch((err) => console.log("Error", err));
-
   app.use(
     "/graphql",
     graphqlHTTP({
