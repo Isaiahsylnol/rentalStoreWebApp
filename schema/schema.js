@@ -5,6 +5,7 @@ type Query {
     movies: [Movie]
     searchMovie(title: String): Movie
     searchByYear(year: String): Movie
+    searchMovieById(_id: String): Movie
     users: [User]
     searchUser(email: String): User
   } 

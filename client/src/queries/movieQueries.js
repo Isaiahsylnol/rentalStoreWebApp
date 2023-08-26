@@ -32,4 +32,20 @@ const SEARCH_MOVIE = gql`
   }
 `;
 
-export { GET_MOVIES, SEARCH_MOVIE };
+const SEARCH_MOVIE_BY_ID = gql`
+  query searchMovieById($_id: String!) {
+    searchMovieById(_id: $_id) {
+      _id
+      title
+      directors
+      producers
+      runtime
+      rating
+      genre
+      year
+      thumbnail
+    }
+  }
+`;
+
+export { GET_MOVIES, SEARCH_MOVIE, SEARCH_MOVIE_BY_ID };

@@ -75,16 +75,16 @@ export default function RegisterUserModal(props) {
       {/* Close modal button - END */}
       <ModalHeader />
       <ModalBody>
-        <div className="justify-center w-96 flex">
+      <div className="justify-center w-96 flex">
           <img
             src={require("../../assets/movie-logo.png")}
-            className="mb-7 rounded-3xl"
+            className="mb-7 rounded-3xl h-32"
             alt="movie logo"
           />
         </div>
         <form
           onSubmit={handleSubmit(onSubmit, onError)}
-          className="flex flex-col gap-7"
+          className="flex p-8 flex-col gap-7"
         >
           <label className="text-white text-base -mb-4">Username</label>
           <input

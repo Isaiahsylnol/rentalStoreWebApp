@@ -1,11 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IKImage, IKContext } from "imagekitio-react";
 import { BsBookmarkFill } from "react-icons/bs";
 import { FaShareAlt } from "react-icons/fa";
 import { MdReportProblem } from "react-icons/md";
 import Header from "./Header";
 import Footer from "./Footer";
-function MovieDetail(props) {
+import { useParams } from 'react-router-dom';
+import { useLazyQuery } from "@apollo/client";
+import { SEARCH_MOVIE_BY_ID } from "../queries/movieQueries";
+
+const MovieDetail = () =>{
+  const { slug } = useParams();
+  const [fetchMovie, { loading, error, data }] = useLazyQuery(SEARCH_MOVIE_BY_ID);
+
+  useEffect(() => {
+    fetchMovie({
+      variables: {
+        _id: slug,
+      },
+    });
+  }, [slug, fetchMovie]);
+
+  const movie = data?.searchMovieById;
+  if (loading)
+  return (
+    <>
+      <h2>Loading...</h2>
+    </>
+  );
+
+if (error)
+  return (
+    <>
+      <h2>Failed to load movie data</h2>
+    </>
+  );
   return (
     <div>
       <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
@@ -16,7 +45,7 @@ function MovieDetail(props) {
             {/* Movie poster */}
             <div className="mx-auto">
               <IKImage
-                path={props.movie.thumbnail + ".jpg"}
+                path={movie?.thumbnail + ".jpg"}
                 transformation={[
                   {
                     height: 600,
@@ -41,10 +70,10 @@ function MovieDetail(props) {
                 </div>
                 <div className="text-left">
                   <h3 className="text-2xl font-semibold mb-3">
-                    {props.movie.title}
+                    {movie?.title}
                   </h3>
                   <span className="font-normal">Producers:</span>{" "}
-                  {props.movie.producers.map(function (person, index) {
+                  {movie?.producers.map(function (person, index) {
                     return (
                       <span key={index}>{(index ? ", " : "") + person}</span>
                     );
@@ -52,21 +81,21 @@ function MovieDetail(props) {
                   <br />
                   <span>
                     <span className="font-normal">Release Date:</span>{" "}
-                    {props.movie.year}
+                    {movie?.year}
                   </span>
                   <br />
                   <span>
                     <span className="font-normal">Duration:</span>{" "}
-                    {props.movie.runtime[0] +
+                    {movie?.runtime[0] +
                       "h" +
                       " " +
-                      props.movie.runtime.slice(2, 4) +
+                      movie?.runtime.slice(2, 4) +
                       "m"}
                   </span>
                   <br />
                   <span>
                     <span className="font-normal">Genre:</span>{" "}
-                    {props.movie.genre.map(function (item, index) {
+                    {movie?.movie?.genre.map(function (item, index) {
                       return (
                         <span key={index}>{(index ? ", " : "") + item}</span>
                       );
@@ -111,4 +140,5 @@ function MovieDetail(props) {
     </div>
   );
 }
+ 
 export default MovieDetail;

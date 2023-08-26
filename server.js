@@ -23,6 +23,19 @@ const startServer = () => {
 
   app.use(cors());
   app.use(express.json());
+  // Serve static files from the React frontend app
+  app.use(express.static(path.join(__dirname, "client/build")));
+
+  // Anything that doesn't match the above, send back the index.html file
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  });
+
+  mongoose
+    .connect(process.env.ATLAS_URI)
+    .then(() => console.log("MongoDB connected!"))
+    .catch((err) => console.log("Error", err));
+
   app.use(
     "/graphql",
     graphqlHTTP({
@@ -31,12 +44,6 @@ const startServer = () => {
       graphiql: true,
     })
   );
-  app.use(express.static(path.join(__dirname, "client/build")));
-  app.use("/api", movieRouter);
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "/client/build/index.html"));
-  });
 
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {

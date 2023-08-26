@@ -101,6 +101,10 @@ const resolvers = {
   //   searchMovieById: (args) => {
   //     return Movies.findOne({ _id: args._id });
   //   },
+
+  searchMovieById: (args) => {
+    return Movies.findOne({ _id: args._id });
+  },
 };
 
 module.exports = resolvers;
