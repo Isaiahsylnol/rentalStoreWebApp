@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
 
 const GET_MOVIES = gql`
-  query getMovies {
+  query movies {
     movies {
-      _id
+      id
       title
       directors
       producers
@@ -19,7 +19,7 @@ const GET_MOVIES = gql`
 const SEARCH_MOVIE = gql`
   query searchMovie($title: String!) {
     searchMovie(title: $title) {
-      _id
+      id
       title
       directors
       producers
@@ -33,9 +33,9 @@ const SEARCH_MOVIE = gql`
 `;
 
 const SEARCH_MOVIE_BY_ID = gql`
-  query searchMovieById($_id: String!) {
-    searchMovieById(_id: $_id) {
-      _id
+  query searchMovieById($id: Int!) {
+    searchMovieById(id: $id) {
+      id
       title
       directors
       producers

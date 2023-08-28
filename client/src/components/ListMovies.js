@@ -6,17 +6,14 @@ import { GET_MOVIES } from "../queries/movieQueries";
 
 const MovieCard = (props) => (
   <div className="max-w-xs">
-    <ButtonBase href={`/detail/${props.movie._id}`}>
+    <ButtonBase href={`/detail/${props.movie.id}`}>
       <div>
         <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
           <div className="object-fit h-96 flex">
             <IKImage path={props.movie.thumbnail + ".jpg"} />
           </div>
           <div className="text-left w-60 text-white p-2 md:p-2">
-            <h1 className="inline text-2xl">
-              {props.movie.title}
-            </h1>{" "}
-            <br />
+            <h1 className="inline text-2xl">{props.movie.title}</h1> <br />
             Release: {props.movie.year} <br />
             Runtime:{" "}
             {props.movie.runtime[0] +

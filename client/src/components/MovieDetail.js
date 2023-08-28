@@ -5,36 +5,37 @@ import { FaShareAlt } from "react-icons/fa";
 import { MdReportProblem } from "react-icons/md";
 import Header from "./Header";
 import Footer from "./Footer";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { useLazyQuery } from "@apollo/client";
 import { SEARCH_MOVIE_BY_ID } from "../queries/movieQueries";
 
-const MovieDetail = () =>{
+const MovieDetail = () => {
   const { slug } = useParams();
-  const [fetchMovie, { loading, error, data }] = useLazyQuery(SEARCH_MOVIE_BY_ID);
+  const [fetchMovie, { loading, error, data }] =
+    useLazyQuery(SEARCH_MOVIE_BY_ID);
 
   useEffect(() => {
     fetchMovie({
       variables: {
-        _id: slug,
+        id: parseInt(slug, 10),
       },
     });
   }, [slug, fetchMovie]);
 
   const movie = data?.searchMovieById;
   if (loading)
-  return (
-    <>
-      <h2>Loading...</h2>
-    </>
-  );
+    return (
+      <>
+        <h2>Loading...</h2>
+      </>
+    );
 
-if (error)
-  return (
-    <>
-      <h2>Failed to load movie data</h2>
-    </>
-  );
+  if (error)
+    return (
+      <>
+        <h2>Failed to load movie data</h2>
+      </>
+    );
   return (
     <div>
       <IKContext urlEndpoint="https://ik.imagekit.io/bbwxfzjdl2zg">
@@ -139,6 +140,6 @@ if (error)
       </div>
     </div>
   );
-}
- 
+};
+
 export default MovieDetail;

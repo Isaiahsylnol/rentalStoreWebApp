@@ -1,36 +1,50 @@
 var bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { findMovies } = require("../controllers/movieController");
+const { findMovies, findMovieById } = require("../controllers/movieController");
 
 const resolvers = {
-  movies: () => {
-    return findMovies();
+  movies: async () => {
+    try {
+      const movies = await findMovies();
+      return movies;
+    } catch (error) {
+      throw new Error("An error occurred while fetching movies.");
+    }
+  },
+
+  searchMovieById: async (args) => {
+    try {
+      const movie = await findMovieById(args.id);
+      return movie;
+    } catch (error) {
+      throw new Error("An error occurred while fetching movies.");
+    }
   },
 
   //   users: () => {
   //     return Users.find({});
   //   },
 
-  registerUser: async (args) => {
-    const hashedPassword = await bcrypt.hash(args.password, 12);
-    try {
-      const existingUser = await Users.findOne({ email: args.email });
-      if (existingUser) {
-        throw new Error("User exists already.");
-      }
-      let user = new Users({
-        email: args.email,
-        username: args.username,
-        password: hashedPassword,
-        firstName: args.firstName,
-        lastName: args.lastName,
-      });
-      const result = await user.save();
-      return result;
-    } catch (err) {
-      throw err;
-    }
-  },
+  // registerUser: async (args) => {
+  //   const hashedPassword = await bcrypt.hash(args.password, 12);
+  //   try {
+  //     const existingUser = await Users.findOne({ email: args.email });
+  //     if (existingUser) {
+  //       throw new Error("User exists already.");
+  //     }
+  //     let user = new Users({
+  //       email: args.email,
+  //       username: args.username,
+  //       password: hashedPassword,
+  //       firstName: args.firstName,
+  //       lastName: args.lastName,
+  //     });
+  //     const result = await user.save();
+  //     return result;
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // },
 
   //   createMovie: async (args) => {
   //     try {
@@ -97,18 +111,6 @@ const resolvers = {
   //   searchByYear: (args) => {
   //     return Movies.findOne({ year: args.year });
   //   },
-
-  //   searchMovieById: (args) => {
-  //     return Movies.findOne({ _id: args._id });
-  //   },
-
-  searchMovieById: (args) => {
-    return Movies.findOne({ _id: args._id });
-  },
-  
-  searchMovieById: (args) => {
-    return Movies.findOne({ _id: args._id });
-  },
 };
 
 module.exports = resolvers;

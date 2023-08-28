@@ -5,7 +5,7 @@ module.exports = new EntitySchema({
   tableName: "movies",
   columns: {
     id: {
-      type: String,
+      type: Number,
       primary: true,
     },
     title: {
@@ -27,7 +27,7 @@ module.exports = new EntitySchema({
       type: String,
     },
     year: {
-      type: String,
+      type: Number,
     },
     thumbnail: {
       type: String,

@@ -5,20 +5,20 @@ type Query {
     movies: [Movie]
     searchMovie(title: String): Movie
     searchByYear(year: String): Movie
-    searchMovieById(_id: String): Movie
+    searchMovieById(id: Int): Movie
     users: [User]
     searchUser(email: String): User
   } 
 
   type Movie {
-    id: String,
+    id: Int,
     title: String!,
     directors: [String]!,
     producers: [String]!,
     runtime: String!,
     rating: String,
     genre: [String]!,
-    year: String!,
+    year: Int!,
     thumbnail: String,
   }
    
