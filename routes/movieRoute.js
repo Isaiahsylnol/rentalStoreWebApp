@@ -1,12 +1,12 @@
 const express = require("express");
 const {
   findMovies,
-  findMoviesByName,
+  findMovieByName,
 } = require("../controllers/movieController");
 
 const router = express.Router();
 
 router.get("/movies", findMovies);
-router.post("/movies", findMoviesByName);
+router.post("/movies", findMovieByName);
 
 module.exports = router;

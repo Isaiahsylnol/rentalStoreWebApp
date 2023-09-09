@@ -6,12 +6,12 @@ import ListMovies from "./components/ListMovies";
 import MovieDetail from "./components/MovieDetail";
 import Home from "./Pages/Home";
 import Profile from "./Pages/Profile";
+import Find from "./components/Find";
 import { LoginModal } from "./components/Modal/LoginModal";
 
 import "./App.css";
 
 function App() {
-
   return (
     <Router>
       <Routes>
@@ -19,8 +19,9 @@ function App() {
         <Route path="/login" element={<LoginModal />} />
         <Route path="/movies" exact element={<ListMovies />} />
         <Route path="/home" element={<Home />} />
-       <Route path="/profile" element={<Profile />} />
-        <Route path="/detail/:slug" element={<MovieDetail/>} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/detail/:slug" element={<MovieDetail />} />
+        <Route path="/find" element={<Find />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

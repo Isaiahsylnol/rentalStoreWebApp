@@ -3,9 +3,10 @@ const { buildSchema } = require("graphql");
 const Schemas = buildSchema(`
 type Query {
     movies: [Movie]
-    searchMovie(title: String): Movie
+    findMovieByName(title: String): Movie
     searchByYear(year: String): Movie
     searchMovieById(id: Int): Movie
+    searchMovies(search: String): [Movie]
     users: [User]
     searchUser(email: String): User
   } 

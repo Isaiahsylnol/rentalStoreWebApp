@@ -10,12 +10,26 @@ const findMovies = async () => {
   }
 };
 
-const findMoviesByName = async (title) => {
+const findMovieByName = async (title) => {
   try {
     const movies = await dataSource
       .getRepository(movie)
       .createQueryBuilder("movie")
-      .where("title LIKE :title", { title: `%${title}%` })
+      .where(`title = :title`, { title })
+      .getOne();
+
+    return movies;
+  } catch (error) {
+    return "An error occurred";
+  }
+};
+
+const searchMovies = async (search) => {
+  try {
+    const movieRep = dataSource.getRepository(movie);
+    const movies = await movieRep
+      .createQueryBuilder("movie")
+      .where("movie.title LIKE :title", { title: `%${search}%` })
       .getMany();
 
     return movies;
@@ -41,6 +55,7 @@ const findMovieById = async (id) => {
 
 module.exports = {
   findMovies,
-  findMoviesByName,
+  searchMovies,
+  findMovieByName,
   findMovieById,
 };

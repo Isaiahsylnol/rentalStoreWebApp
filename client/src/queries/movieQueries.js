@@ -16,9 +16,9 @@ const GET_MOVIES = gql`
   }
 `;
 
-const SEARCH_MOVIE = gql`
-  query searchMovie($title: String!) {
-    searchMovie(title: $title) {
+const FIND_MOVIE = gql`
+  query findMovieByName($title: String!) {
+    findMovieByName(title: $title) {
       id
       title
       directors
@@ -32,6 +32,21 @@ const SEARCH_MOVIE = gql`
   }
 `;
 
+const SEARCH_MOVIES = gql`
+  query searchMovies($search: String!) {
+    searchMovies(search: $search) {
+      id
+      title
+      directors
+      producers
+      runtime
+      rating
+      genre
+      year
+      thumbnail
+    }
+  }
+`;
 const SEARCH_MOVIE_BY_ID = gql`
   query searchMovieById($id: Int!) {
     searchMovieById(id: $id) {
@@ -48,4 +63,4 @@ const SEARCH_MOVIE_BY_ID = gql`
   }
 `;
 
-export { GET_MOVIES, SEARCH_MOVIE, SEARCH_MOVIE_BY_ID };
+export { GET_MOVIES, SEARCH_MOVIES, FIND_MOVIE, SEARCH_MOVIE_BY_ID };

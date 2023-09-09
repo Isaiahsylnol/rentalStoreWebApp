@@ -16,10 +16,10 @@ const MovieCard = (props) => (
             <h1 className="inline text-2xl">{props.movie.title}</h1> <br />
             Release: {props.movie.year} <br />
             Runtime:{" "}
-            {props.movie.runtime[0] +
+            {props.movie.runtime[1] +
               "h" +
               " " +
-              props.movie.runtime.slice(2, 4) +
+              props.movie.runtime.slice(3, 5) +
               "m"}{" "}
             <br />
           </div>
@@ -54,7 +54,7 @@ export default function ListMovies() {
           {data?.movies.map((currentMovie) => {
             return (
               <MovieCard
-                key={currentMovie._id}
+                key={currentMovie.id}
                 movie={currentMovie}
                 thumbnail={currentMovie.thumbnail}
               />

@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import SearchIcon from "@mui/icons-material/Search";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-
 import ModalService from "./Modal/services/ModalService";
 import { LoginModal } from "./Modal/LoginModal";
 
-import { useLazyQuery, useQuery } from "@apollo/client";
-import { SEARCH_MOVIE, GET_MOVIES } from "../queries/movieQueries";
+import SearchBarAutoComplete from "./SearchBarAutoComplete";
 
 // Small screen x Mobile menu
 function menuToggle() {
@@ -23,38 +18,22 @@ const Header = () => {
   }
 
   // Sign user out
-  function signOut() {
+  function handleSignOut() {
     localStorage.removeItem("User");
     setCurrentUser();
   }
 
   let navigate = useNavigate();
 
-  const [movieSearched, setMovieSearched] = useState("");
-  const [fetchMovie, { data: movieSearchedData }] = useLazyQuery(SEARCH_MOVIE);
-  const { data } = useQuery(GET_MOVIES);
-  const [movieTitles, setMovies] = useState([]);
-
   useEffect(() => {
-    setCurrentUser(JSON.parse(localStorage.getItem("User")));
-
-    if (data?.movies) {
-      const titles = data.movies.map((movie) => movie.title);
-      setMovies(titles);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (movieSearchedData) {
-      console.log(movieSearchedData.searchMovie);
-      navigate(`/detail/${movieSearchedData?.searchMovie._id}`);
-      setMovieSearched();
-    }
-  }, [movieSearchedData]);
+    const user = JSON.parse(localStorage.getItem("User"));
+    setCurrentUser(user);
+  }, []);
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-gray-800 fixed w-full z-10 top-0">
-      <div className="block lg:hidden ml-4">
+    <nav className="flex items-center justify-between flex-wrap bg-gray-800 fixed w-full z-10 top-0 p-2">
+      {/* Mobile menu */}
+      <div className="block md:hidden p-2">
         <button
           id="nav-toggle"
           onClick={menuToggle}
@@ -70,7 +49,11 @@ const Header = () => {
           </svg>
         </button>
       </div>
-      <div className="flex justify-center items-center mx-auto h-auto text-white">
+      {/* Desktop menu */}
+      <div
+        className="w-full flex-grow md:flex items-center hidden"
+        id="nav-content"
+      >
         <a href="/" data-cy="btn-logo">
           <img
             src={require("../assets/logo-1.png")}
@@ -78,47 +61,12 @@ const Header = () => {
             className="object-cover w-20"
           />
         </a>
-      </div>
-
-      <div
-        className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden"
-        id="nav-content"
-      >
         {/* Movie search bar */}
-        <div className="flex flex-grow justify-center ml-12 mt-12 sm:mt-0">
-          <Autocomplete
-            style={{ width: 400 }}
-            freeSolo
-            autoComplete
-            autoHighlight
-            options={movieTitles}
-            onChange={(event, value) => {
-              setMovieSearched(value);
-            }}
-            renderInput={(params) => (
-              <div className="md:w-2/1">
-                <TextField
-                  {...params}
-                  variant="outlined"
-                  size="small"
-                  id="searchInput"
-                  className="bg-white rounded-xl"
-                />
-              </div>
-            )}
-          />
-          <SearchIcon
-            className="text-white m-2"
-            onClick={() => {
-              fetchMovie({
-                variables: {
-                  title: movieSearched,
-                },
-              });
-            }}
-          />
+        <div className="flex mx-auto p-3 rounded-xl bg-gray-800">
+          <SearchBarAutoComplete />
         </div>
-        <ul className="lg:flex justify-end items-center m-6 text-base lg:space-x-8">
+
+        <ul className="flex flex-col md:flex-row items-start text-xl gap-2 p-4 sm:pr-10">
           <li className="mr-3 text-center">
             <Link
               className="text-gray-200 font-normal no-underline hover:text-white"
@@ -147,15 +95,15 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <div
-        className="text-gray-200 bg-slate-700 w-full flex md:w-auto md:flex-none"
-        data-cy="current-user"
-      >
+      <div data-cy="current-user">
         {currentUser ? (
           <div>
             <div className="text-right p-4 cursor-default flex flex-col">
               {currentUser.email}
-              <button onClick={signOut} className="text-left sm:text-right">
+              <button
+                onClick={handleSignOut}
+                className="text-left sm:text-right"
+              >
                 Sign out
               </button>
             </div>
