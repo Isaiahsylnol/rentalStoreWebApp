@@ -90,13 +90,13 @@ const MovieDetail = () => {
                     {movie?.runtime[0] +
                       "h" +
                       " " +
-                      movie?.runtime.slice(2, 4) +
+                      movie?.runtime.slice(1) +
                       "m"}
                   </span>
                   <br />
                   <span>
                     <span className="font-normal">Genre:</span>{" "}
-                    {movie?.movie?.genre.map(function (item, index) {
+                    {movie?.genre.map(function (item, index) {
                       return (
                         <span key={index}>{(index ? ", " : "") + item}</span>
                       );

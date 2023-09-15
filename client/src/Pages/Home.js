@@ -251,7 +251,7 @@ const Home = () => {
             </ul>
           </div>
           {/* Featured movie */}
-          <section className="bg-zinc-800 mt-16 flex flex-col  items-center  sm:rounded-lg">
+          <section className="bg-zinc-800 mt-16 flex flex-col items-center sm:rounded-lg">
             <div className="sm:grid sm:grid-cols-3 space-x-6 justify-center mx-auto">
               <div className="text-left text-white pb-6 col-span-2">
                 <div className='sm:rounded-xl bg-[url("https://ik.imagekit.io/bbwxfzjdl2zg/Hobbiton-Courtesy-of-Steve-Hall-_AJrSkjwcn.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1671414852907")] bg-cover bg-center'>
@@ -268,7 +268,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <p className="text-white">
+              <p className="text-white text-base">
                 Magna minim nisi ea veniam reprehenderit officia nulla ullamco
                 id duis laborum minim eu mollit. Ea irure Lorem eiusmod tempor
                 ea adipisicing velit nisi nostrud. Lorem minim cupidatat officia
@@ -284,7 +284,7 @@ const Home = () => {
                 anim sunt eiusmod adipisicing laborum dolor.
               </p>
             </div>
-            <div className="mt-4 ">
+            <div className="mt-4">
               <SimilarMoviesWidget data={currentRecords} />
               <Pagination
                 nPages={nPages}
