@@ -5,6 +5,10 @@ const dataSource = new typeorm.DataSource({
   type: `postgres`,
   url: `${process.env.DATABASE_URL}`,
   entities: [MovieEntity],
+  synchronize: true,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 module.exports = dataSource;
