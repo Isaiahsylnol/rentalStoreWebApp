@@ -1,63 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import Carousel, { CarouselItem } from "../components/Carousel/Carousel";
 import Pagination from "../components/Pagination";
 import { SimilarMoviesWidget } from "../components/SimilarMoviesWidget";
-import { GET_MOVIES } from "../queries/movieQueries";
-import { useQuery } from "@apollo/client";
-
-// Mock data
-const movies = [
-  { title: "Snow Angel", release_date: "2023-01-20" },
-  { title: "Everything Under Control", release_date: "2023-01-21" },
-  { title: "Pathan", release_date: "2023-01-25" },
-  { title: "Infinity Pool", release_date: "2023-01-27" },
-  { title: "My Teacher", release_date: "2023-01-27" },
-  { title: "Blood", release_date: "2023-01-27" },
-  { title: "Close", release_date: "2023-01-27" },
-  { title: "Condor's Nest", release_date: "2023-01-27" },
-  { title: "Harold and the Purple Crayon", release_date: "2023-01-27" },
-];
+import { useFilmContext } from "../filmContext";
 
 const Home = () => {
-  const { loading, error, data } = useQuery(GET_MOVIES);
-  // User is currently on this page
   const [currentPage, setCurrentPage] = useState(1);
+  const [movies, setMovies] = useState();
+  const [nPages, setNPages] = useState(0);
   // No of Records to be displayed on each page
   const [recordsPerPage] = useState(4);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const filmData = useFilmContext();
+
+  useEffect(() => {
+    setMovies(filmData);
+    setNPages(Math.ceil(filmData?.length / recordsPerPage));
+  }, [filmData, recordsPerPage]);
+
   // Records to be displayed on the current page
-  const currentRecords = data?.movies.slice(
-    indexOfFirstRecord,
-    indexOfLastRecord
-  );
-
-  const nPages = Math.ceil(data?.movies?.length / recordsPerPage);
-
-  if (loading)
-    return (
-      <>
-        <h2>Loading...</h2>
-      </>
-    );
-
-  if (error)
-    return (
-      <>
-        <h2>Failed to load data</h2>
-      </>
-    );
+  const currentRecords = movies?.slice(indexOfFirstRecord, indexOfLastRecord);
 
   return (
     <div>
-      <Header />
       {/* Container */}
-      <div className="p-4 mt-40 md:mt-24">
+      <div className="p-4 mt-24">
         <div>
-          <div className="md:flex mx-auto items-center justify-center max-w-7xl">
+          <div className="md:flex mx-auto max-w-7xl">
             {/* left column - Feature Card */}
             <div className="w-full md:w-3/5">
               <Carousel>
@@ -115,7 +86,7 @@ const Home = () => {
               </Carousel>
             </div>
             {/* Right column - Upcoming movies */}
-            <div className="h-fit rounded-2xl bg-slate-700 w-full max-w-5xl justify-center mx-auto mt-12 sm:mt-0 p-5">
+            <div className="rounded-2xl bg-slate-700 w-full max-w-5xl mt-12 sm:mt-0 p-5">
               <h2 className="text-2xl uppercase font-bold text-white p-3 mb-4 cursor-default">
                 Upcoming
               </h2>
@@ -284,18 +255,21 @@ const Home = () => {
                 anim sunt eiusmod adipisicing laborum dolor.
               </p>
             </div>
-            <div className="mt-4">
-              <SimilarMoviesWidget data={currentRecords} />
-              <Pagination
-                nPages={nPages}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-              />
+            <div className="mt-4 flex flex-col">
+              <div className="mx-auto">
+                <SimilarMoviesWidget movies={currentRecords} />
+              </div>
+              <div className="mx-auto">
+                <Pagination
+                  nPages={nPages}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </div>
             </div>
           </section>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

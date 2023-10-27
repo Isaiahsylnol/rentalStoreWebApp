@@ -1,14 +1,14 @@
-const typeorm = require("typeorm");
-const MovieEntity = require("./entity/movie.entity");
+const { Client } = require("pg");
+require("dotenv").config();
+// Create a new PostgreSQL client
 
-const dataSource = new typeorm.DataSource({
-  type: `postgres`,
-  url: `${process.env.DATABASE_URL}`,
-  entities: [MovieEntity],
-  synchronize: true,
+const client = new Client({
+  connectionString: process.env.REACT_APP_DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
 });
 
-module.exports = dataSource;
+client.connect();
+
+module.exports = client;

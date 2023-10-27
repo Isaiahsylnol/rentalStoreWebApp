@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { createBrowserHistory } from "history";
 
 import Modal from "./Modal";
@@ -8,25 +8,10 @@ import ModalService from "./services/ModalService";
 import RegisterUserModal from "./RegisterUserModal";
 
 import { useForm } from "react-hook-form";
-import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../../mutations/userMutations";
-import { ErrorMessage } from "@hookform/error-message";
+import { loginUser } from "../../queries/userApi";
 
 export const LoginModal = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   let history = createBrowserHistory();
-  const [loginUser, { error }] = useMutation(LOGIN_USER, {
-    variables: { email, password },
-    onCompleted(data) {
-      console.log(data);
-      // Create a user object to store client side
-      let user = data.login;
-      user["email"] = email;
-      localStorage.setItem("User", JSON.stringify(user));
-    },
-  });
 
   const {
     register,
@@ -36,10 +21,9 @@ export const LoginModal = (props) => {
     criteriaMode: "all",
   });
 
-  const onSubmit = (data, e) => {
-    setEmail(data.email);
-    setPassword(data.password);
-    loginUser(email, password).then(() => {
+  const onSubmit = async (data, e) => {
+    loginUser(data.email, data.password).then((res) => {
+      localStorage.setItem("User", JSON.stringify(res));
       if (window.location.pathname !== "/login") {
         window.location.reload();
       } else {
@@ -81,7 +65,7 @@ export const LoginModal = (props) => {
       {/* Close modal button - END */}
       <ModalHeader />
       <ModalBody>
-        <div className="justify-center w-96 flex">
+        <div className="justify-center flex w-full">
           <img
             src={require("../../assets/movie-logo.png")}
             className="mb-7 rounded-3xl h-32"
@@ -90,57 +74,41 @@ export const LoginModal = (props) => {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit, onError)}
-          className="flex flex-col gap-7 mx-auto justify-center "
+          className="flex flex-col gap-7 mx-auto justify-center"
         >
-          <div className="justify-center mx-auto">
-            <label className="text-white block text-base">Email</label>
+          <div className="flex flex-col justify-center mx-auto">
+            <label className="text-white block text-base mb-2">Email</label>
             <input
-              className="w-60 md:w-80 p-3 rounded-xl"
+              className="w-60 md:w-80 p-3 rounded-xl mb-3"
               type="email"
               name="email"
               placeholder="Example: paul.harrison@gmail.com"
               {...register("email", {
-                required: "Please fill out this field.",
+                required: true,
               })}
             />
-            <ErrorMessage
-              errors={errors}
-              name="email"
-              render={({ messages }) =>
-                messages &&
-                Object.entries(messages).map(([type, message]) => (
-                  <p
-                    key={type}
-                    className="text-red-500 text-base font-medium -mt-4"
-                  >
-                    {message}
-                  </p>
-                ))
-              }
-            />
+            {errors.email && (
+              <span className="text-red-500 text-base font-medium">
+                Please fill out this field
+              </span>
+            )}
           </div>
-          <div className="justify-center mx-auto">
-            <label className="text-white block text-base">Password</label>
+          <div className="flex flex-col justify-center mx-auto">
+            <label className="text-white block text-base mb-2">Password</label>
             <input
-              className="w-60 md:w-80 p-3 rounded-xl"
+              className="w-60 md:w-80 p-3 rounded-xl mb-3"
               name="password"
               type="password"
               {...register("password", {
                 required: true,
               })}
             />
+            {errors.password && (
+              <span className="text-red-500 text-base font-medium">
+                Please fill out this field
+              </span>
+            )}
           </div>
-          {errors.password && (
-            <span className="text-red-500 text-base font-medium -mt-4">
-              Please fill out this field
-            </span>
-          )}
-
-          {errors && (
-            <span className="text-red-500 text-center text-xl font-bold -mt-4">
-              {error?.message}
-            </span>
-          )}
           <div className="flex justify-center">
             <button
               onClick={() => addModal(RegisterUserModal)}

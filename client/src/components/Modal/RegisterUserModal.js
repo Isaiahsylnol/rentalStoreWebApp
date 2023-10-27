@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
@@ -7,28 +7,16 @@ import ModalBody from "./ModalBody";
 import ModalHeader from "./ModalHeader";
 import ModalService from "./services/ModalService";
 import { LoginModal } from "./LoginModal";
+import { registerUser } from "../../queries/userApi";
 
-import { useMutation } from "@apollo/client";
-import { REGISTER_USER } from "../../mutations/userMutations";
+import { createBrowserHistory } from "history";
 
 export default function RegisterUserModal(props) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-
-  const [password, setPassword] = useState("");
+  let history = createBrowserHistory();
 
   const addModal = (modal) => {
     ModalService.open(modal);
   };
-
-  const [registerUser, { error }] = useMutation(REGISTER_USER, {
-    variables: { username, firstName, lastName, email, password },
-    onCompleted() {
-      console.log("USER SUCCEFUSSLY REGISTERED");
-    },
-  });
 
   const {
     register,
@@ -38,20 +26,29 @@ export default function RegisterUserModal(props) {
     criteriaMode: "all",
   });
 
-  const onSubmit = (data, e) => {
-    setFirstName(data.firstName);
-    setEmail(data.email);
-    setLastName(data.lastName);
-    setPassword(data.password);
-    setUsername(data.username);
-
-    registerUser(firstName, lastName, email, username, password);
+  const onSubmit = (data) => {
+    registerUser(
+      data.email,
+      data.username,
+      data.password,
+      data.first_name,
+      data.last_name
+    ).then((res) => {
+      if (res) {
+        history.push("/login");
+        window.location.reload();
+      }
+    });
   };
-  const onError = (errors, e) => console.log(errors, e);
+
+  const onError = (errors) => {
+    console.log(errors);
+  };
+
   return (
     <Modal>
       {/* Close modal button */}
-      <div className="float-right justify-center p-4">
+      <div className="float-right justify-center w-full">
         <button
           className="hover:bg-slate-700 rounded-3xl"
           aria-label="Close Modal"
@@ -75,16 +72,16 @@ export default function RegisterUserModal(props) {
       {/* Close modal button - END */}
       <ModalHeader />
       <ModalBody>
-      <div className="justify-center w-96 flex">
+        <div className="justify-center w-full flex">
           <img
             src={require("../../assets/movie-logo.png")}
-            className="mb-7 rounded-3xl h-32"
+            className="rounded-3xl w-28"
             alt="movie logo"
           />
         </div>
         <form
           onSubmit={handleSubmit(onSubmit, onError)}
-          className="flex p-8 flex-col gap-7"
+          className="flex flex-col gap-5 scale-75 -mt-10 sm:scale-100 sm:p-12 w-full"
         >
           <label className="text-white text-base -mb-4">Username</label>
           <input
@@ -113,13 +110,13 @@ export default function RegisterUserModal(props) {
           <input
             className="p-3 rounded-xl"
             placeholder="Example: Paul"
-            {...register("firstName", {
+            {...register("first_name", {
               required: "Please fill out this field",
             })}
           />
           <ErrorMessage
             errors={errors}
-            name="firstName"
+            name="first_name"
             render={({ messages }) =>
               messages &&
               Object.entries(messages).map(([type, message]) => (
@@ -136,7 +133,7 @@ export default function RegisterUserModal(props) {
           <input
             className="p-3 rounded-xl"
             placeholder="Example: Harrison"
-            {...register("lastName", {
+            {...register("last_name", {
               required: "Please fill out this field.",
               minLength: {
                 value: 3,
@@ -146,7 +143,7 @@ export default function RegisterUserModal(props) {
           />
           <ErrorMessage
             errors={errors}
-            name="lastName"
+            name="last_name"
             render={({ messages }) =>
               messages &&
               Object.entries(messages).map(([type, message]) => (
@@ -201,7 +198,7 @@ export default function RegisterUserModal(props) {
 
           {errors && (
             <span className="text-red-500 text-center text-xl font-bold -mt-4">
-              {error?.message}
+              {/* {error?.message} */}
             </span>
           )}
           <div className="flex justify-center">

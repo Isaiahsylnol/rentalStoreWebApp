@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { useLazyQuery, useQuery } from "@apollo/client";
-import { FIND_MOVIE, GET_MOVIES } from "../queries/movieQueries";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import ClickOutsideHandler from "../utils/clickOutside";
 
-function SearchBarAutoComplete() {
+function SearchBarAutoComplete({ titles }) {
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [itemClicked, setItemClicked] = useState(false);
-  const [fetchMovie] = useLazyQuery(FIND_MOVIE);
-  const { data } = useQuery(GET_MOVIES);
-  const [movieTitles, setMovies] = useState([]);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const getSuggestions = (input) => {
-    return movieTitles.filter((item) =>
-      item.toLowerCase().includes(input.toLowerCase())
+    return titles.filter((title) =>
+      title.toLowerCase().includes(input.toLowerCase())
     );
   };
 
@@ -23,87 +19,82 @@ function SearchBarAutoComplete() {
     setSuggestions([]);
   };
 
-  const handleInputChange = ({ target: { value } }) => {
+  const handleChange = (event) => {
+    const value = event.target.value;
     setInputValue(value);
-    const newSuggestions = getSuggestions(value);
-    setSuggestions(newSuggestions);
+    setSuggestions(getSuggestions(value));
   };
 
-  useEffect(() => {
-    if (inputValue === "") {
-      setItemClicked(false);
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      searchMovie(inputValue);
     }
-  }, [inputValue]);
+  };
 
-  useEffect(() => {
-    if (data?.movies) {
-      const titles = data.movies.map((movie) => movie.title);
-      setMovies(titles);
-    }
-  }, [data]);
+  const handleClick = (title) => {
+    setInputValue("");
+    searchMovie(title);
+  };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.target.closest(".suggestions-container")) {
-        clearSuggestions();
+  const searchMovie = async (title) => {
+    try {
+      if (!title.trim()) {
+        return;
       }
-    };
-    window.addEventListener("click", handleClickOutside);
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
 
-  const searchMovie = async (item) => {
-    const { data } = await fetchMovie({
-      variables: {
-        title: item || inputValue,
-      },
-    });
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BACKEND_API}/movies/find/${title}`
+      );
 
-    if (data.findMovieByName) {
-      const { id } = data?.findMovieByName;
-      navigate(`/detail/${id}`);
-    } else {
-      navigate(`/find`, { state: inputValue });
+      const matchingFilms = data.search.filter(
+        (film) => film.title.toLowerCase() === title.toLowerCase()
+      );
+
+      if (matchingFilms.length > 0) {
+        const { id } = data.search[0];
+        navigate(`/detail/${id}`);
+      } else {
+        console.log("SEND TO FIND: ", title);
+        navigate("/find", { state: title });
+      }
+    } catch (error) {
+      console.error("Error searching for movie:", error);
     }
   };
 
   return (
-    <div className="w-72">
-      <div className="relative h-8 w-full min-w-[200px]">
-        <div className="flex bg-white items-center p-1 rounded-xl">
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            className="peer text-black h-full w-full rounded-[7px] bg-white px-3 py-2.5 !pr-9 text-sm font-normal focus:border-0 focus:border-blue-400 focus:outline-0 disabled:border-0"
-            placeholder="Search..."
-          />
-          <SearchIcon
-            className="text-black cursor-pointer"
-            onClick={() => searchMovie()}
-          />
-        </div>
-        {suggestions.length > 0 && !itemClicked ? (
-          <ul className="bg-white rounded-[7px] p-3 text-black">
-            {suggestions.map((item, index) => (
-              <li
-                key={index}
-                onClick={() => {
-                  setInputValue(item);
-                  searchMovie(item);
-                  clearSuggestions();
-                  setItemClicked(true);
-                }}
-                className="cursor-pointer"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        ) : null}
+    <div className="w-72 relative h-8">
+      <div className="flex bg-white items-center p-1 rounded-md">
+        <ClickOutsideHandler
+          containerClass=".suggestions-container"
+          action={clearSuggestions}
+        />
+        <input
+          type="text"
+          value={inputValue}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          className="peer text-black w-full rounded-[7px] bg-white p-1 text-sm font-normal focus:outline-0 disabled:border-0"
+          placeholder="Search..."
+        />
+        <SearchIcon
+          className="text-black cursor-pointer"
+          onClick={() => searchMovie(inputValue)}
+        />
       </div>
+      {suggestions.length > 0 && (
+        <ul className="bg-white rounded-md text-black">
+          {suggestions.map((title, index) => (
+            <li
+              key={index}
+              onClick={() => handleClick(title)}
+              className="mt-[1px] cursor-pointer border-b-[1px] border-stone-300 hover:bg-gray-100 hover:rounded-md p-2 w-full"
+            >
+              {title}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
