@@ -1,5 +1,5 @@
 {
-  "name": "heroku-postgres",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,8 +8,18 @@
     "start": "node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
-  "author": "",
+  "author": "Isaiah Sylvester",
   "license": "ISC",
+  "keywords": [
+    "Node",
+    "Express",
+    "Javascript",
+    "Backend",
+    "API",
+    "Heroku",
+    "Movies",
+    "MySQL"
+  ],
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
