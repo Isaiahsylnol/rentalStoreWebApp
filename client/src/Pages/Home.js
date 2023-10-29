@@ -23,6 +23,48 @@ const Home = () => {
   // Records to be displayed on the current page
   const currentRecords = movies?.slice(indexOfFirstRecord, indexOfLastRecord);
 
+  let upcoming = [
+    {
+      title: "The Shawshank Redemption",
+      releaseDate: "1994-09-23",
+    },
+    {
+      title: "The Godfather",
+      releaseDate: "1972-03-24",
+    },
+    {
+      title: "Pulp Fiction",
+      releaseDate: "1994-10-14",
+    },
+    {
+      title: "The Dark Knight",
+      releaseDate: "2008-07-18",
+    },
+    {
+      title: "Schindler's List",
+      releaseDate: "1993-12-15",
+    },
+    {
+      title: "Forrest Gump",
+      releaseDate: "1994-07-06",
+    },
+    {
+      title: "Inception",
+      releaseDate: "2010-07-16",
+    },
+    {
+      title: "Fight Club",
+      releaseDate: "1999-10-15",
+    },
+    {
+      title: "The Matrix",
+      releaseDate: "1999-03-31",
+    },
+    {
+      title: "The Lord of the Rings: The Fellowship of the Ring",
+      releaseDate: "2001-12-19",
+    },
+  ];
   return (
     <div>
       {/* Container */}
@@ -91,14 +133,14 @@ const Home = () => {
                 Upcoming
               </h2>
               <ul className="text-left">
-                {movies?.map(function (movie, i) {
+                {upcoming?.map(function (movie, i) {
                   return (
                     <li
                       key={i}
                       className="p-1 border-b-2 border-white text-white font-semibold"
                     >
                       <span>{movie?.title}</span>
-                      <span className="float-right">{movie?.release_date}</span>
+                      <span className="float-right">{movie?.releaseDate}</span>
                     </li>
                   );
                 })}
